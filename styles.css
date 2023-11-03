@@ -11,4 +11,9 @@ header {
 #boardContainer {
 	margin-top: 20px;
 	text-align: center;
+
+	display: block; /* Removes any extra space below the SVG */
+  margin: auto; /* Centers the SVG horizontally */
+  max-height: 95vh; /* Limits the SVG height to be less than the viewport height */
+  max-width: 95vw; /* Limits the SVG width to be less than the viewport width */
 }
