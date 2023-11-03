@@ -1,3 +1,13 @@
+#header {
+	background-color: #2D2727;
+	color: #F0EB8D;
+	font-family: "Roboto";
+	font-weight: bolder;
+	font-size: 50px;
+	text-align: center;
+	
+}
+
 #boardContainer {
 	margin-top: 20px;
 	text-align: center;
