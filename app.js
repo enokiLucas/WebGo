@@ -1,18 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-	document.getElementById('btn9x9').addEventListener('click', function() {
-			createBoard(9);
-	});
-
-	document.getElementById('btn13x13').addEventListener('click', function() {
-			createBoard(13);
-	});
-
-	document.getElementById('btn19x19').addEventListener('click', function() {
-			createBoard(19);
-	});
-
-	// Adjust board size initially and on window resize
-	window.addEventListener('resize', adjustBoardSize);
+	// Attach event listeners to buttons
+	document.getElementById('btn9x9').addEventListener('click', () => createBoard(9));
+	document.getElementById('btn13x13').addEventListener('click', () => createBoard(13));
+	document.getElementById('btn19x19').addEventListener('click', () => createBoard(19));
 });
 
 function createBoard(size) {
@@ -24,10 +14,8 @@ function createBoard(size) {
 
 	// Create a new SVG element
 	const svgNS = "http://www.w3.org/2000/svg";
-	let board = document.createElementNS(svgNS, "svg");
-	board.setAttribute('width', '100%');
-	board.setAttribute('height', '100%');
-	board.setAttribute('viewBox', `0 0 ${size * 50} ${size * 50}`);
+  let board = document.createElementNS(svgNS, "svg");
+  board.setAttribute('viewBox', `0 0 ${size} ${size}`); // Set the viewBox to match the board size
 	
 	// Draw the board lines
 	for (let i = 0; i < size; i++) {
@@ -52,27 +40,4 @@ function createBoard(size) {
 
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
-
-	// Adjust board size based on the window size
-	adjustBoardSize();
 }
-
-function adjustBoardSize() {
-	const boardContainer = document.getElementById('boardContainer');
-	const svgBoard = boardContainer.querySelector('svg');
-
-	if (svgBoard) {
-			// Get viewport dimensions
-			let vh = window.innerHeight * 0.01;
-			let vw = window.innerWidth * 0.01;
-
-			// Calculate the maximum board size that can fit in the viewport
-			// while maintaining the aspect ratio
-			let size = Math.min(vh, vw) * 95; // 95 is used instead of 100 for some padding
-			svgBoard.style.width = `${size}vmin`;
-			svgBoard.style.height = `${size}vmin`;
-	}
-}
-
-// Run the resize function once to initialize
-window.onload = adjustBoardSize;
