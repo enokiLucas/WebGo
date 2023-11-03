@@ -14,8 +14,10 @@ function createBoard(size) {
 
 	// Create a new SVG element
 	const svgNS = "http://www.w3.org/2000/svg";
-  let board = document.createElementNS(svgNS, "svg");
-  board.setAttribute('viewBox', `0 0 ${size} ${size}`); // Set the viewBox to match the board size
+	let board = document.createElementNS(svgNS, "svg");
+	board.setAttribute('width', '100%');
+	board.setAttribute('height', '100%');
+	board.setAttribute('viewBox', `0 0 ${size * 50} ${size * 50}`);
 	
 	// Draw the board lines
 	for (let i = 0; i < size; i++) {
