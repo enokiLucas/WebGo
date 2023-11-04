@@ -21,25 +21,43 @@ function createBoard(size) {
 	
 	// Draw the board lines
 	for (let i = 0; i <= size; i++) {
-			// Horizontal lines
-			let hLine = document.createElementNS(svgNS, "line");
-			hLine.setAttribute('x1', 0);
-			hLine.setAttribute('y1', i * 50);
-			hLine.setAttribute('x2', size * 50);
-			hLine.setAttribute('y2', i * 50);
-			hLine.setAttribute('stroke', 'black');
-			board.appendChild(hLine);
+		// Horizontal lines
+		let hLine = document.createElementNS(svgNS, "line");
+		hLine.setAttribute('x1', 0);
+		hLine.setAttribute('y1', i * 50);
+		hLine.setAttribute('x2', size * 50);
+		hLine.setAttribute('y2', i * 50);
+		hLine.setAttribute('stroke', 'black');
+		board.appendChild(hLine);
 
-			// Vertical lines
-			let vLine = document.createElementNS(svgNS, "line");
-			vLine.setAttribute('x1', i * 50);
-			vLine.setAttribute('y1', 0);
-			vLine.setAttribute('x2', i * 50);
-			vLine.setAttribute('y2', size * 50);
-			vLine.setAttribute('stroke', 'black');
-			board.appendChild(vLine);
+		// Vertical lines
+		let vLine = document.createElementNS(svgNS, "line");
+		vLine.setAttribute('x1', i * 50);
+		vLine.setAttribute('y1', 0);
+		vLine.setAttribute('x2', i * 50);
+		vLine.setAttribute('y2', size * 50);
+		vLine.setAttribute('stroke', 'black');
+		board.appendChild(vLine);
 	}
 
+	// Create the coordinate labels
+	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
+	const offset = 25; // Adjust this value if necessary for positioning
+	const fontSize = 10; // Adjust font size as needed
+	const textStyle = `font-size: ${fontSize}px; font-family: Arial;`;
+	
+	// Add letters on the top and bottom
+	for (let i = 0; i < size; i++) {
+		// Top
+		let textTop = document.createElementNS(svgNS, "text");
+		textTop.setAttribute('x', (i + 1) * 50 + offset);
+		textTop.setAttribute('y', offset);
+		textTop.setAttribute('text-anchor', 'middle');
+		textTop.setAttribute('style', textStyle);
+		textTop.textContent = alphabet[i];
+		board.appendChild(textTop);
+	}
+	
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
 }
