@@ -10,8 +10,8 @@ header {
 
 /* This CSS will ensure that the SVG board is responsive and fits within the viewport. */
 #boardContainer {
-	width: 100vw; /* Viewport width */
-	height: 100vh; /* Viewport height */
+	width: 75vw; /* Viewport width */
+	height: 75vh; /* Viewport height */
 	display: flex;
 	justify-content: center;
 	align-items: center;
