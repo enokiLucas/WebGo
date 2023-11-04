@@ -9,7 +9,7 @@ function createBoard(size) {
 	// Remove existing board if present
 	const existingBoard = document.querySelector('#boardContainer svg');
 	if (existingBoard) {
-			existingBoard.remove();
+		existingBoard.remove();
 	}
 
 	// Create a new SVG element
