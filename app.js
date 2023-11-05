@@ -85,24 +85,7 @@ function createBoard(size) {
 		textLeft.textContent = size - i; // Numbers go in reverse for Go boards
 		board.appendChild(textLeft);
 	}
-	/*
-	// Define text attributes
-	const fontSize = 10; // Adjust as needed
-	const textOffset = fontSize * 0.3; // Adjust to align with the middle of the line
-
-	// Add coordinates along the top
-	for (let i = 0; i < size; i++) {
-		let text = document.createElementNS(svgNS, "text");
-		text.setAttribute('x', (i + 1) * 50); // Center the text over the line
-		text.setAttribute('y', 40); // Position above the grid
-		text.setAttribute('font-family', 'Arial');
-		text.setAttribute('font-size', fontSize);
-		text.setAttribute('text-anchor', 'middle'); // Centers the text horizontally
-		text.setAttribute('alignment-baseline', 'middle'); // Centers the text vertically
-		text.textContent = String.fromCharCode(65 + i); // Converts 0 -> A, 1 -> B, etc.
-		board.appendChild(text);
-	}	
-	*/
+	
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
 } 
