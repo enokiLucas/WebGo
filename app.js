@@ -13,15 +13,18 @@ function createBoard(size) {
 		existingBoard.remove();
 	}
 
+	// Define the edge margin
+  const edgeMargin = 10;
+	// Define the length between intersections;
+	const lengthSquare = 50;
+
 	// Create a new SVG element
 	const svgNS = "http://www.w3.org/2000/svg";
 	let board = document.createElementNS(svgNS, "svg");
 	board.setAttribute('width', '100%');
 	board.setAttribute('height', '100%');
-	board.setAttribute('viewBox', `0 0 ${size * 50 + 20} ${size * 50 + 20}`);
+	board.setAttribute('viewBox', `0 0 ${size * lengthSquare + (2 * edgeMargin)} ${size * lengthSquare + (2 * edgeMargin)}`);
 
-	// Define the edge margin
-  const edgeMargin = 10;
 
   // Draw the board edge
   let edge = document.createElementNS(svgNS, "rect");
