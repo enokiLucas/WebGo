@@ -23,15 +23,15 @@ function createBoard(size) {
 	let board = document.createElementNS(svgNS, "svg");
 	board.setAttribute('width', '100%');
 	board.setAttribute('height', '100%');
-	board.setAttribute('viewBox', `0 0 ${size * lengthSquare + (2 * edgeMargin)} ${size * lengthSquare + (2 * edgeMargin)}`);
+	board.setAttribute('viewBox', `0 0 ${(size - 1) * lengthSquare + (2 * edgeMargin)} ${(size - 1) * lengthSquare + (2 * edgeMargin)}`);
 
 
   // Draw the board edge
   let edge = document.createElementNS(svgNS, "rect");
   edge.setAttribute('x', 0); // The x position of the rectangle
   edge.setAttribute('y', 0); // The y position of the rectangle
-  edge.setAttribute('width', (2 * edgeMargin) + (size * lengthSquare)); // The width of the rectangle
-  edge.setAttribute('height', (2 * edgeMargin) + (size * lengthSquare)); // The height of the rectangle
+  edge.setAttribute('width', (2 * edgeMargin) + ((size - 1) * lengthSquare)); // The width of the rectangle
+  edge.setAttribute('height', (2 * edgeMargin) + ((size - 1) * lengthSquare)); // The height of the rectangle
   edge.setAttribute('stroke', 'black'); // The edge color
   edge.setAttribute('fill', 'none'); // No fill to make it transparent inside
   edge.setAttribute('stroke-width', '2'); // The width of the border lines
