@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('btn19x19').addEventListener('click', () => createBoard(19));
 });
 
+
 function createBoard(size) {
 	// Remove existing board if present
 	const existingBoard = document.querySelector('#boardContainer svg');
@@ -17,32 +18,50 @@ function createBoard(size) {
 	let board = document.createElementNS(svgNS, "svg");
 	board.setAttribute('width', '100%');
 	board.setAttribute('height', '100%');
-	board.setAttribute('viewBox', `0 0 ${size * 50} ${size * 50}`);
+	board.setAttribute('viewBox', `0 0 ${size * 50 + 20} ${size * 50 + 20}`);
+
+	// Define the edge margin
+  const edgeMargin = 10;
+
+  // Draw the board edge
+  let edge = document.createElementNS(svgNS, "rect");
+  edge.setAttribute('x', edgeMargin); // The x position of the rectangle
+  edge.setAttribute('y', edgeMargin); // The y position of the rectangle
+  edge.setAttribute('width', size * 50); // The width of the rectangle
+  edge.setAttribute('height', size * 50); // The height of the rectangle
+  edge.setAttribute('stroke', 'black'); // The edge color
+  edge.setAttribute('fill', 'none'); // No fill to make it transparent inside
+  edge.setAttribute('stroke-width', '2'); // The width of the border lines
+  board.appendChild(edge);	
 	
 	// Draw the board lines
 	for (let i = 0; i < size; i++) {
 		// Horizontal lines
 		let hLine = document.createElementNS(svgNS, "line");
-		hLine.setAttribute('x1', 0);
-		hLine.setAttribute('y1', i * 50);
-		hLine.setAttribute('x2', (size - 1) * 50);
-		hLine.setAttribute('y2', i * 50);
+		hLine.setAttribute('x1', edgeMargin);
+		hLine.setAttribute('y1', edgeMargin + (i + 1) * 50);
+		hLine.setAttribute('x2', size * 50 + edgeMargin);
+		hLine.setAttribute('y2', (i + 1) * 50 + edgeMargin);
 		hLine.setAttribute('stroke', 'black');
 		board.appendChild(hLine);
 
 		// Vertical lines
 		let vLine = document.createElementNS(svgNS, "line");
-		vLine.setAttribute('x1', i * 50);
-		vLine.setAttribute('y1', 0);
-		vLine.setAttribute('x2', i * 50);
-		vLine.setAttribute('y2', (size - 1) * 50);
+		vLine.setAttribute('x1', (i + 1) * 50 + edgeMargin);
+		vLine.setAttribute('y1', edgeMargin);
+		vLine.setAttribute('x2', (i + 1) * 50 + edgeMargin);
+		vLine.setAttribute('y2', size * 50 + edgeMargin);
 		vLine.setAttribute('stroke', 'black');
 		board.appendChild(vLine);
 	}
 
+
+
+
+
 	// Create the coordinate labels
 	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
-	const offset = 25; // Adjust this value if necessary for positioning
+	const offset = 0; // Adjust this value if necessary for positioning
 	const fontSize = 10; // Adjust font size as needed
 	const textStyle = `font-size: ${fontSize}px; font-family: Arial;`;
 	
@@ -67,7 +86,25 @@ function createBoard(size) {
 		textLeft.textContent = size - i; // Numbers go in reverse for Go boards
 		board.appendChild(textLeft);
 	}
+	/*
+	// Define text attributes
+	const fontSize = 10; // Adjust as needed
+	const textOffset = fontSize * 0.3; // Adjust to align with the middle of the line
 
+	// Add coordinates along the top
+	for (let i = 0; i < size; i++) {
+		let text = document.createElementNS(svgNS, "text");
+		text.setAttribute('x', (i + 1) * 50); // Center the text over the line
+		text.setAttribute('y', 40); // Position above the grid
+		text.setAttribute('font-family', 'Arial');
+		text.setAttribute('font-size', fontSize);
+		text.setAttribute('text-anchor', 'middle'); // Centers the text horizontally
+		text.setAttribute('alignment-baseline', 'middle'); // Centers the text vertically
+		text.textContent = String.fromCharCode(65 + i); // Converts 0 -> A, 1 -> B, etc.
+		board.appendChild(text);
+	}	
+	*/
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
-}
+} 
+
