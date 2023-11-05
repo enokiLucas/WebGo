@@ -42,9 +42,9 @@ function createBoard(size) {
 		// Horizontal lines
 		let hLine = document.createElementNS(svgNS, "line");
 		hLine.setAttribute('x1', edgeMargin);
-		hLine.setAttribute('y1', edgeMargin + (i + 1) * lengthSquare);
+		hLine.setAttribute('y1', edgeMargin + i * lengthSquare);
 		hLine.setAttribute('x2', size * lengthSquare + edgeMargin);
-		hLine.setAttribute('y2', (i + 1) * lengthSquare + edgeMargin);
+		hLine.setAttribute('y2', edgeMargin + i * lengthSquare);
 		hLine.setAttribute('stroke', 'black');
 		board.appendChild(hLine);
 
