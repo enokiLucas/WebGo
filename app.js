@@ -25,17 +25,17 @@ function createBoard(size) {
 
   // Draw the board edge
   let edge = document.createElementNS(svgNS, "rect");
-  edge.setAttribute('x', edgeMargin); // The x position of the rectangle
-  edge.setAttribute('y', edgeMargin); // The y position of the rectangle
-  edge.setAttribute('width', size * 50); // The width of the rectangle
-  edge.setAttribute('height', size * 50); // The height of the rectangle
+  edge.setAttribute('x', 0); // The x position of the rectangle
+  edge.setAttribute('y', 0); // The y position of the rectangle
+  edge.setAttribute('width', (2 * edgeMargin) + (size * 50)); // The width of the rectangle
+  edge.setAttribute('height', (2 * edgeMargin) + (size * 50)); // The height of the rectangle
   edge.setAttribute('stroke', 'black'); // The edge color
   edge.setAttribute('fill', 'none'); // No fill to make it transparent inside
   edge.setAttribute('stroke-width', '2'); // The width of the border lines
   board.appendChild(edge);	
 	
 	// Draw the board lines
-	for (let i = 0; i < size; i++) {
+	for (let i = 0; i <= size; i++) {
 		// Horizontal lines
 		let hLine = document.createElementNS(svgNS, "line");
 		hLine.setAttribute('x1', edgeMargin);
