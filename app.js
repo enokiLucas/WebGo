@@ -60,15 +60,15 @@ function createBoard(size) {
 
 	// Create the coordinate labels
 	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
-	const offset = edgeMargin / 2; // Adjust this value if necessary for positioning
+	const offset = (edgeMargin / 2) - 2; // Adjust this value if necessary for positioning
 	const fontSize = 10; // Adjust font size as needed
 	const textStyle = `font-size: ${fontSize}px; font-family: Arial;`;
 	
 	// Add letters on the top
 	for (let i = 0; i < size; i++) {
 		let textTop = document.createElementNS(svgNS, "text");
-		textTop.setAttribute('x', (i + 1) * lengthSquare + offset);
-		textTop.setAttribute('y', offset);
+		textTop.setAttribute('x', edgeMargin + i * lengthSquare);
+		textTop.setAttribute('y', edgeMargin - offset);
 		textTop.setAttribute('text-anchor', 'middle');
 		textTop.setAttribute('style', textStyle);
 		textTop.textContent = alphabet[i];
