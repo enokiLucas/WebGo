@@ -30,8 +30,8 @@ function createBoard(size) {
   let edge = document.createElementNS(svgNS, "rect");
   edge.setAttribute('x', 0); // The x position of the rectangle
   edge.setAttribute('y', 0); // The y position of the rectangle
-  edge.setAttribute('width', (2 * edgeMargin) + (size * 50)); // The width of the rectangle
-  edge.setAttribute('height', (2 * edgeMargin) + (size * 50)); // The height of the rectangle
+  edge.setAttribute('width', (2 * edgeMargin) + (size * lengthSquare)); // The width of the rectangle
+  edge.setAttribute('height', (2 * edgeMargin) + (size * lengthSquare)); // The height of the rectangle
   edge.setAttribute('stroke', 'black'); // The edge color
   edge.setAttribute('fill', 'none'); // No fill to make it transparent inside
   edge.setAttribute('stroke-width', '2'); // The width of the border lines
@@ -42,25 +42,21 @@ function createBoard(size) {
 		// Horizontal lines
 		let hLine = document.createElementNS(svgNS, "line");
 		hLine.setAttribute('x1', edgeMargin);
-		hLine.setAttribute('y1', edgeMargin + (i + 1) * 50);
-		hLine.setAttribute('x2', size * 50 + edgeMargin);
-		hLine.setAttribute('y2', (i + 1) * 50 + edgeMargin);
+		hLine.setAttribute('y1', edgeMargin + (i + 1) * lengthSquare);
+		hLine.setAttribute('x2', size * lengthSquare + edgeMargin);
+		hLine.setAttribute('y2', (i + 1) * lengthSquare + edgeMargin);
 		hLine.setAttribute('stroke', 'black');
 		board.appendChild(hLine);
 
 		// Vertical lines
 		let vLine = document.createElementNS(svgNS, "line");
-		vLine.setAttribute('x1', (i + 1) * 50 + edgeMargin);
+		vLine.setAttribute('x1', (i + 1) * lengthSquare + edgeMargin);
 		vLine.setAttribute('y1', edgeMargin);
-		vLine.setAttribute('x2', (i + 1) * 50 + edgeMargin);
-		vLine.setAttribute('y2', size * 50 + edgeMargin);
+		vLine.setAttribute('x2', (i + 1) * lengthSquare + edgeMargin);
+		vLine.setAttribute('y2', size * lengthSquare + edgeMargin);
 		vLine.setAttribute('stroke', 'black');
 		board.appendChild(vLine);
 	}
-
-
-
-
 
 	// Create the coordinate labels
 	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
@@ -71,7 +67,7 @@ function createBoard(size) {
 	// Add letters on the top
 	for (let i = 0; i < size; i++) {
 		let textTop = document.createElementNS(svgNS, "text");
-		textTop.setAttribute('x', (i + 1) * 50 + offset);
+		textTop.setAttribute('x', (i + 1) * lengthSquare + offset);
 		textTop.setAttribute('y', offset);
 		textTop.setAttribute('text-anchor', 'middle');
 		textTop.setAttribute('style', textStyle);
@@ -83,7 +79,7 @@ function createBoard(size) {
  	for (let i = 0; i < size; i++) {
 		let textLeft = document.createElementNS(svgNS, "text");
 		textLeft.setAttribute('x', offset);
-		textLeft.setAttribute('y', (i + 1) * 50 + offset);
+		textLeft.setAttribute('y', (i + 1) * lengthSquare + offset);
 		textLeft.setAttribute('text-anchor', 'middle');
 		textLeft.setAttribute('style', textStyle);
 		textLeft.textContent = size - i; // Numbers go in reverse for Go boards
