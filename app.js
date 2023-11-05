@@ -46,9 +46,8 @@ function createBoard(size) {
 	const fontSize = 10; // Adjust font size as needed
 	const textStyle = `font-size: ${fontSize}px; font-family: Arial;`;
 	
-	// Add letters on the top and bottom
+	// Add letters on the top
 	for (let i = 0; i < size; i++) {
-		// Top
 		let textTop = document.createElementNS(svgNS, "text");
 		textTop.setAttribute('x', (i + 1) * 50 + offset);
 		textTop.setAttribute('y', offset);
@@ -57,7 +56,18 @@ function createBoard(size) {
 		textTop.textContent = alphabet[i];
 		board.appendChild(textTop);
 	}
-	
+
+ 	// Add numbers on the left
+ 	for (let i = 0; i < size; i++) {
+		let textLeft = document.createElementNS(svgNS, "text");
+		textLeft.setAttribute('x', offset);
+		textLeft.setAttribute('y', (i + 1) * 50 + offset);
+		textLeft.setAttribute('text-anchor', 'middle');
+		textLeft.setAttribute('style', textStyle);
+		textLeft.textContent = size - i; // Numbers go in reverse for Go boards
+		board.appendChild(textLeft);
+	}
+
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
 }
