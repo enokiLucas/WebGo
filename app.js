@@ -14,7 +14,7 @@ function createBoard(size) {
 	}
 
 	// Define the edge margin
-  const edgeMargin = 10;
+  const edgeMargin = 20;
 	// Define the length between intersections;
 	const lengthSquare = 50;
 
@@ -60,7 +60,7 @@ function createBoard(size) {
 
 	// Create the coordinate labels
 	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
-	const offset = 0; // Adjust this value if necessary for positioning
+	const offset = edgeMargin / 2; // Adjust this value if necessary for positioning
 	const fontSize = 10; // Adjust font size as needed
 	const textStyle = `font-size: ${fontSize}px; font-family: Arial;`;
 	
