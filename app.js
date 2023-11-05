@@ -20,12 +20,12 @@ function createBoard(size) {
 	board.setAttribute('viewBox', `0 0 ${size * 50} ${size * 50}`);
 	
 	// Draw the board lines
-	for (let i = 0; i <= size; i++) {
+	for (let i = 0; i < size; i++) {
 		// Horizontal lines
 		let hLine = document.createElementNS(svgNS, "line");
 		hLine.setAttribute('x1', 0);
 		hLine.setAttribute('y1', i * 50);
-		hLine.setAttribute('x2', size * 50);
+		hLine.setAttribute('x2', (size - 1) * 50);
 		hLine.setAttribute('y2', i * 50);
 		hLine.setAttribute('stroke', 'black');
 		board.appendChild(hLine);
@@ -35,7 +35,7 @@ function createBoard(size) {
 		vLine.setAttribute('x1', i * 50);
 		vLine.setAttribute('y1', 0);
 		vLine.setAttribute('x2', i * 50);
-		vLine.setAttribute('y2', size * 50);
+		vLine.setAttribute('y2', (size - 1) * 50);
 		vLine.setAttribute('stroke', 'black');
 		board.appendChild(vLine);
 	}
