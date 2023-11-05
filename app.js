@@ -50,9 +50,9 @@ function createBoard(size) {
 
 		// Vertical lines
 		let vLine = document.createElementNS(svgNS, "line");
-		vLine.setAttribute('x1', (i + 1) * lengthSquare + edgeMargin);
+		vLine.setAttribute('x1', edgeMargin + i * lengthSquare);
 		vLine.setAttribute('y1', edgeMargin);
-		vLine.setAttribute('x2', (i + 1) * lengthSquare + edgeMargin);
+		vLine.setAttribute('x2', edgeMargin + i * lengthSquare);
 		vLine.setAttribute('y2', size * lengthSquare + edgeMargin);
 		vLine.setAttribute('stroke', 'black');
 		board.appendChild(vLine);
