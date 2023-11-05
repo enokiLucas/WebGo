@@ -78,8 +78,8 @@ function createBoard(size) {
  	// Add numbers on the left
  	for (let i = 0; i < size; i++) {
 		let textLeft = document.createElementNS(svgNS, "text");
-		textLeft.setAttribute('x', offset);
-		textLeft.setAttribute('y', (i + 1) * lengthSquare + offset);
+		textLeft.setAttribute('x', edgeMargin - offset);
+		textLeft.setAttribute('y', 3 + edgeMargin + i * lengthSquare); // +3 is for better aliment
 		textLeft.setAttribute('text-anchor', 'middle');
 		textLeft.setAttribute('style', textStyle);
 		textLeft.textContent = size - i; // Numbers go in reverse for Go boards
