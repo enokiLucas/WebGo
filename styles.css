@@ -8,6 +8,10 @@ header {
 	
 }
 
+main {
+	display: flex;
+}
+
 #sizeSelection {
 	display: flex;
 	justify-content: center;
