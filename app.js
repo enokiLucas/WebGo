@@ -25,41 +25,29 @@ function createBoard(size) {
 	board.setAttribute('height', '100%');
 	board.setAttribute('viewBox', `0 0 ${(size - 1) * lengthSquare + (2 * edgeMargin)} ${(size - 1) * lengthSquare + (2 * edgeMargin)}`);
 
-// Define a linear gradient for the wood texture
-    let defs = document.createElementNS(svgNS, 'defs');
-    let linearGradient = document.createElementNS(svgNS, 'linearGradient');
-    linearGradient.setAttribute('id', 'woodGradient');
-    linearGradient.setAttribute('x1', '0%');
-    linearGradient.setAttribute('y1', '0%');
-    linearGradient.setAttribute('x2', '0%');
-    linearGradient.setAttribute('y2', '100%');
-    linearGradient.innerHTML = `
-        <stop offset="0%" style="stop-color:#deb887;stop-opacity:1" />
-        <stop offset="50%" style="stop-color:#cdaa7d;stop-opacity:1" />
-        <stop offset="100%" style="stop-color:#deb887;stop-opacity:1" />
-    `;
-    defs.appendChild(linearGradient);
-
-    // Define a noise filter for texture
-    let filter = document.createElementNS(svgNS, 'filter');
-    filter.setAttribute('id', 'noise');
-    filter.innerHTML = `
-        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="10" stitchTiles="stitch" />
-        <feColorMatrix type="saturate" values="0" />
-    `;
-    defs.appendChild(filter);
-
-    // Attach the definitions to the SVG
-    board.appendChild(defs);
-
-    // Draw the board background with the wood texture
-    let background = document.createElementNS(svgNS, 'rect');
-    background.setAttribute('width', '100%');
-    background.setAttribute('height', '100%');
-    background.setAttribute('fill', 'url(#woodGradient)');
-    background.setAttribute('filter', 'url(#noise)');
-    board.insertBefore(background, board.firstChild); // Ensure the background is at the bottom layer
-
+  // Draw the board background with the wood texture
+  let pattern = document.createElementNS(svgNS, "pattern");
+  pattern.setAttribute('id', 'woodPattern');
+  pattern.setAttribute('patternUnits', 'userSpaceOnUse');
+  pattern.setAttribute('width', '300'); // Width of the image
+  pattern.setAttribute('height', '300'); // Height of the image
+  
+  let image = document.createElementNS(svgNS, "image");
+  image.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '../Images/GimpWood01.png');
+  image.setAttribute('width', '300');
+  image.setAttribute('height', '300');
+  
+  pattern.appendChild(image);
+  
+  let defs = document.createElementNS(svgNS, "defs");
+  defs.appendChild(pattern);
+  board.appendChild(defs);
+  
+  let background = document.createElementNS(svgNS, "rect");
+  background.setAttribute('width', '100%');
+  background.setAttribute('height', '100%');
+  background.setAttribute('fill', 'url(#woodPattern)');
+  board.insertBefore(background, board.firstChild);
 
   // Draw the board edge
   let edge = document.createElementNS(svgNS, "rect");
