@@ -86,25 +86,27 @@ function createBoard(size) {
 		board.appendChild(textLeft);
 	}
 	
-	    // Draw the Hoshi (star) points for 9x9, 13x13, and 19x19 boards
-    const hoshiPoints = {
-        9: [[2, 2], [2, 6], [4, 4], [6, 2], [6, 6]],
-        13: [[3, 3], [3, 9], [6, 6], [9, 3], [9, 9]],
-        19: [[3, 3], [3, 9], [3, 15], [9, 3], [9, 9], [9, 15], [15, 3], [15, 9], [15, 15]],
-    };
+	// Draw the Hoshi (star) points for 9x9, 13x13, and 19x19 boards
+  const hoshiPoints = {
+    9: [[2, 2], [2, 6], [4, 4], [6, 2], [6, 6]],
+    13: [[3, 3], [3, 9], [6, 6], [9, 3], [9, 9]],
+    19: [[3, 3], [3, 9], [3, 15], [9, 3], [9, 9], [9, 15], [15, 3], [15, 9], [15, 15]],
+  };
 
-    // Check if we have predefined hoshi points for the current board size
-    if (hoshiPoints[size]) {
-        hoshiPoints[size].forEach(point => {
-            let hoshi = document.createElementNS(svgNS, 'circle');
-            let [x, y] = point.map(coord => edgeMargin + coord * lengthSquare);
-            hoshi.setAttribute('cx', x);
-            hoshi.setAttribute('cy', y);
-            hoshi.setAttribute('r', 3); // Radius of the hoshi point, adjust as needed
-            hoshi.setAttribute('fill', 'black');
-            board.appendChild(hoshi);
-        });
-    }
+  // Check if we have predefined hoshi points for the current board size
+  if (hoshiPoints[size]) {
+    hoshiPoints[size].forEach(point => {
+      let hoshi = document.createElementNS(svgNS, 'circle');
+      let [x, y] = point.map(coord => edgeMargin + coord * lengthSquare);
+      hoshi.setAttribute('cx', x);
+      hoshi.setAttribute('cy', y);
+      hoshi.setAttribute('r', 3); // Radius of the hoshi point, adjust as needed
+      hoshi.setAttribute('fill', 'black');
+      board.appendChild(hoshi);
+    });
+  }
+
+
 
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
