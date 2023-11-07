@@ -129,9 +129,58 @@ function createBoard(size) {
     });
   }
 
-
-
 	// Append the SVG to the container
 	document.getElementById('boardContainer').appendChild(board);
+
+	// Append the listeners after the board is created
+	addListenersToBoard(board, size);
 } 
 
+
+// Function to add event listeners to each intersection of the board
+function addListenersToBoard(board, size) {
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  // Iterate over the grid size to access each intersection
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      // Create a circle at each intersection for the event listener
+      let intersection = document.createElementNS(svgNS, "circle");
+      intersection.setAttribute('cx', (i + 1) * 50);
+      intersection.setAttribute('cy', (j + 1) * 50);
+      intersection.setAttribute('r', 5); // Small radius, essentially invisible
+      intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
+      intersection.setAttribute('class', 'intersection');
+
+      // Add mouseover event listener to show the ghost piece
+      intersection.addEventListener('mouseenter', (event) => {
+        showGhostPiece(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
+      });
+
+      // Add mouseout event listener to hide the ghost piece
+      intersection.addEventListener('mouseleave', (event) => {
+        hideGhostPiece();
+      });
+
+      // Add click event listener to place a stone on the board
+      intersection.addEventListener('click', (event) => {
+        placeStone(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
+
+			  // Get the coordinates from the event target
+				let x = event.target.cx.baseVal.value;
+				let y = event.target.cy.baseVal.value;
+
+				// Convert the SVG coordinates to your board's coordinate system if needed
+				// For example, if you want to start the coordinates at (1,1) instead of (0,0)
+				let boardX = x / 50;
+				let boardY = y / 50;
+
+				// Log the coordinates to the console
+				console.log(`Intersection clicked at: (${boardX}, ${boardY})`);
+      });
+
+      // Append the intersection to the board
+      board.appendChild(intersection);
+    }
+  }
+}
