@@ -146,8 +146,8 @@ function addListenersToBoard(board, size) {
     for (let j = 0; j < size; j++) {
       // Create a circle at each intersection for the event listener
       let intersection = document.createElementNS(svgNS, "circle");
-      intersection.setAttribute('cx', (i + 1) * 50);
-      intersection.setAttribute('cy', (j + 1) * 50);
+      intersection.setAttribute('cx', edgeMargin + (i * 50));
+      intersection.setAttribute('cy', edgeMargin + (j * 50));
       intersection.setAttribute('r', 5); // Small radius, essentially invisible
       intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
       intersection.setAttribute('class', 'intersection');
