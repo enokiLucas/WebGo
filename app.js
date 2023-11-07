@@ -172,11 +172,13 @@ function addListenersToBoard(board, size) {
 
 				// Convert the SVG coordinates to your board's coordinate system if needed
 				// For example, if you want to start the coordinates at (1,1) instead of (0,0)
-				let boardX = x / 50;
-				let boardY = y / 50;
+				let boardX = (x - edgeMargin)/lengthSquare;
+				let boardY = (y - edgeMargin)/lengthSquare;
+
+				const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
 
 				// Log the coordinates to the console
-				console.log(`Intersection clicked at: (${boardX}, ${boardY})`);
+				console.log(`Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})`);
       });
 
       // Append the intersection to the board
