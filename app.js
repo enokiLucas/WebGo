@@ -151,7 +151,7 @@ function addListenersToBoard(board, size) {
       intersection.setAttribute('r', 5); // Small radius, essentially invisible
       intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
       intersection.setAttribute('class', 'intersection');
-
+/*
       // Add mouseover event listener to show the ghost piece
       intersection.addEventListener('mouseenter', (event) => {
         showGhostPiece(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
@@ -161,10 +161,10 @@ function addListenersToBoard(board, size) {
       intersection.addEventListener('mouseleave', (event) => {
         hideGhostPiece();
       });
-
+*/
       // Add click event listener to place a stone on the board
       intersection.addEventListener('click', (event) => {
-        placeStone(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
+        //placeStone(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
 
 			  // Get the coordinates from the event target
 				let x = event.target.cx.baseVal.value;
