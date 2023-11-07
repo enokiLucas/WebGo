@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('btn19x19').addEventListener('click', () => createBoard(19));
 });
 
+// Define the edge margin
+ const edgeMargin = 20;
+// Define the length between intersections;
+const lengthSquare = 50;
+
 
 function createBoard(size) {
 	// Remove existing board if present
@@ -12,11 +17,6 @@ function createBoard(size) {
 	if (existingBoard) {
 		existingBoard.remove();
 	}
-
-	// Define the edge margin
-  const edgeMargin = 20;
-	// Define the length between intersections;
-	const lengthSquare = 50;
 
 	// Create a new SVG element
 	const svgNS = "http://www.w3.org/2000/svg";
