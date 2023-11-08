@@ -210,9 +210,9 @@ function showGhostPiece(color) {
     const y = event.clientY - rect.top;
     
     // Convert the mouse position to the nearest intersection
-    const gridSize = 50; // assuming grid size is 50 pixels
-    const nearestX = Math.round(x / gridSize) * gridSize;
-    const nearestY = Math.round(y / gridSize) * gridSize;
+    const gridSize = lengthSquare; // assuming grid size is 50 pixels
+    const nearestX = Math.floor((event.clientX - rect.left) / gridSize) * gridSize + gridSize / 2;
+    const nearestY = Math.floor((event.clientY - rect.left) / gridSize) * gridSize + gridSize / 2;
 
     // Update the position of the ghost stone
     ghostStone.setAttribute('cx', nearestX);
