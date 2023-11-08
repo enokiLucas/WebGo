@@ -151,12 +151,12 @@ function addListenersToBoard(board, size) {
       intersection.setAttribute('r', 5); // Small radius, essentially invisible
       intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
       intersection.setAttribute('class', 'intersection');
-/*
+
       // Add mouseover event listener to show the ghost piece
       intersection.addEventListener('mouseenter', (event) => {
-        showGhostPiece(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
+        showGhostPiece('black');
       });
-
+/*
       // Add mouseout event listener to hide the ghost piece
       intersection.addEventListener('mouseleave', (event) => {
         hideGhostPiece();
@@ -185,4 +185,43 @@ function addListenersToBoard(board, size) {
       board.appendChild(intersection);
     }
   }
+}
+
+function showGhostPiece(color) {
+  // Create the ghost stone
+  const svgNS = "http://www.w3.org/2000/svg";
+  let ghostStone = document.createElementNS(svgNS, "circle");
+  ghostStone.setAttribute('r', 20); // radius of the stone
+  ghostStone.setAttribute('fill', color);
+  ghostStone.setAttribute('fill-opacity', '0.2'); // semi-transparent
+  ghostStone.setAttribute('display', 'none'); // hidden by default
+
+  // Append the ghost stone to the board
+  const board = document.querySelector('#boardContainer svg');
+  board.appendChild(ghostStone);
+
+  // Attach mousemove listener to the board
+  board.addEventListener('mousemove', (event) => {
+    // Get the bounding rectangle of the board
+    const rect = board.getBoundingClientRect();
+    
+    // Calculate the position of the mouse over the board
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    // Convert the mouse position to the nearest intersection
+    const gridSize = 50; // assuming grid size is 50 pixels
+    const nearestX = Math.round(x / gridSize) * gridSize;
+    const nearestY = Math.round(y / gridSize) * gridSize;
+
+    // Update the position of the ghost stone
+    ghostStone.setAttribute('cx', nearestX);
+    ghostStone.setAttribute('cy', nearestY);
+    ghostStone.setAttribute('display', 'block');
+  });
+
+  // Hide the ghost stone when the mouse leaves the board
+  board.addEventListener('mouseleave', () => {
+    ghostStone.setAttribute('display', 'none');
+  });
 }
