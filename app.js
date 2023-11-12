@@ -183,7 +183,8 @@ const saveClick = (size, event) => {
 	let boardY = (y - edgeMargin)/lengthSquare;
 
 	// Log the coordinates to the console
-	console.log(`Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})`);	
+	console.log('Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})');
+	console.log('Intersection at [${boardX}, ${boardY}]')	
 }
 
 function showGhostPiece(size, color) {
