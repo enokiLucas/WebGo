@@ -5,10 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('btn19x19').addEventListener('click', () => createBoard(19));
 });
 
-// Define the edge margin
- const edgeMargin = 20;
-// Define the length between intersections;
-const lengthSquare = 50;
+//Variables
+ const edgeMargin = 20; // Define the edge margin
+const lengthSquare = 50; // Define the length between intersections;
+const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
+const offset = (edgeMargin / 2) - 2; // Adjust this value if necessary for positioning
+const fontSize = 10; // Adjust font size as needed
+const textStyle = `font-size: ${fontSize}px; font-family: Arial;`; // Style of the text used inside the board. To be moved to a .css file.
 
 
 const createBoard = (size) => {
@@ -81,11 +84,7 @@ const createBoard = (size) => {
 		board.appendChild(vLine);
 	}
 
-	// Create the coordinate labels
-	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
-	const offset = (edgeMargin / 2) - 2; // Adjust this value if necessary for positioning
-	const fontSize = 10; // Adjust font size as needed
-	const textStyle = `font-size: ${fontSize}px; font-family: Arial;`;
+
 	
 	// Add letters on the top
 	for (let i = 0; i < size; i++) {
@@ -182,8 +181,6 @@ const saveClick = (size, event) => {
 	// For example, if you want to start the coordinates at (1,1) instead of (0,0)
 	let boardX = (x - edgeMargin)/lengthSquare;
 	let boardY = (y - edgeMargin)/lengthSquare;
-
-	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
 
 	// Log the coordinates to the console
 	console.log(`Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})`);	
