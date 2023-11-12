@@ -164,7 +164,7 @@ const addListenersToBoard = (board, size) => {
 			*/
       // Add click event listener to place a stone on the board
       intersection.addEventListener('click', (event) => {
-				saveClick(event);
+				saveClick(size, event);
       });
 
       // Append the intersection to the board
@@ -173,7 +173,7 @@ const addListenersToBoard = (board, size) => {
   }
 }
 
-const saveClick = (event) => {
+const saveClick = (size, event) => {
 	// Get the coordinates from the event target
 	let x = event.target.cx.baseVal.value;
 	let y = event.target.cy.baseVal.value;
@@ -187,7 +187,6 @@ const saveClick = (event) => {
 
 	// Log the coordinates to the console
 	console.log(`Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})`);	
-
 }
 
 
