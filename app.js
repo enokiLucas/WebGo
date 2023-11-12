@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const lengthSquare = 50;
 
 
-function createBoard(size) {
+const createBoard = (size) => {
 	// Remove existing board if present
 	const existingBoard = document.querySelector('#boardContainer svg');
 	if (existingBoard) {
@@ -138,7 +138,7 @@ function createBoard(size) {
 
 
 // Function to add event listeners to each intersection of the board
-function addListenersToBoard(board, size) {
+const addListenersToBoard = (board, size) => {
   const svgNS = "http://www.w3.org/2000/svg";
 
   // Iterate over the grid size to access each intersection
@@ -156,16 +156,14 @@ function addListenersToBoard(board, size) {
       intersection.addEventListener('mouseenter', (event) => {
         showGhostPiece('black');
       });
-/*
+			/*
       // Add mouseout event listener to hide the ghost piece
       intersection.addEventListener('mouseleave', (event) => {
         hideGhostPiece();
       });
-*/
+			*/
       // Add click event listener to place a stone on the board
       intersection.addEventListener('click', (event) => {
-        //placeStone(event.target.cx.baseVal.value, event.target.cy.baseVal.value);
-
 			  // Get the coordinates from the event target
 				let x = event.target.cx.baseVal.value;
 				let y = event.target.cy.baseVal.value;
@@ -187,7 +185,11 @@ function addListenersToBoard(board, size) {
   }
 }
 
-function showGhostPiece(color) {
+
+
+
+
+const showGhostPiece = (color) => {
   // Create the ghost stone
   const svgNS = "http://www.w3.org/2000/svg";
   let ghostStone = document.createElementNS(svgNS, "circle");
