@@ -164,19 +164,7 @@ const addListenersToBoard = (board, size) => {
 			*/
       // Add click event listener to place a stone on the board
       intersection.addEventListener('click', (event) => {
-			  // Get the coordinates from the event target
-				let x = event.target.cx.baseVal.value;
-				let y = event.target.cy.baseVal.value;
-
-				// Convert the SVG coordinates to your board's coordinate system if needed
-				// For example, if you want to start the coordinates at (1,1) instead of (0,0)
-				let boardX = (x - edgeMargin)/lengthSquare;
-				let boardY = (y - edgeMargin)/lengthSquare;
-
-				const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
-
-				// Log the coordinates to the console
-				console.log(`Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})`);
+				saveClick(event);
       });
 
       // Append the intersection to the board
@@ -185,7 +173,22 @@ const addListenersToBoard = (board, size) => {
   }
 }
 
+const saveClick = (event) => {
+	// Get the coordinates from the event target
+	let x = event.target.cx.baseVal.value;
+	let y = event.target.cy.baseVal.value;
 
+	// Convert the SVG coordinates to your board's coordinate system if needed
+	// For example, if you want to start the coordinates at (1,1) instead of (0,0)
+	let boardX = (x - edgeMargin)/lengthSquare;
+	let boardY = (y - edgeMargin)/lengthSquare;
+
+	const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
+
+	// Log the coordinates to the console
+	console.log(`Intersection clicked at: (${alphabet[boardX]}, ${size - boardY})`);	
+
+}
 
 
 
