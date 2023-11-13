@@ -140,6 +140,10 @@ const createBoard = (size) => {
 const addListenersToBoard = (board, size) => {
   const svgNS = "http://www.w3.org/2000/svg";
 
+	  // Initialize the ghost piece on the board
+		initializeGhostPiece(board, 'black');
+		const ghostStone = document.getElementById('ghostStone');
+
   // Iterate over the grid size to access each intersection
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
@@ -151,16 +155,9 @@ const addListenersToBoard = (board, size) => {
       intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
       intersection.setAttribute('class', 'intersection');
 
-      // Add mouseover event listener to show the ghost piece
-      intersection.addEventListener('mouseenter', (event) => {
-        showGhostPiece(size, 'black');
-      });
-			/*
-      // Add mouseout event listener to hide the ghost piece
-      intersection.addEventListener('mouseleave', (event) => {
-        hideGhostPiece();
-      });
-			*/
+      // Add Ghost Stone locked into the listener
+			setupIntersectionListeners(intersection, ghostStone)
+
       // Add click event listener to place a stone on the board
       intersection.addEventListener('click', (event) => {
 				saveClick(size, event);
