@@ -197,3 +197,15 @@ const initializeGhostPiece = (board, color) => {
   ghostStone.style.visibility = 'hidden'; // Initially hidden
   board.appendChild(ghostStone);
 }
+
+const setupIntersectionListeners = (intersection, ghostStone) => {
+  intersection.addEventListener('mouseenter', () => {
+    ghostStone.setAttribute('cx', intersection.getAttribute('cx'));
+    ghostStone.setAttribute('cy', intersection.getAttribute('cy'));
+    ghostStone.style.visibility = 'visible';
+  });
+
+  intersection.addEventListener('mouseleave', () => {
+    ghostStone.style.visibility = 'hidden';
+  });
+}
