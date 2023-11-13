@@ -187,49 +187,13 @@ const saveClick = (size, event) => {
 	console.log(`Intersection at [${boardX}, ${boardY}]`)	
 }
 
-function showGhostPiece(size, color) {
+const initializeGhostPiece = (board, color) => {
   const svgNS = "http://www.w3.org/2000/svg";
-  let ghostStone = document.querySelector('#ghostStone');
-
-  // If ghostStone does not exist, create it
-  if (!ghostStone) {
-    ghostStone = document.createElementNS(svgNS, "circle");
-    ghostStone.setAttribute('id', 'ghostStone');
-    ghostStone.setAttribute('r', lengthSquare / 4.1); // Radius of the piece.
-    ghostStone.style.fill = color;
-    ghostStone.style.fillOpacity = '0.5';
-    ghostStone.style.pointerEvents = 'none';
-    document.querySelector('#boardContainer svg').appendChild(ghostStone);
-  }
-
-  // Attach mousemove listener to the board
-  const board = document.querySelector('#boardContainer svg');
-  board.addEventListener('mousemove', (event) => {
-    const rect = board.getBoundingClientRect();
-    
-    // Calculate the position of the mouse over the board
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    // Snap the position to the grid, accounting for edgeMargin
-    const gridX = Math.floor((mouseX - edgeMargin) / lengthSquare);
-    const gridY = Math.floor((mouseY - edgeMargin) / lengthSquare);
-
-    // Ensure the ghost stone is within the bounds of the board
-    if (gridX >= 0 && gridX < size && gridY >= 0 && gridY < size) {
-      const stoneX = edgeMargin + gridX * lengthSquare + lengthSquare / 2;
-      const stoneY = edgeMargin + gridY * lengthSquare + lengthSquare / 2;
-
-      ghostStone.setAttribute('cx', stoneX);
-      ghostStone.setAttribute('cy', stoneY);
-      ghostStone.style.display = 'block';
-    } else {
-      ghostStone.style.display = 'none'; // Hide if outside the board
-    }
-  });
-
-  // Attach mouseleave listener to hide the ghost piece
-  board.addEventListener('mouseleave', () => {
-    ghostStone.style.display = 'none';
-  });
+  let ghostStone = document.createElementNS(svgNS, "circle");
+  ghostStone.setAttribute('id', 'ghostStone');
+  ghostStone.setAttribute('r', lengthSquare / 2); // The radius should be half the square size
+  ghostStone.setAttribute('fill', color); // Placeholder color
+  ghostStone.setAttribute('fill-opacity', '0.5'); // Semi-transparent
+  ghostStone.style.visibility = 'hidden'; // Initially hidden
+  board.appendChild(ghostStone);
 }
