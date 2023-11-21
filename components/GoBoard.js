@@ -54,7 +54,7 @@ class GoBoard extends HTMLElement {
 		pattern.setAttribute('height', '300'); // Height of the image
 
 		let image = document.createElementNS(svgNS, "image");
-		image.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '../Images/GimpWood01.png');
+		image.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '../assets/images/GimpWood01.png');
 		image.setAttribute('width', '300');
 		image.setAttribute('height', '300');
 
