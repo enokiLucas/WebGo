@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //Variables
- const edgeMargin = 20; // Define the edge margin
+const edgeMargin = 20; // Define the edge margin
 const lengthSquare = 50; // Define the length between intersections;
 const alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
 const offset = (edgeMargin / 2) - 2; // Adjust this value if necessary for positioning
