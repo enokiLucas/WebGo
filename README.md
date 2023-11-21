@@ -7,3 +7,5 @@ Application to play the game of Go inside a browser, built using Web Components 
 
 
 3beb957
+
+Last commit before switching to the Web Components Format: fb4cfe5
