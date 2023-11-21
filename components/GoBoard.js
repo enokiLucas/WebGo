@@ -4,6 +4,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE } from '../uti
 class GoBoard extends HTMLElement {
   constructor() {
     super();
+		this.attachShadow({ mode: 'open' });
   	// Initialize any state or bind methods
     this.boardSize = 13; // Default board size or use attribute to set it
   }
@@ -144,8 +145,8 @@ class GoBoard extends HTMLElement {
 			});
 		}
 
-		// Append the SVG to the container
-		document.getElementById('boardContainer').appendChild(board);
+		// Append the SVG element to the Shadow DOM
+		this.shadowRoot.appendChild(board)
   }
 
   // Additional methods related to board functionality
