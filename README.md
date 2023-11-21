@@ -1,5 +1,9 @@
 # WebGo
-Application to play the game of Go, inside a browser built using web technologies
+
+## Status: in development.
+---
+
+Application to play the game of Go inside a browser, built using Web Components (HTML, CSS and JavaScript) and Ruby on Rails (not yet implemented).
 
 
 3beb957

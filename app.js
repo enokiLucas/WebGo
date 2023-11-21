@@ -151,7 +151,7 @@ const addListenersToBoard = (board, size) => {
       let intersection = document.createElementNS(svgNS, "circle");
       intersection.setAttribute('cx', edgeMargin + (i * 50));
       intersection.setAttribute('cy', edgeMargin + (j * 50));
-      intersection.setAttribute('r', 5); // Small radius, essentially invisible
+      intersection.setAttribute('r', 10); // Small radius, essentially invisible
       intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
       intersection.setAttribute('class', 'intersection');
 
