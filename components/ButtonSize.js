@@ -1,3 +1,5 @@
+import {render(size)} from 'GoBoard.js'
+
 class ButtonSize extends HTMLElement {
 	constructor() {
 		super(); // Always call super() first in a Web Component constructor.
@@ -16,8 +18,7 @@ class ButtonSize extends HTMLElement {
 
 		// Add event listener
 		button.addEventListener('click', () => {
-		// Assuming createBoard is a global function or imported
-		createBoard(this.boardSize);
+		render(this.boardSize);
 		});
 
 		this.shadowRoot.appendChild(button);
