@@ -31,16 +31,5 @@
 		<script type="module" src="components/GoBoard.js"></script>
 		<script type="module" src="components/BoardButtonSize.js"></script>
 
-		<script>
-			document.addEventListener('board-create', (event) => {
-				const boardSize = event.detail.size;
-				// Assuming you have a reference to your GoBoard component
-				const goBoard = document.querySelector('go-board');
-				if (goBoard) {
-					goBoard.setAttribute('size', boardSize);
-				}
-			});
-		</script>
-
 	</body>
 </html>
