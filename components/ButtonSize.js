@@ -1,5 +1,3 @@
-import {render(size)} from 'GoBoard.js'
-
 class ButtonSize extends HTMLElement {
 	constructor() {
 		super(); // Always call super() first in a Web Component constructor.
@@ -12,13 +10,16 @@ class ButtonSize extends HTMLElement {
 	}
 
 	connectedCallback() {
-		// Add a button element to the shadow DOM
 		const button = document.createElement('button');
 		button.textContent = `${this.boardSize}x${this.boardSize} Board`;
 
 		// Add event listener
 		button.addEventListener('click', () => {
-		render(this.boardSize);
+			// Emit a custom event with the board size
+			this.dispatchEvent(new CustomEvent('board-create', {
+				detail: { size: this.boardSize },
+				bubbles: true, // Allows the event to bubble up through the DOM
+			}));
 		});
 
 		this.shadowRoot.appendChild(button);
