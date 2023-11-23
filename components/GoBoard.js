@@ -35,9 +35,9 @@ class GoBoard extends HTMLElement {
 
 	render(size) {
 		// Remove existing board if present
-		const existingBoard = document.querySelector('go-board');
-		if (existingBoard) {
-		existingBoard.remove();
+		const existingSVG = this.shadowRoot.querySelector('svg');
+		if (existingSVG) {
+		existingSVG.remove();
 		}
 
 		// Create a new SVG element
