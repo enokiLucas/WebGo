@@ -13,6 +13,12 @@ class GoBoard extends HTMLElement {
 		// Called when the element is inserted into the DOM
 		this.initializeBoard(this.boardSize);
 		addListenersToBoard(this, this.boardSize);
+
+		// Listen for 'board-create' event on the document
+		document.addEventListener('board-create', (event) => {
+			const boardSize = event.detail.size;
+			this.setAttribute('size', boardSize);
+		});
 	}
 
 	// You can use attributes to dynamically set properties like board size
