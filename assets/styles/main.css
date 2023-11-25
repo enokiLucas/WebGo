@@ -1,0 +1,59 @@
+/* Overall Page Styling */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #1a1a1a; /* Dark background */
+	color: #ffffff; /* Light text */
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+}
+
+header, footer {
+	text-align: center;
+	padding: 10px;
+	background-color: #333;
+}
+
+/* Main Content Styling */
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+/* Go Board Styling */
+go-board {
+	border-radius: 10px; /* Rounded edges */
+	box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5); /* Shadow for depth */
+	margin: 0 20px; /* Spacing around the board */
+}
+
+/* Button Styling */
+board-button-size {
+	background: #444; /* Darker background for buttons */
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 12px; /* Rounded edges for buttons */
+}
+
+board-button-size:hover {
+	background-color: #555; /* Button hover effect */
+}
+
+/* Footer Styling */
+footer {
+	color: #aaa; /* Lighter text color for footer */
+}
