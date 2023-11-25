@@ -12,7 +12,7 @@ class GoBoard extends HTMLElement {
 	connectedCallback() {
 		// Called when the element is inserted into the DOM
 		this.initializeBoard(this.boardSize);
-		addListenersToBoard(this, this.boardSize);
+		//addListenersToBoard(this, this.boardSize);
 
 		// Listen for 'board-create' event on the document
 		document.addEventListener('board-create', (event) => {
