@@ -7,15 +7,18 @@ body {
 	color: #ffffff; /* Light text */
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
 	align-items: center;
 	justify-content: center;
+	height: 100vh;
 }
 
-header, footer {
-	text-align: center;
+header {
+	position: absolute;
+	top: 0;
+	left: 0;
 	padding: 10px;
 	background-color: #333;
+	color: red;
 }
 
 /* Main Content Styling */
@@ -31,13 +34,14 @@ go-board {
 	border-radius: 10px; /* Rounded edges */
 	box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5); /* Shadow for depth */
 	margin: 0 20px; /* Spacing around the board */
+	transform: scale(1.75); /* Enlarging the board */
 }
 
 /* Button Styling */
 board-button-size {
-	background: #444; /* Darker background for buttons */
+	background: #556; /* Single color for button */
 	border: none;
-	color: white;
+	color: white; /* White text */
 	padding: 10px 20px;
 	text-align: center;
 	text-decoration: none;
@@ -50,10 +54,13 @@ board-button-size {
 }
 
 board-button-size:hover {
-	background-color: #555; /* Button hover effect */
+	background-color: #667; /* Button hover effect */
 }
 
 /* Footer Styling */
 footer {
 	color: #aaa; /* Lighter text color for footer */
+	text-align: center;
+	padding: 10px;
+	background-color: #333;
 }
