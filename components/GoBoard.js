@@ -7,6 +7,15 @@ class GoBoard extends HTMLElement {
 		this.attachShadow({ mode: 'open' });
 		// Initialize any state or bind methods
 		this.boardSize = 13; // Default board size or use attribute to set it
+		this.loadStyles();
+	}
+
+	async loadStyles() {
+		const css = await fetch('../assets/styles/GoBoard.css')
+		.then(response => response.text());
+		const style = document.createElement('style');
+		style.textContent = css;
+		this.shadowRoot.appendChild(style);
 	}
 
 	connectedCallback() {
