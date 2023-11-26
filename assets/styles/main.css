@@ -1,4 +1,5 @@
-/* Overall Page Styling */
+/*Global styles*/
+
 body {
 	margin: 0;
 	padding: 0;
@@ -12,7 +13,6 @@ body {
 	height: 100vh;
 }
 
-/* Header Styling */
 header {
 	width: 100%;
 	text-align: left;
@@ -22,7 +22,10 @@ header {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Footer Styling */
+main {
+	display: flex;
+}
+
 footer {
 	width: 100%;
 	text-align: center;
@@ -39,4 +42,4 @@ footer {
 	justify-content: center;
 }
 
-/* Add other global styles as needed */
+
