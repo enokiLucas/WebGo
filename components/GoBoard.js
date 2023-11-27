@@ -232,11 +232,7 @@ class GoBoard extends HTMLElement {
 		console.log(`Intersection clicked at: (${ALPHABET[boardX]}, ${this.boardSize - boardY})`);
 		console.log(`Intersection at [${boardX}, ${boardY}]`);
 	}
-
-
 } //End of the class
 
 // Define the custom element
 customElements.define('go-board', GoBoard);
-
-//this.appendChild(board); // or this.shadowRoot.appendChild(board) if using Shadow DOM
