@@ -1,5 +1,5 @@
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE } from '../utils/constants.js'; //Import global variables
-import { SVGBoard } from 'SVGBoard.js';//Import the method that creates the board.
+import { SVGBoard } from './SVGBoard.js';//Import the method that creates the board.
 
 
 class GoBoard extends HTMLElement {
