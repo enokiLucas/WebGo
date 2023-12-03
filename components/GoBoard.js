@@ -1,5 +1,6 @@
-import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE } from '../utils/constants.js';
-//import { addListenersToBoard } from './IntersectionListeners.js';
+import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE } from '../utils/constants.js'; //Import global variables
+
+
 
 class GoBoard extends HTMLElement {
 	constructor() {
