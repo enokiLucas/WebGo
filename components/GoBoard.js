@@ -1,7 +1,6 @@
-import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE } from '../utils/constants.js'; //Import global variables
+import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE, SVG_NS } from '../utils/constants.js'; //Import global variables
 import { SVGBoard } from './SVGBoard.js';//Import the method that creates the board.
 import { loadStyles } from '../utils/styleLoader.js';
-
 
 class GoBoard extends HTMLElement {
 	constructor() {
@@ -37,20 +36,19 @@ class GoBoard extends HTMLElement {
 	}
 
 	initializeBoard(size) {
+		//Remove existing board when on already exist.
 		const existingSVG = this.shadowRoot.querySelector('svg');
 		if (existingSVG) {
 			existingSVG.remove();
 		}
 
 		// Code to set up the board
-		const svgBoard = new SVGBoard("http://www.w3.org/2000/svg", size);
+		const svgBoard = new SVGBoard(SVG_NS, size);
 		const boardElement = svgBoard.createBoard();
 		this.shadowRoot.appendChild(boardElement);
 	}
 
 	setupBoardInteractions() {
-		const svgNS = "http://www.w3.org/2000/svg";
-
 		// Initialize the ghost piece on the board
 		this.initializeGhostPiece('black');
 		const ghostStone = this.shadowRoot.getElementById('ghostStone');
@@ -59,7 +57,7 @@ class GoBoard extends HTMLElement {
 		for (let i = 0; i < this.boardSize; i++) {
 			for (let j = 0; j < this.boardSize; j++) {
 				// Create a circle at each intersection for the event listener
-				let intersection = document.createElementNS(svgNS, "circle");
+				let intersection = document.createElementNS(SVG_NS, "circle");
 				intersection.setAttribute('cx', EDGE_MARGIN + (i * LENGTH_SQUARE));
 				intersection.setAttribute('cy', EDGE_MARGIN + (j * LENGTH_SQUARE));
 				intersection.setAttribute('r', 10); // Small radius, essentially invisible
@@ -82,8 +80,7 @@ class GoBoard extends HTMLElement {
 
 	//Methods used by setupBoardInteractions().
 	initializeGhostPiece(color) {
-		const svgNS = "http://www.w3.org/2000/svg";
-		let ghostStone = document.createElementNS(svgNS, "circle");
+		let ghostStone = document.createElementNS(SVG_NS, "circle");
 		ghostStone.setAttribute('id', 'ghostStone');
 		ghostStone.setAttribute('r', LENGTH_SQUARE / 2); // The radius should be half the square size
 		ghostStone.setAttribute('fill', color); // Placeholder color
