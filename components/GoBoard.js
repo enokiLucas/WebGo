@@ -1,5 +1,6 @@
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE } from '../utils/constants.js'; //Import global variables
 import { SVGBoard } from './SVGBoard.js';//Import the method that creates the board.
+import { loadStyles } from '../utils/styleLoader.js';
 
 
 class GoBoard extends HTMLElement {
@@ -8,18 +9,10 @@ class GoBoard extends HTMLElement {
 		this.attachShadow({ mode: 'open' });
 		// Initialize any state or bind methods
 		this.boardSize = 13; // Default board size or use attribute to set it
-		this.loadStyles();
 	}
 
-	async loadStyles() {
-		const css = await fetch('../assets/styles/GoBoard.css')
-		.then(response => response.text());
-		const style = document.createElement('style');
-		style.textContent = css;
-		this.shadowRoot.appendChild(style);
-	}
-
-	connectedCallback() {
+	async connectedCallback() {
+		await loadStyles(this.shadowRoot, '../assets/styles/GoBoard.css');
 		// Called when the element is inserted into the DOM
 		this.initializeBoard(this.boardSize);
 		this.setupBoardInteractions();
