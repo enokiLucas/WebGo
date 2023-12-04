@@ -44,13 +44,16 @@ class GoBoard extends HTMLElement {
 	}
 
 	initializeBoard(size) {
+		const existingSVG = this.shadowRoot.querySelector('svg');
+		if (existingSVG) {
+			existingSVG.remove();
+		}
+
 		// Code to set up the board
 		const svgBoard = new SVGBoard("http://www.w3.org/2000/svg", size);
 		const boardElement = svgBoard.createBoard();
 		this.shadowRoot.appendChild(boardElement);
 	}
-
-	// Additional methods related to board functionality
 
 	setupBoardInteractions() {
 		const svgNS = "http://www.w3.org/2000/svg";
