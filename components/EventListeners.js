@@ -14,6 +14,11 @@ export function addEventListeners(board, boardSize, onIntersectionHover, onInter
 			intersection.setAttribute('fill', 'transparent'); // Make the circle invisible
 			intersection.setAttribute('class', 'intersection');
 
+			// Use the provided callback functions for hover and click events
+			intersection.addEventListener('mouseenter', () => onIntersectionHover(intersection));
+			intersection.addEventListener('click', () => onIntersectionClick(intersection));
+
+
 			board.appendChild(intersection);
 		}
 	}
