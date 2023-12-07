@@ -1,3 +1,5 @@
+//deprecated
+
 //Handle event listeners in the intersections of the board.
 
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE, SVG_NS } from '../utils/constants.js'; //Import global variables
