@@ -1,6 +1,6 @@
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE, SVG_NS } from '../utils/constants.js'; //Import global variables
 import { SVGBoard } from './SVGBoard.js';//Import the method that creates the board.
-import { loadStyles } from '../utils/styleLoader.js';
+import { loadStyles } from '../utils/StyleLoader.js';
 import { addEventListeners } from './EventListeners.js';
 import './GhostPieceManager.js';
 import { GameStateManager } from './GameStateManager.js';
