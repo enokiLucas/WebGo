@@ -88,7 +88,7 @@ export function setupBoardInteractions(board, size, ghostStone) {
 		});
 	}
 
-	saveClick(event) {
+	export function saveClick(event) {
 		let x = event.target.cx.baseVal.value;
 		let y = event.target.cy.baseVal.value;
 
