@@ -17,7 +17,12 @@ class GoBoard extends HTMLElement {
 		await loadStyles(this.shadowRoot, '../assets/styles/GoBoard.css');
 		// Called when the element is inserted into the DOM
 		this.initializeBoard(this.boardSize);
-		//addEventListener();
+		addEventListeners(
+			this.shadowRoot,
+			this.boardSize,
+			//handleIntersectionHover,
+			//handleIntersectionClick
+		);
 
 		// Listen for 'board-create' event on the document
 		document.addEventListener('board-create', (event) => {

@@ -1,4 +1,4 @@
-import { EDGE_MARGIN, LENGTH_SQUARE} from '../utils/constants.js'
+import { EDGE_MARGIN, LENGTH_SQUARE, SVG_NS} from '../utils/constants.js'
 
 export function addEventListeners(board, boardSize, onIntersectionHover, onIntersectionClick) {
 	// Logic to add event listeners
