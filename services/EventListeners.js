@@ -18,7 +18,6 @@ export function addEventListeners(board, boardSize, onIntersectionHover, onInter
 			intersection.addEventListener('mouseenter', () => onIntersectionHover(intersection));
 			intersection.addEventListener('click', () => onIntersectionClick(intersection));
 
-
 			board.appendChild(intersection);
 		}
 	}
