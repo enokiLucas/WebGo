@@ -20,8 +20,8 @@ class GoBoard extends HTMLElement {
 		addEventListeners(
 			this.shadowRoot,
 			this.boardSize,
-			//handleIntersectionHover,
-			//handleIntersectionClick
+			handleIntersectionHover,
+			handleIntersectionClick
 		);
 
 		// Listen for 'board-create' event on the document

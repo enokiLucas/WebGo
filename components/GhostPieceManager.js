@@ -1,6 +1,6 @@
-class GhostPieceManager extends HTMLElement {
+/*class GhostPieceManager extends HTMLElement {
     // Custom element logic for the ghost piece
-}
+}*/
 // GhostPieceManager.js
 export class GhostPieceManager {
     constructor(boardElement) {
