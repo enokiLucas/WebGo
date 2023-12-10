@@ -4,8 +4,8 @@ import { loadStyles } from '../utils/StyleLoader.js';
 import { addEventListeners } from '../services/EventListeners.js';
 import './GhostPieceManager.js';
 import { GameStateManager } from '../services/GameStateManager.js';
-import { handleIntersectionClick } from '../services/HandleIntersectionClick.js'
-import { handleIntersectionHover } from '../services/HandleIntersectionHover.js'
+import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
+import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';
 
 class GoBoard extends HTMLElement {
 	constructor() {
