@@ -10,7 +10,7 @@ export function handleIntersectionClick(intersection) {
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET } from '../utils/constants.js';
 
 export function handleIntersectionClick(event) {
-	console.log("Intersection clicked", event);/*
+	console.log("Intersection clicked");/*
 	let x = event.target.cx.baseVal.value;
 	let y = event.target.cy.baseVal.value;
 

@@ -52,7 +52,7 @@ class GoBoard extends HTMLElement {
 		this.shadowRoot.appendChild(boardElement);
 
 		addEventListeners(
-			this.shadowRoot,
+			boardElement,
 			this.boardSize,
 			handleIntersectionHover,
 			handleIntersectionClick
