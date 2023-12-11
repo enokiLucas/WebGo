@@ -19,12 +19,6 @@ class GoBoard extends HTMLElement {
 		await loadStyles(this.shadowRoot, '../assets/styles/GoBoard.css');
 		// Called when the element is inserted into the DOM
 		this.initializeBoard(this.boardSize);
-		addEventListeners(
-			this.shadowRoot,
-			this.boardSize,
-			handleIntersectionHover,
-			handleIntersectionClick
-		);
 
 		// Listen for 'board-create' event on the document
 		document.addEventListener('board-create', (event) => {
@@ -56,6 +50,13 @@ class GoBoard extends HTMLElement {
 		const svgBoard = new SVGBoard(SVG_NS, size);
 		const boardElement = svgBoard.createBoard();
 		this.shadowRoot.appendChild(boardElement);
+
+		addEventListeners(
+			this.shadowRoot,
+			this.boardSize,
+			handleIntersectionHover,
+			handleIntersectionClick
+		);
 	}
 }
 

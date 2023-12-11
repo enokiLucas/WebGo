@@ -1,4 +1,6 @@
 import { EDGE_MARGIN, LENGTH_SQUARE, SVG_NS} from '../utils/constants.js'
+import { handleIntersectionHover } from './handleIntersectionHover.js';
+import { handleIntersectionClick } from './handleIntersectionClick.js';
 
 export function addEventListeners(board, boardSize, onIntersectionHover, onIntersectionClick) {
 	// Logic to add event listeners
@@ -15,10 +17,12 @@ export function addEventListeners(board, boardSize, onIntersectionHover, onInter
 			intersection.setAttribute('class', 'intersection');
 
 			// Use the provided callback functions for hover and click events
-			intersection.addEventListener('mouseenter', () => onIntersectionHover(intersection));
-			intersection.addEventListener('click', () => onIntersectionClick(intersection));
+			intersection.addEventListener('mouseenter', () => handleIntersectionHover(intersection));
+			intersection.addEventListener('click', () => handleIntersectionClick(intersection));
 
 			board.appendChild(intersection);
+
+			//console.log("Adding event listeners", { board, boardSize }); //Test
 		}
 	}
 }

@@ -10,6 +10,7 @@ export function handleIntersectionClick(intersection) {
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET } from '../utils/constants.js';
 
 export function handleIntersectionClick(event) {
+	console.log("Intersection clicked", event);/*
 	let x = event.target.cx.baseVal.value;
 	let y = event.target.cy.baseVal.value;
 
@@ -21,6 +22,6 @@ export function handleIntersectionClick(event) {
 	console.log(`Intersection at [${boardX}, ${boardY}]`);
 
 	// Here, you can add more logic to handle the click event,
-	// such as updating the game state or placing a piece.
+	// such as updating the game state or placing a piece.*/
 }
 
