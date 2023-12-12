@@ -51,10 +51,14 @@ class GoBoard extends HTMLElement {
 		const boardElement = svgBoard.createBoard();
 		this.shadowRoot.appendChild(boardElement);
 
+		//Create the ghost piece
+		this.ghostPiece = document.createElement('ghost-piece');
+		this.shadowRoot.appendChild(this.ghostPiece);
+
 		addEventListeners(
 			boardElement,
 			this.boardSize,
-			intersection => handleIntersectionHover(this.ghostPiece, intersection),
+			intersection => handleIntersectionHover(event),
 			handleIntersectionClick
 		);
 	}

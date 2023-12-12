@@ -14,7 +14,7 @@ class GhostPiece extends HTMLElement {
 	createGhostPiece() {
 		const ghostPiece = document.createElementNS(SVG_NS, "circle");
 		ghostPiece.setAttribute('r', LENGTH_SQUARE / 2); // Radius of the ghost piece
-		ghostPiece.setAttribute('fill', black); // Semi-transparent fill
+		ghostPiece.setAttribute('fill', 'black'); // Semi-transparent fill
 		ghostPiece.setAttribute('fill-opacity', '0.5'); // Adjust for desired transparency
 		ghostPiece.style.visibility = 'hidden'; //Initially hidden
 

@@ -17,7 +17,7 @@ export function addEventListeners(board, boardSize, onIntersectionHover, onInter
 			intersection.setAttribute('class', 'intersection');
 
 			// Use the provided callback functions for hover and click events
-			intersection.addEventListener('mouseenter', () => handleIntersectionHover(intersection));
+			intersection.addEventListener('mouseenter', (event) => handleIntersectionHover(event));
 			intersection.addEventListener('click', (event) => handleIntersectionClick(boardSize, event));
 
 			board.appendChild(intersection);
