@@ -2,7 +2,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE, SVG_NS } from
 import { SVGBoard } from './SVGBoard.js';//Import the method that creates the board.
 import { loadStyles } from '../utils/StyleLoader.js';
 import { addEventListeners } from '../services/EventListeners.js';
-import './GhostPieceManager.js';
+import './GhostPiece.js';
 import { GameStateManager } from '../services/GameStateManager.js';
 import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
 import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';

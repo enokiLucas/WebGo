@@ -1,12 +1,3 @@
-/*import { makeMove } from './GameStateManager.js';
-import { placePiece } from './GhostPieceManager.js';
-
-export function handleIntersectionClick(intersection) {
-	// Logic for click interaction
-	makeMove(intersection);   // Update game state
-	placePiece(intersection); // Place a piece on the board
-}*/
-
 import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET } from '../utils/constants.js';
 
 export function handleIntersectionClick(boardSize, event) {
