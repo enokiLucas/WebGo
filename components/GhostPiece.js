@@ -1,4 +1,4 @@
-import { SVG_NS } from '../utils/constants.js';
+import { LENGTH_SQUARE, SVG_NS } from '../utils/constants.js';
 
 class GhostPiece extends HTMLElement {
 	constructor() {
@@ -12,18 +12,12 @@ class GhostPiece extends HTMLElement {
 	}
 
 	createGhostPiece() {
-		const ghostPiece = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-		ghostPiece.setAttribute('r', 10); // Radius of the ghost piece
-		ghostPiece.setAttribute('fill', 'gray'); // Semi-transparent fill
+		const ghostPiece = document.createElementNS(SVG_NS, "circle");
+		ghostPiece.setAttribute('r', LENGTH_SQUARE / 2); // Radius of the ghost piece
+		ghostPiece.setAttribute('fill', black); // Semi-transparent fill
 		ghostPiece.setAttribute('fill-opacity', '0.5'); // Adjust for desired transparency
+		ghostPiece.style.visibility = 'hidden'; //Initially hidden
 
-		const style = document.createElement('style');
-		style.textContent = `
-			circle {
-			visibility: hidden; /* Initially hidden */
-		}`;
-
-		this.shadowRoot.appendChild(style);
 		this.shadowRoot.appendChild(ghostPiece);
 	}
 
