@@ -54,7 +54,7 @@ class GoBoard extends HTMLElement {
 		addEventListeners(
 			boardElement,
 			this.boardSize,
-			handleIntersectionHover,
+			intersection => handleIntersectionHover(this.ghostPiece, intersection),
 			handleIntersectionClick
 		);
 	}
