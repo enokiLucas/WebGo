@@ -7,24 +7,20 @@ class GhostPiece extends HTMLElement {
 		this.createGhostPiece();
 	}
 
-	connectedCallback() {
-		this.style.visibility = 'hidden'; // Initially hidden
-	}
-
 	createGhostPiece() {
-		const ghostPiece = document.createElementNS(SVG_NS, "circle");
-		ghostPiece.setAttribute('r', LENGTH_SQUARE / 2); // Radius of the ghost piece
-		ghostPiece.setAttribute('fill', 'black'); // Semi-transparent fill
-		ghostPiece.setAttribute('fill-opacity', '0.5'); // Adjust for desired transparency
-		ghostPiece.style.visibility = 'hidden'; //Initially hidden
+		this.ghostPiece = document.createElementNS(SVG_NS, "circle");
+		this.ghostPiece.setAttribute('r', LENGTH_SQUARE / 2); // Radius of the ghost piece
+		this.ghostPiece.setAttribute('fill', 'black'); // Semi-transparent fill
+		this.ghostPiece.setAttribute('fill-opacity', '0.5'); // Adjust for desired transparency
+		this.ghostPiece.style.visibility = 'hidden'; //Initially hidden
 
 		this.shadowRoot.appendChild(ghostPiece);
 	}
 
 	show(x, y) {
-		this.style.visibility = 'visible';
-		this.style.cx = x;
-		this.style.cy = y;
+		this.ghostPiece.setAttribute('cx', x);
+		this.ghostPiece.setAttribute('cy', y);
+		this.ghostPiece.style.visibility = 'visible';
 	}
 
 	hide() {
