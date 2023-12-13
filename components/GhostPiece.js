@@ -4,6 +4,7 @@ class GhostPiece extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		this.ghostPiece = null
 		this.createGhostPiece();
 	}
 
@@ -14,7 +15,7 @@ class GhostPiece extends HTMLElement {
 		this.ghostPiece.setAttribute('fill-opacity', '0.5'); // Adjust for desired transparency
 		this.ghostPiece.style.visibility = 'hidden'; //Initially hidden
 
-		this.shadowRoot.appendChild(ghostPiece);
+		this.shadowRoot.appendChild(this.ghostPiece);
 	}
 
 	show(x, y) {
