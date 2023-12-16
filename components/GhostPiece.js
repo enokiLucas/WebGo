@@ -1,4 +1,5 @@
 import { LENGTH_SQUARE, SVG_NS } from '../utils/constants.js';
+import { loadStyles } from '../utils/StyleLoader.js';
 
 class GhostPiece extends HTMLElement {
 	constructor() {
@@ -8,7 +9,11 @@ class GhostPiece extends HTMLElement {
 		this.createGhostPiece();
 	}
 
-	createGhostPiece() {
+	async connectedCallback() {
+		await loadStyles(this.shadowRoot, '../assets/styles/GhostPiece.css');
+	}
+
+	async createGhostPiece() {
 		const svg = document.createElementNS(SVG_NS, 'svg');
 		svg.setAttribute('width', '100%');
 		svg.setAttribute('height', '100%');
