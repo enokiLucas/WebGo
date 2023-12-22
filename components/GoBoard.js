@@ -6,6 +6,7 @@ import './GhostPiece.js';
 import { GameStateManager } from '../services/GameStateManager.js';
 import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
 import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';
+import { createGhostPiece } from '../utils/GhostPieceUtils.js';
 
 class GoBoard extends HTMLElement {
 	constructor() {
@@ -51,14 +52,15 @@ class GoBoard extends HTMLElement {
 		const boardElement = svgBoard.createBoard();
 		this.shadowRoot.appendChild(boardElement);
 
-		//Create the ghost piece
-		this.ghostPiece = document.createElement('ghost-piece');
-		this.shadowRoot.appendChild(this.ghostPiece);
+		// Create and append ghost piece to the SVG board
+		this.ghostPiece = createGhostPiece();
+		boardElement.appendChild(this.ghostPiece);
 
 		addEventListeners(
 			boardElement,
 			this.boardSize,
-			(event) => handleIntersectionHover(this.ghostPiece, event),
+			this.ghostPiece,
+			handleIntersectionHover,
 			handleIntersectionClick
 		);
 	}

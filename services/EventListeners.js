@@ -2,7 +2,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE, SVG_NS} from '../utils/constants.js'
 import { handleIntersectionHover } from './handleIntersectionHover.js';
 import { handleIntersectionClick } from './handleIntersectionClick.js';
 
-export function addEventListeners(board, boardSize, handleIntersectionHover, handleIntersectionClick) {
+export function addEventListeners(board, boardSize, ghostPiece, handleIntersectionHover, handleIntersectionClick) {
 	// Logic to add event listeners
 	// These listeners can interact with ghostPieceManager and gameStateManager
 	// Iterate over the grid size to access each intersection
@@ -17,7 +17,7 @@ export function addEventListeners(board, boardSize, handleIntersectionHover, han
 			intersection.setAttribute('class', 'intersection');
 
 			// Use the provided callback functions for hover and click events
-			intersection.addEventListener('mouseenter', (event) => handleIntersectionHover(event));
+			intersection.addEventListener('mouseenter', (event) => handleIntersectionHover(event, ghostPiece));
 			intersection.addEventListener('click', (event) => handleIntersectionClick(boardSize, event));
 
 			board.appendChild(intersection);
