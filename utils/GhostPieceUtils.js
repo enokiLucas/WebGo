@@ -1,4 +1,3 @@
-// utils/GhostPieceUtil.js
 import { SVG_NS, LENGTH_SQUARE } from '../utils/constants.js';
 
 export function createGhostPiece() {
