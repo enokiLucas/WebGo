@@ -18,6 +18,8 @@ export function addEventListeners(board, boardSize, ghostPiece, handleIntersecti
 
 			// Use the provided callback functions for hover and click events
 			intersection.addEventListener('mouseenter', (event) => handleIntersectionHover(event, ghostPiece));
+			intersection.addEventListener('mouseleave', () => { ghostPiece.style.visibility = 'hidden'; });
+
 			intersection.addEventListener('click', (event) => handleIntersectionClick(boardSize, event));
 
 			board.appendChild(intersection);
