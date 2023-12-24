@@ -2,7 +2,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET, OFFSET, TEXT_STYLE, SVG_NS } from
 import { SVGBoard } from './SVGBoard.js';//Import the method that creates the board.
 import { loadStyles } from '../utils/StyleLoader.js';
 import { addEventListeners } from '../services/EventListeners.js';
-import { createGhostPiece } from '../utils/GhostPieceUtils.js';
+import { createGhostStone } from '../utils/GhostStoneUtil.js';
 import { GameStateManager } from '../services/GameStateManager.js';
 import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
 import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';
@@ -52,13 +52,13 @@ class GoBoard extends HTMLElement {
 		this.shadowRoot.appendChild(boardElement);
 
 		// Create and append ghost piece to the SVG board
-		this.ghostPiece = createGhostPiece();
-		boardElement.appendChild(this.ghostPiece);
+		this.ghostStone = createGhostStone();
+		boardElement.appendChild(this.ghostStone);
 
 		addEventListeners(
 			boardElement,
 			this.boardSize,
-			this.ghostPiece,
+			this.ghostStone,
 			handleIntersectionHover,
 			handleIntersectionClick
 		);

@@ -1,8 +1,8 @@
-export function handleIntersectionHover(event, ghostPiece) {
+export function handleIntersectionHover(event, ghostStone) {
     const x = event.target.cx.baseVal.value;
     const y = event.target.cy.baseVal.value;
 
-    ghostPiece.setAttribute('cx', x);
-    ghostPiece.setAttribute('cy', y);
-    ghostPiece.setAttribute('visibility', 'visible');
+    ghostStone.setAttribute('cx', x);
+    ghostStone.setAttribute('cy', y);
+    ghostStone.setAttribute('visibility', 'visible');
 }
