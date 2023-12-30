@@ -1,6 +1,7 @@
 import { EDGE_MARGIN, LENGTH_SQUARE, SVG_NS} from '../utils/constants.js'
 import { handleIntersectionHover } from './handleIntersectionHover.js';
 import { handleIntersectionClick } from './handleIntersectionClick.js';
+import { gameStateManager } from './GameStateManager.js';
 
 export function addEventListeners(board, boardSize, ghostStone, handleIntersectionHover, handleIntersectionClick) {
 	// Logic to add event listeners
@@ -24,7 +25,7 @@ export function addEventListeners(board, boardSize, ghostStone, handleIntersecti
 
 			intersection.addEventListener('mouseleave', () => { ghostStone.style.visibility = 'hidden'; });
 
-			intersection.addEventListener('click', (event) => handleIntersectionClick(boardSize, event));
+			intersection.addEventListener('click', (event) => handleIntersectionClick(event, gameStateManager, ghostStone));
 
 			board.appendChild(intersection);
 

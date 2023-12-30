@@ -60,7 +60,7 @@ class GoBoard extends HTMLElement {
 			this.boardSize,
 			this.ghostStone,
 			handleIntersectionHover,
-			handleIntersectionClick
+			(event) => handleIntersectionClick(boardElement, event, gameStateManager, this.ghostStone)
 		);
 	}
 }

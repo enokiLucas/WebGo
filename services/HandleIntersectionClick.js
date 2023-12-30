@@ -4,7 +4,10 @@ import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
 
 export function handleIntersectionClick(event, gameStateManager, ghostStone) {
 	// Place a stone on the board at the clicked intersection
-	placeStoneOnBoard(event.currentTarget.parentElement, event.target.cx.baseVal.value, event.target.cy.baseVal.value, gameStateManager.getCurrentPlayer());
+	const x = event.target.cx.baseVal.value;
+	const y = event.target.cy.baseVal.value;
+
+	placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer());
 
 	// Toggle the current player
 	gameStateManager.togglePlayer();
