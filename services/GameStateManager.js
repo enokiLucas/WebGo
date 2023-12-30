@@ -1,21 +1,18 @@
-// GameStateManager.js
-export class GameStateManager {
+class GameStateManager {
 	constructor() {
-		this.gameState = {
-			// Define the initial state of the game
-			// e.g., board state, current player, etc.
-		};
+		this.moves = [];
+		this.currentPlayer = 'black'; // Initialize with black
 	}
 
-	makeMove(intersection) {
-		// Logic to update the game state based on a move
-		// 'intersection' can be used to determine the move details
+	togglePlayer() {
+		this.currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
 	}
 
-	getCurrentState() {
-		// Return the current game state
-		return this.gameState;
+	getCurrentPlayer() {
+		return this.currentPlayer;
 	}
 
-	// Add other methods as needed for game state management
+// ... other methods like recordMove, getSGF, etc. ...
 }
+// Export a single instance
+export const gameStateManager = new GameStateManager();

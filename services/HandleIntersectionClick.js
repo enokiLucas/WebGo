@@ -1,7 +1,26 @@
-import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET } from '../utils/constants.js';
+//import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET } from '../utils/constants.js';
+import { gameStateManager } from 'GameStateManager.js';
+import { placeStoneOnBoard } from 'PlaceStoneOnBoard.js';
 
-export function handleIntersectionClick(boardSize, event) {
-	let x = event.target.cx.baseVal.value;
+export function handleIntersectionClick(event, gameStateManager, ghostStone) {
+	// Place a stone on the board at the clicked intersection
+	placeStoneOnBoard(event.currentTarget.parentElement, event.target.cx.baseVal.value, event.target.cy.baseVal.value, gameStateManager.getCurrentPlayer());
+
+	// Toggle the current player
+	gameStateManager.togglePlayer();
+
+	// Update the color of the ghost stone
+	ghostStone.setColor(gameStateManager.getCurrentPlayer());
+}
+
+
+
+
+
+
+
+/*
+let x = event.target.cx.baseVal.value;
 	let y = event.target.cy.baseVal.value;
 
 	let boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
@@ -13,5 +32,5 @@ export function handleIntersectionClick(boardSize, event) {
 
 	// Here, you can add more logic to handle the click event,
 	// such as updating the game state or placing a piece.
-}
+*/
 
