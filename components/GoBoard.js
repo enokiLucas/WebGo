@@ -52,7 +52,7 @@ class GoBoard extends HTMLElement {
 		this.shadowRoot.appendChild(boardElement);
 
 		// Create and append ghost piece to the SVG board
-		this.ghostStone = createGhostStone(gameStateManager.getCurrentPlayer());
+		this.ghostStone = createGhostStone();
 		boardElement.appendChild(this.ghostStone);
 
 		addEventListeners(
