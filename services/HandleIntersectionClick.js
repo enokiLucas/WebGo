@@ -11,6 +11,9 @@ export function handleIntersectionClick(board, event, gameStateManager, ghostSto
 
 	// Toggle the current player
 	gameStateManager.togglePlayer();
+
+	// Change the color of the ghost stone
+	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
 }
 
 
