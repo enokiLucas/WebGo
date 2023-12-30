@@ -1,4 +1,5 @@
-//Function to place a stone on the board.
+import { SVG_NS, LENGTH_SQUARE } from '../utils/constants.js'
+
 export function placeStoneOnBoard(board, x, y, playerColor) {
 	let stone = document.createElementNS(SVG_NS, "circle");
 	stone.setAttribute('cx', x);

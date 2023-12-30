@@ -52,7 +52,7 @@ class GoBoard extends HTMLElement {
 		this.shadowRoot.appendChild(boardElement);
 
 		// Create and append ghost piece to the SVG board
-		this.ghostStone = createGhostStone();
+		this.ghostStone = createGhostStone(gameStateManager.getCurrentPlayer());
 		boardElement.appendChild(this.ghostStone);
 
 		addEventListeners(
@@ -60,7 +60,7 @@ class GoBoard extends HTMLElement {
 			this.boardSize,
 			this.ghostStone,
 			handleIntersectionHover,
-			(event) => handleIntersectionClick(boardElement, event, gameStateManager, this.ghostStone)
+			handleIntersectionClick
 		);
 	}
 }

@@ -2,7 +2,7 @@
 import { gameStateManager } from './GameStateManager.js';
 import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
 
-export function handleIntersectionClick(event, gameStateManager, ghostStone) {
+export function handleIntersectionClick(board, event, gameStateManager, ghostStone) {
 	// Place a stone on the board at the clicked intersection
 	const x = event.target.cx.baseVal.value;
 	const y = event.target.cy.baseVal.value;
@@ -11,9 +11,6 @@ export function handleIntersectionClick(event, gameStateManager, ghostStone) {
 
 	// Toggle the current player
 	gameStateManager.togglePlayer();
-
-	// Update the color of the ghost stone
-	ghostStone.setColor(gameStateManager.getCurrentPlayer());
 }
 
 
@@ -23,7 +20,7 @@ export function handleIntersectionClick(event, gameStateManager, ghostStone) {
 
 
 /*
-let x = event.target.cx.baseVal.value;
+	let x = event.target.cx.baseVal.value;
 	let y = event.target.cy.baseVal.value;
 
 	let boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
