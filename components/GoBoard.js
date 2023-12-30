@@ -3,7 +3,6 @@ import { SVGBoard } from './SVGBoard.js';//Import the method that creates the bo
 import { loadStyles } from '../utils/StyleLoader.js';
 import { addEventListeners } from '../services/EventListeners.js';
 import { createGhostStone } from '../utils/GhostStoneUtil.js';
-import { GameStateManager } from '../services/GameStateManager.js';
 import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
 import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';
 import { gameStateManager } from '../services/GameStateManager.js';

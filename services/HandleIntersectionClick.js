@@ -1,6 +1,6 @@
 //import { EDGE_MARGIN, LENGTH_SQUARE, ALPHABET } from '../utils/constants.js';
-import { gameStateManager } from 'GameStateManager.js';
-import { placeStoneOnBoard } from 'PlaceStoneOnBoard.js';
+import { gameStateManager } from './GameStateManager.js';
+import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
 
 export function handleIntersectionClick(event, gameStateManager, ghostStone) {
 	// Place a stone on the board at the clicked intersection
