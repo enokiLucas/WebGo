@@ -4,6 +4,10 @@ class GameStateManager {
 		this.currentPlayer = 'black'; // Initialize with black
 	}
 
+	resetGameState() {
+		this.moves = []; // Reset the moves array
+	}
+
 	togglePlayer() {
 		this.currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
 	}

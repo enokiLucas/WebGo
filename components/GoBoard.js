@@ -55,6 +55,8 @@ class GoBoard extends HTMLElement {
 		this.ghostStone = createGhostStone();
 		boardElement.appendChild(this.ghostStone);
 
+		gameStateManager.resetGameState();
+
 		addEventListeners(
 			boardElement,
 			this.boardSize,

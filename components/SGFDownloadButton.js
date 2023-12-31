@@ -18,6 +18,14 @@ class SGFDownloadButton extends HTMLElement {
 		button.addEventListener('click', this.downloadSGF.bind(this));
 	}
 
+	connectedCallback() {
+		// Listen for board size change events
+		document.addEventListener('board-create', (event) => {
+			const newSize = event.detail.size;
+			this.setAttribute('board-size', newSize);
+		});
+	}
+
 	downloadSGF() {
 		const sgfContent = this.generateSGFContent();
 		const blob = new Blob([sgfContent], { type: 'text/plain' });
@@ -33,9 +41,10 @@ class SGFDownloadButton extends HTMLElement {
 	}
 
 	generateSGFContent() {
-		const metadata = `(;GM[1]FF[4]SZ[${this.getAttribute('board-size')}]`; // Use attribute for board size
-		const moves = this.getSGFMoves(); // Implement or import your method to get moves
-		return `${metadata}${moves})`;
+		const boardSize = this.getAttribute('board-size');
+    const sgfHeader = `(;GM[1]FF[4]CA[UTF-8]SZ[${boardSize}]\n`;
+    const sgfMoves = gameStateManager.getSGFMoves();
+    return `${sgfHeader}${sgfMoves})`;
 	}
 
 	getSGFMoves() {
