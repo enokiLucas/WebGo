@@ -20,6 +20,4 @@ export function handleIntersectionClick(board, event, gameStateManager, ghostSto
 
 	// Add move to the game state
 	gameStateManager.addMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);
-
-	gameStateManager.printSGFToConsole(); //Testing
 }
