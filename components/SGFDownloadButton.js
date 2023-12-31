@@ -31,9 +31,12 @@ class SGFDownloadButton extends HTMLElement {
 		const blob = new Blob([sgfContent], { type: 'text/plain' });
 		const url = URL.createObjectURL(blob);
 
+		const currentDate = new Date();
+		const formattedDate = currentDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
+
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = 'game.sgf'; // Customize the file name as needed
+		a.download = `GO-${formattedDate}.sgf`; // Customize the file name as needed
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
@@ -42,7 +45,7 @@ class SGFDownloadButton extends HTMLElement {
 
 	generateSGFContent() {
 		const boardSize = this.getAttribute('board-size');
-    const sgfHeader = `(;GM[1]FF[4]CA[UTF-8]SZ[${boardSize}]\n`;
+    const sgfHeader = `(;GM[1]FF[4]CA[UTF-8]AP[WebGo]KM[]SZ[${boardSize}]DT[${formattedDate}]\n`;
     const sgfMoves = gameStateManager.getSGFMoves();
     return `${sgfHeader}${sgfMoves})`;
 	}
