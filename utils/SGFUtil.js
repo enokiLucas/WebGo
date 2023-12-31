@@ -1,7 +1,13 @@
+import { EDGE_MARGIN, LENGTH_SQUARE } from './constants.js'
+
 export function convertToSGFPosition(x, y, boardSize) {
-	const letters = "abcdefghijklmnopqrstuvwxyz";
-	const sgfX = letters.charAt(x);
-	const sgfY = letters.charAt(boardSize - 1 - y); // Assuming 0-indexed y-coordinate
+	const lettersSGF = "abcdefghijklmnopqrstuvwxyz";
+
+	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
+	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
+
+	const sgfX = lettersSGF.charAt(boardX);
+	const sgfY = lettersSGF.charAt(boardY);
 
 	return `${sgfX}${sgfY}`;
 }
