@@ -1,5 +1,6 @@
 import { gameStateManager } from './GameStateManager.js';
 import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
+import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js'
 
 export function handleIntersectionClick(board, event, gameStateManager, ghostStone) {
 	// Place a stone on the board at the clicked intersection
@@ -13,4 +14,12 @@ export function handleIntersectionClick(board, event, gameStateManager, ghostSto
 
 	// Change the color of the ghost stone
 	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
+
+	//Convert the board coordinates to SGF positions.
+	const sgfPosition = convertToSGFPosition(x, y);
+
+	// Add move to the game state
+	gameStateManager.addMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);
+
+	gameStateManager.printSGFToConsole(); //Testing
 }
