@@ -18,6 +18,12 @@ class SGFDownloadButton extends HTMLElement {
 		button.addEventListener('click', this.downloadSGF.bind(this));
 	}
 
+	getDateISO8601() {
+		const currentDate = new Date();
+		const formattedDate = currentDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
+		return formattedDate;
+	}
+
 	connectedCallback() {
 		// Listen for board size change events
 		document.addEventListener('board-create', (event) => {
@@ -31,12 +37,9 @@ class SGFDownloadButton extends HTMLElement {
 		const blob = new Blob([sgfContent], { type: 'text/plain' });
 		const url = URL.createObjectURL(blob);
 
-		const currentDate = new Date();
-		const formattedDate = currentDate.toISOString().split('T')[0]; // Format: "YYYY-MM-DD"
-
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = `GO-${formattedDate}.sgf`; // Customize the file name as needed
+		a.download = `GO-${this.getDateISO8601()}.sgf`; // Customize the file name as needed
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
@@ -45,9 +48,10 @@ class SGFDownloadButton extends HTMLElement {
 
 	generateSGFContent() {
 		const boardSize = this.getAttribute('board-size');
-    const sgfHeader = `(;GM[1]FF[4]CA[UTF-8]AP[WebGo]KM[]SZ[${boardSize}]DT[${formattedDate}]\n`;
-    const sgfMoves = gameStateManager.getSGFMoves();
-    return `${sgfHeader}${sgfMoves})`;
+		const dateFormatted = this.getDateISO8601();
+		const sgfHeader = `(;GM[1]FF[4]CA[UTF-8]AP[WebGo]KM[]SZ[${boardSize}]DT[${dateFormatted}]\n`;
+		const sgfMoves = gameStateManager.getSGFMoves();
+		return `${sgfHeader}${sgfMoves})`;
 	}
 
 	getSGFMoves() {
