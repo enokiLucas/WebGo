@@ -1,33 +1,14 @@
-// Import tab components
-import './tabs/TestTab.js';
+import { loadHTML } from '../../utils/HTMLLoader.js'
 
 class GameControlPanel extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
+	constructor() {
+		super();
+		this.attachShadow({ mode: 'open' });
+	}
 
-    connectedCallback() {
-        this.render();
-    }
-
-    render() {
-        this.shadowRoot.innerHTML = `
-            <style>
-                /* Styles for your GameControlPanel */
-                .panel {
-                    /* Panel styles */
-                }
-                .tab {
-                    /* Tab styles */
-                }
-            </style>
-            <div class="panel">
-                <test-tab></test-tab>
-                <!-- More tabs will be added here in the future -->
-            </div>
-        `;
-    }
+	async connectedCallback() {
+		await loadHTML(this.ShadowRoot, '../../assests/html/GameControlPanel.html');
+	}
 }
 
 customElements.define('game-control-panel', GameControlPanel);
