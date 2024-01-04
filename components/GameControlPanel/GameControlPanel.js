@@ -7,7 +7,7 @@ class GameControlPanel extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		await loadHTML(this.ShadowRoot, '../../assests/html/GameControlPanel.html');
+		await loadHTML(this.shadowRoot, '../../assets/html/GameControlPanel.html');
 	}
 }
 

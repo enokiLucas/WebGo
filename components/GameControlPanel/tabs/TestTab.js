@@ -1,6 +1,4 @@
-// Import button components
-import '../../BoardButtonSize.js';
-import '../../SGFDownloadButton.js';
+import { loadHTML } from '../../../utils/HTMLLoader.js'
 
 class TestTab extends HTMLElement {
 	constructor() {
