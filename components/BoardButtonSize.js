@@ -19,6 +19,7 @@ class BoardButtonSize extends HTMLElement {
 			this.dispatchEvent(new CustomEvent('board-create', {
 				detail: { size: this.boardSize },
 				bubbles: true, // Allows the event to bubble up through the DOM
+				composed: true, //Allows the event to cross the shadow DOM barrier
 			}));
 		});
 
