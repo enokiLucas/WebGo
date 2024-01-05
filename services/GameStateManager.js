@@ -2,6 +2,15 @@ class GameStateManager {
 	constructor() {
 		this.moves = [];
 		this.currentPlayer = 'black'; // Initialize with black
+		this.boardSize = 13;
+	}
+
+	setBoardSize(size) {
+		this.boardSize = size;
+	}
+
+	getBoardSize() {
+		return this.boardSize;
 	}
 
 	resetGameState() {

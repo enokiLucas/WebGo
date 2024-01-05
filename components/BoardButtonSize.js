@@ -1,3 +1,4 @@
+import { gameStateManager } from '../services/GameStateManager.js';
 class BoardButtonSize extends HTMLElement {
 	constructor() {
 		super(); // Always call super() first in a Web Component constructor.
@@ -6,7 +7,7 @@ class BoardButtonSize extends HTMLElement {
 		this.attachShadow({ mode: 'open' });
 
 		// Set up the initial state or properties
-		this.boardSize = this.getAttribute('board-size') || 9; // Default to 9x9
+		this.boardSize = this.getAttribute('board-size')
 	}
 
 	connectedCallback() {
@@ -15,16 +16,13 @@ class BoardButtonSize extends HTMLElement {
 
 		// Add event listener
 		button.addEventListener('click', () => {
-			// Emit a custom event with the board size
-			this.dispatchEvent(new CustomEvent('board-create', {
-				detail: { size: this.boardSize },
-				bubbles: true, // Allows the event to bubble up through the DOM
-				composed: true, //Allows the event to cross the shadow DOM barrier
-			}));
+			gameStateManager.setBoardSize(this.boardSize);
 		});
 
 		this.shadowRoot.appendChild(button);
+
 	}
+
 }
 
 // Define the custom element

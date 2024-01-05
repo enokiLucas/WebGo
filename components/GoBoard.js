@@ -10,15 +10,13 @@ import { gameStateManager } from '../services/GameStateManager.js';
 class GoBoard extends HTMLElement {
 	constructor() {
 		super();
-		this.attachShadow({ mode: 'open' });
-		// Initialize any state or bind methods
-		this.boardSize = 13; // Default board size or use attribute to set it
+		this.attachShadow({ mode: 'open' }); // Initialize any state or bind methods
 	}
 
 	async connectedCallback() {
 		await loadStyles(this.shadowRoot, '../assets/styles/GoBoard.css');
 		// Called when the element is inserted into the DOM
-		this.initializeBoard(this.boardSize);
+		this.initializeBoard(gameStateManager.getBoardSize());
 
 		// Listen for 'board-create' event on the document
 		document.addEventListener('board-create', (event) => {
@@ -34,8 +32,8 @@ class GoBoard extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (name === 'size') {
-			this.boardSize = parseInt(newValue);
-			this.initializeBoard(this.boardSize);
+			gameStateManager.setBoardSize(parseInt(newValue));
+			this.initializeBoard(gameStateManager.getBoardSize());
 		}
 	}
 
