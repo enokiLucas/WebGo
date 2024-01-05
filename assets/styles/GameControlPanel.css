@@ -1,0 +1,11 @@
+.tab {
+    /* Styling for tabs */
+}
+
+.tab.active {
+    /* Styling for active tab */
+}
+
+.tab-content {
+    display: none; /* Hide all tab contents by default */
+}
