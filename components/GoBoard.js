@@ -18,10 +18,10 @@ class GoBoard extends HTMLElement {
 		// Called when the element is inserted into the DOM
 		this.initializeBoard(gameStateManager.getBoardSize());
 
-		// Listen for 'board-create' event on the document
-		document.addEventListener('board-create', (event) => {
-			const boardSize = event.detail.size;
-			this.setAttribute('size', boardSize);
+		// Listen to board size change events
+		document.addEventListener('board-size-changed', (event) => {
+			const newSize = event.detail.size;
+			this.initializeBoard(newSize);
 		});
 	}
 

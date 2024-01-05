@@ -5,8 +5,12 @@ class GameStateManager {
 		this.boardSize = 13;
 	}
 
-	setBoardSize(size) {
-		this.boardSize = size;
+	setBoardSize(newSize) {
+		this.boardSize = newSize;
+		// Emit an event
+		document.dispatchEvent(new CustomEvent('board-size-changed', {
+			detail: { size: newSize }
+		}));
 	}
 
 	getBoardSize() {
@@ -39,5 +43,6 @@ class GameStateManager {
 		console.log(this.getSGFMoves());
 	}
 }
+
 // Export a single instance
 export const gameStateManager = new GameStateManager();
