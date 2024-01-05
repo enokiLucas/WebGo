@@ -57,7 +57,7 @@ class GoBoard extends HTMLElement {
 
 		addEventListeners(
 			boardElement,
-			this.boardSize,
+			gameStateManager.getBoardSize(),
 			this.ghostStone,
 			handleIntersectionHover,
 			handleIntersectionClick
