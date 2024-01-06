@@ -1,11 +1,59 @@
+/* Main panel styling */
+game-control-panel {
+    display: block;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Tab headers */
+.tab-header {
+    display: flex;
+    margin-bottom: 10px;
+}
+
 .tab {
-    /* Styling for tabs */
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    background-color: #d9d9d9;
+    margin-right: 5px;
+    font-weight: bold;
 }
 
+/* Active tab styling */
 .tab.active {
-    /* Styling for active tab */
+    background-color: white;
+    border-bottom: 1px solid white;
 }
 
+/* Tab content area */
 .tab-content {
-    display: none; /* Hide all tab contents by default */
+    display: none;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 0 5px 5px 5px;
+    background-color: white;
+}
+
+/* Display active tab content */
+.tab-content.active {
+    display: block;
+}
+
+/* Extra styles for visual appeal */
+button {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
 }
