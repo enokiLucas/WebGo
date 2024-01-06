@@ -1,10 +1,10 @@
 .game-control-panel {
-	background-color: #D3D3D3; /* A light grey background */
-	color: #000000; /* Black text color for contrast */
+	background-color: #585b70; /* Surface 2 */
+	color: #fab387; /* Peach */
 	display: flex;
 	flex-direction: row;
 	height: 70vh;
-	width: 50vh;
+	width: 40vh;
 	margin: 10px;
 	padding-left: 10px;
 }
@@ -17,9 +17,9 @@
 }
 
 .tab {
-	background-color: #FFFFFF; /* White background for the tab */
-	border: 1px solid #0000FF; /* Blue border for the tab */
-	color: #0000FF; /* Blue text color for the tab label */
+	background-color: #9399b2; /* Overlay 2 */
+	border: 1px solid #89b4fa; /* Blue border for the tab */
+	color: #89b4fa; /* Blue text color for the tab label */
 	margin-bottom: 5px; /* Space between tabs */
 	cursor: pointer; /* Pointer cursor on hover */
 	padding: 5px 10px; /* Padding inside the tab */
@@ -28,15 +28,15 @@
 }
 
 .tab.selected {
-	background-color: #0000FF; /* Blue background for the selected tab */
-	color: #FFFFFF; /* White text color for contrast */
+	background-color: #89b4fa; /* Blue background for the selected tab */
+	color: #9399b2; /* White text color for contrast */
 }
 
 .tab-content {
 	display: none; /* Hide all tab content by default */
 	flex-grow: 1;
 	padding: 10px;
-	border-left: 4px solid #0000FF; /* Thick blue border on the left to separate from tabs */
+	border-left: 4px solid #89b4fa; /* Thick blue border on the left to separate from tabs */
 }
 
 .tab-content.active {
