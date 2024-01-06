@@ -24,6 +24,7 @@ header {
 
 main {
 	display: flex;
+	max-width: 100%;
 }
 
 footer {

@@ -11,11 +11,11 @@ class GameControlPanel extends HTMLElement {
 	async connectedCallback() {
 		await loadHTML(this.shadowRoot, '../../assets/html/GameControlPanel.html');
 		await loadStyles(this.shadowRoot, '../../assets/styles/GameControlPanel.css');
-		this.setupTabs();
+		this.switchTabs();
 		this.activateDefaultTab();
 	}
 
-	setupTabs() {
+	switchTabs() {
 		const tabs = this.shadowRoot.querySelectorAll('.tab');
 		const tabContents = this.shadowRoot.querySelectorAll('.tab-content');
 

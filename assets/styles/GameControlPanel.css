@@ -1,45 +1,47 @@
 .game-control-panel {
-    background-color: #D3D3D3; /* A light grey background */
-    color: #000000; /* Black text color for contrast */
-    border-right: 4px solid #0000FF; /* Thick blue border on the right */
-    padding: 10px; /* Padding inside the panel */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Align items to the right for the tab orientation */
-    height: 100%; /* Full height to cover the side of the view */
+	background-color: #D3D3D3; /* A light grey background */
+	color: #000000; /* Black text color for contrast */
+	display: flex;
+	flex-direction: row;
+	height: 70vh;
+	width: 50vh;
+	margin: 10px;
+	padding-left: 10px;
+}
+
+.tabs {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start; /* Align items to start from the right */
+	padding: 10px; /* Padding inside the tabs container */
 }
 
 .tab {
-    background-color: #FFFFFF; /* White background for the tab */
-    border: 1px solid #0000FF; /* Blue border for the tab */
-    color: #0000FF; /* Blue text color for the tab label */
-    margin-bottom: 5px; /* Space between tabs */
-    cursor: pointer; /* Pointer cursor on hover */
-    padding: 5px 10px; /* Padding inside the tab */
+	background-color: #FFFFFF; /* White background for the tab */
+	border: 1px solid #0000FF; /* Blue border for the tab */
+	color: #0000FF; /* Blue text color for the tab label */
+	margin-bottom: 5px; /* Space between tabs */
+	cursor: pointer; /* Pointer cursor on hover */
+	padding: 5px 10px; /* Padding inside the tab */
+	writing-mode: vertical-rl; /* Make text vertical */
+	text-orientation: mixed; /* Ensure text is readable from bottom to top */
 }
 
 .tab.selected {
-    background-color: #0000FF; /* Blue background for the selected tab */
-    color: #FFFFFF; /* White text color for contrast */
+	background-color: #0000FF; /* Blue background for the selected tab */
+	color: #FFFFFF; /* White text color for contrast */
 }
 
 .tab-content {
-    display: none; /* Hide all tab content by default */
-    padding: 10px;
-    border: 1px solid #0000FF; /* Border to match the tabs */
+	display: none; /* Hide all tab content by default */
+	flex-grow: 1;
+	padding: 10px;
+	border-left: 4px solid #0000FF; /* Thick blue border on the left to separate from tabs */
 }
 
 .tab-content.active {
-    display: block; /* Only display the active tab content */
+	display: block; /* Only display the active tab content */
+	width: 100%; /* Take the full width available */
 }
 
-/* Styling for the board size buttons inside the starter tab */
-.board-size-button {
-    background-color: #FFFFFF; /* White background for the button */
-    color: #0000FF; /* Blue text color to match the theme */
-    border: 1px solid #0000FF; /* Blue border for the button */
-    margin: 5px 0; /* Margin for spacing */
-    padding: 5px; /* Padding for sizing */
-    cursor: pointer; /* Pointer cursor on hover */
-    text-align: left; /* Align text to the left */
-}
+/* Additional styles may be necessary to adjust layout and appearance */
