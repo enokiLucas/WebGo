@@ -1,4 +1,5 @@
 import { gameStateManager } from '../services/GameStateManager.js';
+import { loadStyles } from '../utils/StyleLoader.js';
 
 class SGFDownloadButton extends HTMLElement {
 	constructor() {
@@ -25,6 +26,8 @@ class SGFDownloadButton extends HTMLElement {
 	}
 
 	connectedCallback() {
+		loadStyles(this.shadowRoot, '../assets/styles/Buttons.css');
+
 		// Listen for board size change events
 		document.addEventListener('board-create', (event) => {
 			const newSize = event.detail.size;

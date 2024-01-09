@@ -1,3 +1,5 @@
+/* Button Styles */
+
 button {
     background-color: #4CAF50; /* Green background */
     color: white; /* White text */
@@ -12,4 +14,29 @@ button {
     box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* Subtle shadow for depth */
     text-transform: uppercase; /* Uppercase text for stylistic choice */
     letter-spacing: 1px; /* Spacing between letters for a premium feel */
+}
+
+button:hover {
+    background-color: #45a049; /* Slightly darker green on hover for interactivity */
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2); /* Larger shadow on hover for a "lifting" effect */
+}
+
+button:active {
+    background-color: #3e8e41; /* Even darker green for active/clicked state */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* Smaller shadow for a "pressed" effect */
+}
+
+button:focus {
+    outline: none; /* Removes the default focus outline */
+    border: 2px solid #35a541; /* Adds a border to indicate focus, can match the hover state */
+}
+
+/* Disabled Button Styles */
+
+button:disabled,
+button[disabled]{
+    background-color: #cccccc; /* Greyed out background for disabled state */
+    color: #666666; /* Dark grey text to indicate the button is not active */
+    cursor: not-allowed; /* Cursor indicates the button is not clickable */
+    box-shadow: none; /* No shadow for flat appearance */
 }
