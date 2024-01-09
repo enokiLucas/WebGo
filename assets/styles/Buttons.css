@@ -1,0 +1,15 @@
+button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 15px 30px; /* Top and bottom padding, Left and right padding */
+    margin: 10px; /* Margin around buttons */
+    border: none; /* No border for a modern look */
+    border-radius: 25px; /* Rounded corners for a softer look */
+    cursor: pointer; /* Cursor changes to a hand icon when hovering over button */
+    transition: all 0.3s; /* Smooth transition for hover effects */
+    font-size: 1rem; /* Default font size */
+    font-weight: bold; /* Bold font for better legibility */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    text-transform: uppercase; /* Uppercase text for stylistic choice */
+    letter-spacing: 1px; /* Spacing between letters for a premium feel */
+}

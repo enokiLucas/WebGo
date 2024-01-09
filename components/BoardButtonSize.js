@@ -1,4 +1,6 @@
 import { gameStateManager } from '../services/GameStateManager.js';
+import { loadStyles } from '../utils/StyleLoader.js';
+
 class BoardButtonSize extends HTMLElement {
 	constructor() {
 		super(); // Always call super() first in a Web Component constructor.
@@ -11,6 +13,8 @@ class BoardButtonSize extends HTMLElement {
 	}
 
 	connectedCallback() {
+		loadStyles(this.shadowRoot, '../assets/styles/Buttons.css');
+
 		const button = document.createElement('button');
 		button.textContent = `${this.boardSize}x${this.boardSize} Board`;
 

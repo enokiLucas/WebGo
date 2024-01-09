@@ -7,6 +7,8 @@
 	width: 40vh;
 	margin: 10px;
 	padding-left: 10px;
+	border: 2px solid #f5e0dc;
+	border-radius: 30px;
 }
 
 .tabs {
@@ -36,7 +38,6 @@
 	display: none; /* Hide all tab content by default */
 	flex-grow: 1;
 	padding: 10px;
-	border-left: 4px solid #89b4fa; /* Thick blue border on the left to separate from tabs */
 }
 
 .tab-content.active {
