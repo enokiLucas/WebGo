@@ -1,7 +1,7 @@
 /* Button Styles */
 
 button {
-    background-color: #4CAF50; /* Green background */
+    background-color: #fab387; /* Green background #4CAF50 */
     color: white; /* White text */
     padding: 15px 30px; /* Top and bottom padding, Left and right padding */
     margin: 10px; /* Margin around buttons */
@@ -17,18 +17,18 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; /* Slightly darker green on hover for interactivity */
+    background-color: #e99e7e; /* Slightly darker green on hover for interactivity */
     box-shadow: 0 12px 20px rgba(0,0,0,0.2); /* Larger shadow on hover for a "lifting" effect */
 }
 
 button:active {
-    background-color: #3e8e41; /* Even darker green for active/clicked state */
+    background-color: #d9856d; /* Even darker green for active/clicked state */
     box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* Smaller shadow for a "pressed" effect */
 }
 
 button:focus {
     outline: none; /* Removes the default focus outline */
-    border: 2px solid #35a541; /* Adds a border to indicate focus, can match the hover state */
+    border: 2px solid #e99e7e; /* Adds a border to indicate focus, can match the hover state */
 }
 
 /* Disabled Button Styles */
