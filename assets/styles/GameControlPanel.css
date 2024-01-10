@@ -12,37 +12,58 @@
 }
 
 .tabs {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start; /* Align items to start from the right */
-	padding: 10px; /* Padding inside the tabs container */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    list-style-type: none; /* Removes default list styling */
+    margin: 0;
 }
 
 .tab {
-	background-color: #9399b2; /* Overlay 2 */
-	border: 1px solid #89b4fa; /* Blue border for the tab */
-	color: #89b4fa; /* Blue text color for the tab label */
-	margin-bottom: 5px; /* Space between tabs */
-	cursor: pointer; /* Pointer cursor on hover */
-	padding: 5px 10px; /* Padding inside the tab */
-	writing-mode: vertical-rl; /* Make text vertical */
-	text-orientation: mixed; /* Ensure text is readable from bottom to top */
+    display: inline-block;
+    background-color: #fab387; /* Peach color for the tab */
+    border: 1px solid #0000FF; /* Blue border to match the container */
+    margin-right: -1px; /* Overlap borders */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    position: relative;
+    top: 1px; /* Aligns with the tab content border */
+    z-index: 2; /* Ensures tab overlap on tab content */
 }
 
-.tab.selected {
-	background-color: #89b4fa; /* Blue background for the selected tab */
-	color: #9399b2; /* White text color for contrast */
+.tab:hover {
+    background-color: #e99e7e; /* Slightly darker shade for hover */
 }
 
+.tab.selected,
+.tab:active {
+    background-color: #d9856d; /* Even darker shade for selected/active tab */
+    color: #FFFFFF; /* White text for better contrast */
+}
+
+.tab:not(.selected):focus {
+    outline: none; /* Removes focus outline for non-selected tabs */
+}
+
+/* Styling for the tab content container */
+.tab-content-container {
+    border: 1px solid #0000FF; /* Blue border for the container */
+    border-radius: 30px;
+    padding: 20px;
+    margin-top: -1px; /* Aligns with the tabs */
+}
+
+/* Styles for active and inactive tab content */
 .tab-content {
-	display: none; /* Hide all tab content by default */
-	flex-grow: 1;
-	padding: 10px;
+    display: none; /* Hide inactive tab content */
 }
 
 .tab-content.active {
-	display: block; /* Only display the active tab content */
-	width: 100%; /* Take the full width available */
+    display: block; /* Show active tab content */
 }
 
 /* Additional styles may be necessary to adjust layout and appearance */
