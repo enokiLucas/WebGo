@@ -1,0 +1,25 @@
+.timer {
+    /* Basic styles */
+    color: #00FF00; /* Green or blue font color */
+    transition: background-color 0.5s ease;
+}
+
+.timer.black-turn {
+    background-color: black;
+    animation: slideInFromLeft 0.5s ease;
+}
+
+.timer.white-turn {
+    background-color: white;
+    animation: slideInFromRight 0.5s ease;
+}
+
+@keyframes slideInFromLeft {
+    0% { background-color: white; }
+    100% { background-color: black; }
+}
+
+@keyframes slideInFromRight {
+    0% { background-color: black; }
+    100% { background-color: white; }
+}
