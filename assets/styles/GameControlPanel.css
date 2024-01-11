@@ -16,7 +16,7 @@
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 0;
-	list-style-type: none; /* Removes default list styling */
+	/*list-style-type: none; /* Removes default list styling */
 	margin: 0;
 	border-left: 3px solid #e99e7e;
 }
@@ -36,6 +36,7 @@
 	/*writing-mode: vertical-rl; /* Make text vertical */
 	text-orientation: mixed; /* Ensure text is readable from bottom to top */
 	font-weight: bold;
+	border: none;
 }
 
 .tab:hover {
