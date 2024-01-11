@@ -18,21 +18,24 @@
 	padding: 0;
 	list-style-type: none; /* Removes default list styling */
 	margin: 0;
+	border-left: 3px solid #e99e7e;
 }
 
 .tab {
-	display: inline-block;
-	background-color: #fab387; /* Peach color for the tab */
-	/*margin-right: -1px; /* Overlap borders */
+	/*display: inline-block;*/
+	color: white;
+	background-color: #585b70; /* Same color as the rest of the panel */
+	margin: 5px; /* Overlap borders */
+	border-radius: 30px;
 	padding: 10px 20px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
-	border-radius: 0 30px 30px 0;
 	position: relative;
 	top: 1px; /* Aligns with the tab content border */
 	z-index: 2; /* Ensures tab overlap on tab content */
-	writing-mode: vertical-rl; /* Make text vertical */
+	/*writing-mode: vertical-rl; /* Make text vertical */
 	text-orientation: mixed; /* Ensure text is readable from bottom to top */
+	font-weight: bold;
 }
 
 .tab:hover {
