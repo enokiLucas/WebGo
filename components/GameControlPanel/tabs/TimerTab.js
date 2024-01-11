@@ -1,4 +1,5 @@
 import { loadHTML } from '../../../utils/HTMLLoader.js';
+import { loadStyles } from '../../../utils/StyleLoader.js';
 
 class TimerTab extends HTMLElement {
 	constructor() {
@@ -9,11 +10,8 @@ class TimerTab extends HTMLElement {
 
 	async connectedCallback() {
 		await loadHTML(this.shadowRoot, '../../../assets/html/TimerTab.html');
-		await loadStyle(this.shadowRoot, '../../../assests/styles/TimerTab.css');
+		await loadStyles(this.shadowRoot, '../../../assets/styles/TimerTab.css');
 	}
-}
-
-	// Additional methods to update timer, switch player, etc.
 }
 
 customElements.define('timer-tab', TimerTab);
