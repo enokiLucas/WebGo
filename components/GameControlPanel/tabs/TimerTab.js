@@ -7,10 +7,11 @@ class TimerTab extends HTMLElement {
 		// Initialize state such as player turn, captured stones, etc.
 	}
 
-	connectedCallback() {
-		// Load HTML and CSS
-		// Setup timer logic
+	async connectedCallback() {
+		await loadHTML(this.shadowRoot, '../../../assets/html/TimerTab.html');
+		await loadStyle(this.shadowRoot, '../../../assests/styles/TimerTab.css');
 	}
+}
 
 	// Additional methods to update timer, switch player, etc.
 }
