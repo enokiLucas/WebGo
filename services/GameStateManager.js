@@ -1,3 +1,5 @@
+import { TimerTab } from ''
+
 class GameStateManager {
 	constructor() {
 		this.moves = [];
@@ -41,6 +43,14 @@ class GameStateManager {
 		// For now, just print the moves
 		// Later, you can add board size and other meta information
 		console.log(this.getSGFMoves());
+	}
+
+	makeMove(color, position) {
+		// Logic to handle a move
+		this.addMove(color, position);
+		this.togglePlayer();
+		// Update the timer display
+		document.querySelector('timer-tab').updateTimerDisplay();
 	}
 }
 
