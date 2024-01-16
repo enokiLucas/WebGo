@@ -9,15 +9,14 @@ export function handleIntersectionClick(board, event, gameStateManager, ghostSto
 
 	placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer());
 
-	// Toggle the current player
-	//gameStateManager.togglePlayer();
-
-	// Change the color of the ghost stone
-	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
-
 	//Convert the board coordinates to SGF positions.
 	const sgfPosition = convertToSGFPosition(x, y);
 
+	// Toggle the current player
+	//gameStateManager.togglePlayer();
 	// Add move to the game state
 	gameStateManager.makeMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);
+
+	// Change the color of the ghost stone
+	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
 }

@@ -1,5 +1,3 @@
-import { TimerTab } from ''
-
 class GameStateManager {
 	constructor() {
 		this.moves = [];
@@ -49,8 +47,6 @@ class GameStateManager {
 		// Logic to handle a move
 		this.addMove(color, position);
 		this.togglePlayer();
-		// Update the timer display
-		document.querySelector('timer-tab').updateTimerDisplay();
 	}
 }
 
