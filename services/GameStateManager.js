@@ -44,19 +44,6 @@ class GameStateManager {
 		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
 		document.dispatchEvent(event);
 	}
-
-	// In GameStateManager.js
-	startNewGame(size) {
-		this.resetGameState();
-		this.setBoardSize(size);
-		this.currentPlayer = 'black'; // Starting with black
-		// Emit an event or invoke a method to update UI components
-		// Example: Emitting an event
-		document.dispatchEvent(new CustomEvent('game-started', {
-			detail: { size: size }
-		}));
-	}
-
 }
 
 // Export a single instance
