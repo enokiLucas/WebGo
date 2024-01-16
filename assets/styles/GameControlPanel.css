@@ -11,6 +11,10 @@
 	border-radius: 30px;
 }
 
+.tab-content-container {
+	flex: 3;
+}
+
 .tabs {
 	display: flex;
 	flex-direction: column;
@@ -19,6 +23,7 @@
 	/*list-style-type: none; /* Removes default list styling */
 	margin: 0;
 	border-left: 3px solid #e99e7e;
+	flex: 1;
 }
 
 .tab {
