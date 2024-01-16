@@ -12,11 +12,16 @@ class TimerTab extends HTMLElement {
 	async connectedCallback() {
 		await loadHTML(this.shadowRoot, '../../../assets/html/TimerTab.html');
 		await loadStyles(this.shadowRoot, '../../../assets/styles/TimerTab.css');
-		this.updateTimerDisplay();
+		document.addEventListener('moveMade', this.updateTimerDisplay);
 	}
 
-	updateTimerDisplay() {
-		const currentPlayer = gameStateManager.getCurrentPlayer();
+	disconnectedCallback() {
+		// Remove the event listener when the component is removed from the DOM
+		document.removeEventListener('moveMade', this.updateTimerDisplay);
+	}
+
+	updateTimerDisplay = (e) => {
+		const currentPlayer = e.detail.currentPlayer;
 		const timerDisplay = this.shadowRoot.querySelector('.timer');
 
 		if (currentPlayer === 'black') {

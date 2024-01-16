@@ -47,6 +47,8 @@ class GameStateManager {
 		// Logic to handle a move
 		this.addMove(color, position);
 		this.togglePlayer();
+		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
+		document.dispatchEvent(event);
 	}
 }
 

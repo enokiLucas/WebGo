@@ -12,8 +12,6 @@ export function handleIntersectionClick(board, event, gameStateManager, ghostSto
 	//Convert the board coordinates to SGF positions.
 	const sgfPosition = convertToSGFPosition(x, y);
 
-	// Toggle the current player
-	//gameStateManager.togglePlayer();
 	// Add move to the game state
 	gameStateManager.makeMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);
 
