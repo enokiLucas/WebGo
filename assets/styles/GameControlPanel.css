@@ -13,6 +13,7 @@
 
 .tab-content-container {
 	flex: 3;
+	padding: 0;
 }
 
 .tabs {

@@ -1,7 +1,8 @@
 .timer {
     /* Basic styles */
     color: #00FF00; /* Green or blue font color */
-    transition: background-color 0.5s ease;
+    transition: background-color 5s ease;
+		width: 100%;
 }
 
 .timer.black-turn {
