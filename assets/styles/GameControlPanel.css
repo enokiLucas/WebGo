@@ -13,7 +13,8 @@
 
 .tab-content-container {
 	flex: 3;
-	padding: 0;
+	padding: 20px;
+	margin-top: -1px; /* Aligns with the tabs */
 }
 
 .tabs {
@@ -57,12 +58,6 @@
 
 .tab:not(.selected):focus {
 	outline: none; /* Removes focus outline for non-selected tabs */
-}
-
-/* Styling for the tab content container */
-.tab-content-container {
-	padding: 20px;
-	margin-top: -1px; /* Aligns with the tabs */
 }
 
 /* Styles for active and inactive tab content */
