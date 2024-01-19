@@ -1,25 +1,30 @@
 .timer {
-		box-sizing: border-box;
-    width: calc(100% + 40px); /* Assuming the parent has a total horizontal padding of 40px */
-    height: calc(100% + 40px); /* Assuming the parent has a total vertical padding of 40px */
-    margin: -20px; /* Half of the total padding to offset on all sides */
-    color: #00FF00; /* Green or blue font color */
-    transition: background-color 0.5s ease;
-		border-radius: 30px 0 0 0;
+	box-sizing: border-box;
+	width: calc(100% + 40px); /* Assuming the parent has a total horizontal padding of 40px */
+	height: calc(100% + 40px); /* Assuming the parent has a total vertical padding of 40px */
+	margin: -20px; /* Half of the total padding to offset on all sides */
+	color: #00FF00; /* Green or blue font color */
+	transition: background-color 0.5s ease;
+	border-radius: 30px 0 0 0;
 }
 
 .timer.black-turn {
-    background-color: black;
-    animation: slideInFromLeft 0.5s ease;
+	background-color: black;
+	animation: slideInFromLeft 0.5s ease;
+}
+
+.timer.white-turn {
+	background-color: white;
+	animation: slideInFromRight 0.5x ease;
 }
 
 /* Additional styles for animations */
 @keyframes slideInFromLeft {
-    0% { background-color: white; }
-    100% { background-color: black; }
+	0% { background-color: white; }
+	100% { background-color: black; }
 }
 
 @keyframes slideInFromRight {
-    0% { background-color: black; }
-    100% { background-color: white; }
+	0% { background-color: black; }
+	100% { background-color: white; }
 }
