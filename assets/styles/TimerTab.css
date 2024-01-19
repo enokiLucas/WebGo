@@ -1,15 +1,15 @@
 .timer {
-    /* Full width, account for any padding in the parent container */
-    width: calc(100% + 20px); /* Adjust the 20px to match the parent's padding */
-    margin: -20px; /* Negative margin to offset parent's padding */
+		box-sizing: border-box;
+    width: calc(100% + 40px); /* Assuming the parent has a total horizontal padding of 40px */
+    height: calc(100% + 40px); /* Assuming the parent has a total vertical padding of 40px */
+    margin: -20px; /* Half of the total padding to offset on all sides */
+    color: #00FF00; /* Green or blue font color */
     transition: background-color 0.5s ease;
 }
 
 .timer.black-turn {
     background-color: black;
     animation: slideInFromLeft 0.5s ease;
-    padding: 20px; /* If you want some space inside the black background */
-    margin-left: -30px; /* Adjust this value as needed to shift the element to the left */
 }
 
 /* Additional styles for animations */
