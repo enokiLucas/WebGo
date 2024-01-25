@@ -16,7 +16,6 @@ export class RulesEngine {
 	}
 
 	changeElement(x, y, color) {
-		console.log(`Attempting to change element at [${x}, ${y}] to ${color}`);
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 		//this.checkForCaptures(x, y, color);
