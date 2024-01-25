@@ -4,7 +4,7 @@ import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
 import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js'
 import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js'
 
-export function handleIntersectionClick(board, event, gameStateManager, rulesEngine, ghostStone) {
+export function handleIntersectionClick(board, event, gameStateManager, ghostStone) {
 	// Place a stone on the board at the clicked intersection
 	const x = event.target.cx.baseVal.value;
 	const y = event.target.cy.baseVal.value;
