@@ -25,7 +25,7 @@ export function addEventListeners(board, boardSize, ghostStone, handleIntersecti
 			});
 			intersection.addEventListener('mouseleave', () => { ghostStone.style.visibility = 'hidden'; });
 
-			intersection.addEventListener('click', (event) => handleIntersectionClick(board, event, gameStateManager, ghostStone));
+			intersection.addEventListener('click', (event) => handleIntersectionClick(board, event, ghostStone));
 
 			board.appendChild(intersection);
 		}
