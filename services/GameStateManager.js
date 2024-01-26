@@ -13,6 +13,10 @@ class GameStateManager {
 		}));
 	}
 
+	resetPlayer() {
+		this.currentPlayer = 'black'; // Reset the players turns
+	}
+
 	getBoardSize() {
 		return this.boardSize;
 	}

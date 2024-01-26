@@ -9,13 +9,17 @@ export class RulesEngine {
 	initializeBoardMatrix() {
 		// Create a 2D array representing the board
 		let boardMatrix = [];
-		for (let i = 0; i < this.boardSize; i++) {
-			boardMatrix[i] = new Array(this.boardSize).fill(null);
+		for (let i = 0; i < this.boardSize; i++) { // Create an array with this.boardSize number of lines
+			boardMatrix[i] = new Array(this.boardSize).fill(null); // Create a new array for each line, each new array with this.boardSize number of rows.
 		}
 		return boardMatrix;
 	}
 
-	changeElement(x, y, color) {
+	resetBoardMatrix() {
+		this.boardMatrix = this.initializeBoardMatrix(); // Reinitialize the board Matrix
+	}
+
+	updateCell(x, y, color) {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 		//this.checkForCaptures(x, y, color);
