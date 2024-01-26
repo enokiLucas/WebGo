@@ -17,7 +17,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Update the logical board
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
-	rulesEngine.changeElement(boardX, boardY, gameStateManager.getCurrentPlayer());
+	rulesEngine.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	// Add move to the game state
 	gameStateManager.makeMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);

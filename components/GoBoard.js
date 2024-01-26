@@ -6,6 +6,7 @@ import { createGhostStone } from '../utils/GhostStoneUtil.js';
 import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
 import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';
 import { gameStateManager } from '../services/GameStateManager.js';
+import { rulesEngine } from '../services/RulesEngine.js';
 
 class GoBoard extends HTMLElement {
 	constructor() {
