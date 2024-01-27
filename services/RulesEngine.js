@@ -25,19 +25,7 @@ export class RulesEngine {
 		//this.checkForCaptures(x, y, color);
 		console.log(this.boardMatrix);
 	}
-
-	checkForCaptures(x, y, color) {
-		// Check for captures around the placed stone
-		// Implement capture logic (e.g., checking for surrounded stones)
-		// For now, this is a placeholder
-	}
-
-	// Additional methods related to game rules and state
-	// Examples: updateGameState, calculateTerritory, etc.
 }
-
-// Export an instance of RuleEngine (if singleton needed)
-// export const ruleEngine = new RuleEngine(19); // Default to 19x19 board
 
 // Export a single instance
 export const rulesEngine = new RulesEngine();
