@@ -1,6 +1,6 @@
 import { gameStateManager } from './GameStateManager.js'
 
-export class RulesEngine {
+export class RulesControl {
 	constructor() {
 		this.boardMatrix = this.initializeBoardMatrix();
 	}
@@ -28,4 +28,4 @@ export class RulesEngine {
 }
 
 // Export a single instance
-export const rulesEngine = new RulesEngine();
+export const rulesControl = new RulesControl();

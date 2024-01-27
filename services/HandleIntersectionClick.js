@@ -1,5 +1,5 @@
 import { gameStateManager } from './GameStateManager.js';
-import { rulesEngine } from './RulesEngine.js'
+import { rulesControl } from './RulesControl.js'
 import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
 import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js'
 import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js'
@@ -17,7 +17,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Update the logical board
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
-	rulesEngine.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
+	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	// Add move to the game state
 	gameStateManager.makeMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);

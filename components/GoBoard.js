@@ -6,7 +6,7 @@ import { createGhostStone } from '../utils/GhostStoneUtil.js';
 import { handleIntersectionClick } from '../services/HandleIntersectionClick.js';
 import { handleIntersectionHover } from '../services/HandleIntersectionHover.js';
 import { gameStateManager } from '../services/GameStateManager.js';
-import { rulesEngine } from '../services/RulesEngine.js';
+import { rulesControl } from '../services/RulesControl.js';
 
 class GoBoard extends HTMLElement {
 	constructor() {
@@ -55,7 +55,7 @@ class GoBoard extends HTMLElement {
 		boardElement.appendChild(this.ghostStone);
 
 		gameStateManager.resetGameState();
-		rulesEngine.resetBoardMatrix(size);
+		rulesControl.resetBoardMatrix(size);
 		gameStateManager.resetPlayer();
 
 		addEventListeners(
