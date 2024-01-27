@@ -1,28 +1,29 @@
 import { gameStateManager } from './GameStateManager.js'
 
 export class RulesEngine {
-	constructor(boardSize) {
-		this.boardSize = gameStateManager.getBoardSize();
+	constructor() {
 		this.boardMatrix = this.initializeBoardMatrix();
 	}
 
-	initializeBoardMatrix() {
+	initializeBoardMatrix(size) {
 		// Create a 2D array representing the board
-		let boardMatrix = [];
-		for (let i = 0; i < this.boardSize; i++) { // Create an array with this.boardSize number of lines
-			boardMatrix[i] = new Array(this.boardSize).fill(null); // Create a new array for each line, each new array with this.boardSize number of rows.
+		const boardMatrix = [];
+		const size_n = parseInt(size, 10); // Convert string to number
+		for (let i = 0; i < size; i++) { // Create an array with size number of lines
+			boardMatrix[i] = new Array(size_n).fill(null); // Create a new array for each line, each new array with 'size' number of rows.
 		}
 		return boardMatrix;
 	}
 
-	resetBoardMatrix() {
-		this.boardMatrix = this.initializeBoardMatrix(); // Reinitialize the board Matrix
+	resetBoardMatrix(size) {
+		this.boardMatrix = this.initializeBoardMatrix(size); // Reinitialize the board Matrix
 	}
 
 	updateCell(x, y, color) {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 		//this.checkForCaptures(x, y, color);
+		console.log(this.boardMatrix);
 	}
 
 	checkForCaptures(x, y, color) {

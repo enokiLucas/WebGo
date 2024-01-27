@@ -55,7 +55,7 @@ class GoBoard extends HTMLElement {
 		boardElement.appendChild(this.ghostStone);
 
 		gameStateManager.resetGameState();
-		rulesEngine.resetBoardMatrix();
+		rulesEngine.resetBoardMatrix(size);
 		gameStateManager.resetPlayer();
 
 		addEventListeners(
