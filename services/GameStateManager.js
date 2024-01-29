@@ -48,6 +48,12 @@ class GameStateManager {
 		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
 		document.dispatchEvent(event);
 	}
+
+	makePass() {
+		this.addMove(this.currentPlayer, ""); // Add a pass move to SGF
+		this.togglePlayer(); // Switch turns
+		console.log(this.getSGFMoves());
+	}
 }
 
 // Export a single instance
