@@ -21,10 +21,12 @@ class TimerTab extends HTMLElement {
 		document.removeEventListener('moveMade', this.updateTimerDisplay);
 	}
 
+	//Change the color of the display
 	updateTimerDisplay = (e) => {
 		const currentPlayer = e.detail.currentPlayer;
 		const timerDisplay = this.shadowRoot.querySelector('.timer');
 
+		//Change the clor during normal play.
 		if (currentPlayer === 'black') {
 			timerDisplay.classList.add('black-turn');
 			timerDisplay.classList.remove('white-turn');
@@ -34,6 +36,14 @@ class TimerTab extends HTMLElement {
 			timerDisplay.classList.remove('black-turn');
 			timerDisplay.querySelector('.player-turn').textContent = "White's Turn";
 		}
+
+		//Change the color of the display when a new game start.
+		document.addEventListener('board-size-changed', () => {
+			timerDisplay.classList.add('black-turn');
+			timerDisplay.classList.remove('white-turn');
+			timerDisplay.querySelector('.player-turn').textContent = "Black's Turn";
+		});
+
 	}
 
 }
