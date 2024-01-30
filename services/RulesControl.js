@@ -23,7 +23,6 @@ export class RulesControl {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 		//this.checkForCaptures(x, y, color);
-		console.log(this.boardMatrix);
 	}
 }
 

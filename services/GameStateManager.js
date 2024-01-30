@@ -54,8 +54,6 @@ class GameStateManager {
 		this.togglePlayer(); // Switch turns
 		document.dispatchEvent(new CustomEvent('Pass', {
 			detail: { currentPlayer: this.currentPlayer }}));
-
-		console.log(this.getSGFMoves());
 	}
 }
 
