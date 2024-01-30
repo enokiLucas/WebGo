@@ -13,6 +13,7 @@ class TimerTab extends HTMLElement {
 		await loadHTML(this.shadowRoot, '../../../assets/html/TimerTab.html');
 		await loadStyles(this.shadowRoot, '../../../assets/styles/TimerTab.css');
 		document.addEventListener('moveMade', this.updateTimerDisplay);
+		document.addEventListener('Pass', this.updateTimerDisplay);
 	}
 
 	disconnectedCallback() {
