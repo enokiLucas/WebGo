@@ -49,8 +49,8 @@ class GameStateManager {
 		document.dispatchEvent(event);
 	}
 
-	makePass() {
-		this.addMove(this.currentPlayer, ""); // Add a pass move to SGF
+	makePass(color) {
+		this.addMove(color, ""); // Add a pass move to SGF
 		this.togglePlayer(); // Switch turns
 		document.dispatchEvent(new CustomEvent('Pass', {
 			detail: { currentPlayer: this.currentPlayer }}));

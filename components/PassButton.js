@@ -1,5 +1,6 @@
 import { gameStateManager } from '../services/GameStateManager.js'
 import { loadStyles } from '../utils/StyleLoader.js';
+import { getPlayerSGFColor } from '../utils/SGFUtil.js'
 
 class PassButton extends HTMLElement {
 	constructor() {
@@ -15,7 +16,7 @@ class PassButton extends HTMLElement {
 		button.textContent = 'Pass';
 
 		button.addEventListener('click', () => {
-			gameStateManager.makePass();
+			gameStateManager.makePass(getPlayerSGFColor(gameStateManager.getCurrentPlayer()));
 		});
 
 		this.shadowRoot.appendChild(button);
