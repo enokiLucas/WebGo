@@ -7,16 +7,6 @@ class SGFDownloadButton extends HTMLElement {
 
 		// Attach a shadow root to the element.
 		this.attachShadow({ mode: 'open' });
-
-		// Create a button element
-		const button = document.createElement('button');
-		button.textContent = 'Download SGF';
-
-		// Append the button to the shadow root
-		this.shadowRoot.appendChild(button);
-
-		// Bind the click event to the button
-		button.addEventListener('click', this.downloadSGF.bind(this));
 	}
 
 	getDateISO8601() {
@@ -26,6 +16,16 @@ class SGFDownloadButton extends HTMLElement {
 	}
 
 	connectedCallback() {
+		// Create a button element
+		const button = document.createElement('button');
+		button.textContent = 'Download SGF';
+
+		// Append the button to the shadow root
+		this.shadowRoot.appendChild(button);
+
+		// Bind the click event to the button
+		button.addEventListener('click', this.downloadSGF.bind(this));
+
 		loadStyles(this.shadowRoot, '../assets/styles/Buttons.css');
 
 		// Listen for board size change events
