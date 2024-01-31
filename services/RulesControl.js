@@ -22,7 +22,6 @@ export class RulesControl {
 	updateCell(x, y, color) {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
-		//this.checkForCaptures(x, y, color);
 	}
 }
 
