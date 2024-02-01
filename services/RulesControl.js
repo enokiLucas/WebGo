@@ -23,6 +23,10 @@ export class RulesControl {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 	}
+
+	getCellValue(x, y) {
+		return boardMatrix[x][y];
+	}
 }
 
 // Export a single instance
