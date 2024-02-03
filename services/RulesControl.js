@@ -25,7 +25,7 @@ export class RulesControl {
 	}
 
 	getCellValue(x, y) {
-		return boardMatrix[x][y];
+		return this.boardMatrix[x][y];
 	}
 }
 
