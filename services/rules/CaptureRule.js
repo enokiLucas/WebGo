@@ -2,9 +2,7 @@ import { rulesControl } from '../RulesControl.js';
 import { gameStateManager } from './GameStateManager.js'
 
 class CaptureRule {
-	constructor() {
-		// Initialization if needed
-	}
+	constructor() {}
 
 	applyCaptureLogic(x, y, color) {
 		// Check adjacent stones for potential captures
@@ -70,10 +68,52 @@ class CaptureRule {
 		return true;
 	}
 
+
 	removeCapturedStones(x, y, color) {
-		// Implement logic to remove a captured group of stones from the board
-		// This may involve identifying all connected stones of the same color and removing them
+		// Initialize a queue with the starting stone
+		const queue = [[x, y]];
+		const toBeRemoved = []; // Stores stones to be removed
+		const visited = new Set(); // Tracks visited positions as 'x,y' strings to avoid duplicates
+
+		while (queue.length > 0) {
+			const [currX, currY] = queue.shift();
+			const key = `${currX},${currY}`;
+
+			// Skip if already visited
+			if (visited.has(key)) continue;
+			visited.add(key);
+
+			// Skip if the cell is not of the target color
+			if (rulesControl.getCellValue(currX, currY) !== color) continue;
+
+			// Mark for removal
+			toBeRemoved.push([currX, currY]);
+
+			// Check all adjacent cells
+			const directions = [
+				[0, 1],  // Right
+				[1, 0],  // Down
+				[0, -1], // Left
+				[-1, 0]  // Up
+			];
+
+			for (const [dx, dy] of directions) {
+				const newX = currX + dx;
+				const newY = currY + dy;
+
+				// Add adjacent cell of the same color to the queue
+				if (this.isValidCoordinate(newX, newY) && rulesControl.getCellValue(newX, newY) === color) {
+					queue.push([newX, newY]);
+				}
+			}
+		}
+
+		// Remove the marked stones from the board
+		for (const [remX, remY] of toBeRemoved) {
+			rulesControl.updateCell(remX, remY, null); // Assuming `updateCell` can also remove stones by setting them to null
+		}
 	}
+
 }
 
 // Export a single instance if CaptureRule
