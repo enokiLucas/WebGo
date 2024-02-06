@@ -27,6 +27,12 @@ export class RulesControl {
 	getCellValue(x, y) {
 		return this.boardMatrix[x][y];
 	}
+
+	isValidCoordinate(x, y) {
+		const size = gameStateManager.getBoardSize();
+		return x >= 0 && x < size && y >= 0 && y < size;
+	}
+
 }
 
 // Export a single instance
