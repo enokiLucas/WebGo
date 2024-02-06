@@ -37,6 +37,22 @@ class CaptureRule {
 		});
 	} //removeGroup(this.identifyGroup(x,y,color));
 
+	hasLiberties(group) {
+		for (let [x, y] of group) {
+			// Directions: up, right, down, left
+			const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+			for (let [dx, dy] of directions) {
+				const newX = x + dx;
+				const newY = y + dy;
+				if (this.isValidCoordinate(newX, newY) && rulesControl.getCellValue(newX, newY) === null) {
+					// If any adjacent cell is empty, the group has at least one liberty
+					return true;
+				}
+			}
+		}
+		// If no liberties are found
+		return false;
+	} //hasLiberties(this.identifyGroup(x,y,color));
 
 
 
