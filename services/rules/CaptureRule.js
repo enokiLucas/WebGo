@@ -5,24 +5,25 @@ class CaptureRule {
 	constructor() {}
 
 	identifyGroup(x, y, color) {
-		const queue = [[x, y]];
-		const identifiedGroup = [];
-		const visited = new Set();
+		const queue = [[x, y]]; //List of coordinates starting at (x,y)
+		const identifiedGroup = []; //Array to store the coordinates of all stones in the group
+		const visited = new Set(); //Set that will store already visited coordinates
 
-		while (queue.length > 0) {
+		while (queue.length > 0) { // Breadth First Search algorithm
 			const [currX, currY] = queue.shift();
 			const key = `${currX},${currY}`;
 
-			if (visited.has(key) || rulesControl.getCellValue(currX, currY) !== color) continue;
-			visited.add(key);
-			identifiedGroup.push([currX, currY]);
+			if (visited.has(key) || rulesControl.getCellValue(currX, currY) !== color) continue; // check if the set of coordinates have being tested and that it is of the correct color.
+			visited.add(key); // add coordinates to the visited set
+			identifiedGroup.push([currX, currY]); // add coordinates to the array
 
+			// Chack for adjacents stones
 			// Directions: up, right, down, left
 			const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 			directions.forEach(([dx, dy]) => {
 				const newX = currX + dx;
 				const newY = currY + dy;
-					if (this.isValidCoordinate(newX, newY) && !visited.has(`${newX},${newY}`)) {
+					if (rulesControl.isValidCoordinate(newX, newY) && !visited.has(`${newX},${newY}`)) {
 						queue.push([newX, newY]);
 					}
 			});
@@ -31,11 +32,6 @@ class CaptureRule {
 		return identifiedGroup;
 	}
 
-	removeGroup(group) {
-		group.forEach(([x, y]) => {
-			rulesControl.updateCell(x, y, null);
-		});
-	} //removeGroup(this.identifyGroup(x,y,color));
 
 	hasLiberties(group) {
 		for (let [x, y] of group) {
@@ -53,6 +49,14 @@ class CaptureRule {
 		// If no liberties are found
 		return false;
 	} //hasLiberties(this.identifyGroup(x,y,color));
+
+
+	removeGroup(group) {
+		group.forEach(([x, y]) => {
+			rulesControl.updateCell(x, y, null);
+		});
+	} //removeGroup(this.identifyGroup(x,y,color));
+
 
 
 
