@@ -31,6 +31,12 @@ class CaptureRule {
 		return identifiedGroup;
 	}
 
+	removeGroup(group) {
+		group.forEach(([x, y]) => {
+			rulesControl.updateCell(x, y, null);
+		});
+	} //removeGroup(this.identifyGroup(x,y,color));
+
 
 
 
