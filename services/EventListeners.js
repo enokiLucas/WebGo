@@ -1,4 +1,4 @@
-import { EDGE_MARGIN, LENGTH_SQUARE, SVG_NS} from '../utils/constants.js'
+import { EDGE_MARGIN, LENGTH_SQUARE, SVG_NS} from '../utils/constants.js';
 import { handleIntersectionHover } from './handleIntersectionHover.js';
 import { handleIntersectionClick } from './handleIntersectionClick.js';
 import { gameStateManager } from './GameStateManager.js';

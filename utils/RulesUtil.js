@@ -1,4 +1,5 @@
-import { rulesControl } from '../services/RulesControl.js'
+import { rulesControl } from '../services/RulesControl.js';
+import { gameStateManager } from '../services/GameStateManager.js';
 
 export function toggleColor(color) {
 	// Utility to switch between 'black' and 'white'
@@ -27,7 +28,7 @@ export function adjacentLiberties(x, y) {
 	for (let [dx, dy] of directions) {
 		const newX = x + dx;
 		const newY = y + dy;
-		if (rulesControl.isValidCoordinate(newX, newY) && rulesControl.getCellValue(newX, newY) === null) {
+		if (isValidCoordinate(newX, newY) && rulesControl.getCellValue(newX, newY) === null) {
 			return true; // Found an adjacent liberty
 		}
 	}

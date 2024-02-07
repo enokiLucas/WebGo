@@ -1,8 +1,9 @@
 import { gameStateManager } from './GameStateManager.js';
-import { rulesControl } from './RulesControl.js'
+import { rulesControl } from './RulesControl.js';
 import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
-import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js'
-import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js'
+import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js';
+import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
+import { captureRule } from './rules/CaptureRule.js';
 
 export function handleIntersectionClick(board, event, ghostStone) {
 	// Place a stone on the board at the clicked intersection
@@ -24,4 +25,8 @@ export function handleIntersectionClick(board, event, ghostStone) {
 
 	// Change the color of the ghost stone
 	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
+
+	// Check the liberties of a group of stones and capture then if necessary
+	// The x, y coordinates need to be relative to the boardMatrix
+	captureRule.processCaptures(boardX, boardY, gameStateManager.getCurrentPlayer());
 }
