@@ -24,7 +24,7 @@ class CaptureRule {
 				const newX = currX + dx;
 				const newY = currY + dy;
 					if (rulesControl.isValidCoordinate(newX, newY) && !visited.has(`${newX},${newY}`)) {
-						queue.push([newX, newY]);
+						queue.push([newX, newY]); // add new coordinate to the queue.
 					}
 			});
 		}
