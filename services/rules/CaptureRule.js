@@ -7,20 +7,21 @@ class CaptureRule {
 	constructor() {}
 
 	removeGroup(group) {
-		group.forEach(([x, y]) => {
-			rulesControl.updateCell(x, y, null);
+		group.forEach(stone => {
+			rulesControl.updateCell(stone.x, stone.y, null);
 		});
-	} //removeGroup(this.identifyGroup(x,y,color));
+	}
 
 
 	// Wrapper function to be called after a move is made
 	processCaptures(x, y, color) {
 		// Identify opposite color groups around the last move
 		const oppositeColorGroups = identifyGroups(x, y, true);
-		console.log(typeof oppositeColorGroups);
+		//console.log(oppositeColorGroups);
 
 		// Check each group for captures
 		oppositeColorGroups.forEach(group => {
+			console.log(group);
 			// Check if the group has no liberties
 			if (!hasLiberties(group)) {
 				// Remove the captured group from the board
