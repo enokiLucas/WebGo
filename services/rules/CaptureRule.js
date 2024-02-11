@@ -17,6 +17,7 @@ class CaptureRule {
 	processCaptures(x, y, color) {
 		// Identify opposite color groups around the last move
 		const oppositeColorGroups = identifyGroups(x, y, true);
+		console.log(typeof oppositeColorGroups);
 
 		// Check each group for captures
 		oppositeColorGroups.forEach(group => {
