@@ -28,5 +28,5 @@ export function handleIntersectionClick(board, event, ghostStone) {
 
 	// Check the liberties of a group of stones and capture then if necessary
 	// The x, y coordinates need to be relative to the boardMatrix
-	captureRule.processCaptures(boardX, boardY, gameStateManager.getCurrentPlayer());
+	captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
 }
