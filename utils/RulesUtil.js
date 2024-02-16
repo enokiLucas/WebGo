@@ -63,7 +63,11 @@ export function identifyGroups(startX, startY, identifyOpposite = false) {
 			const newY = y + dy;
 			// Recursively explore if the adjacent stone matches the target color and is within bounds.
 			if (isValidCoordinate(newX, newY) && rulesControl.getCellValue(newX, newY) === targetColor) {
-				group = group.concat(exploreGroup(newX, newY));
+				const adjacentGroup = exploreGroup(newX, newY);
+				// Ensure that adjacentGroup is an array and not undefined
+				if (adjacentGroup && adjacentGroup.length > 0) {
+					group = group.concat(adjacentGroup);
+				}
 			}
 		});
 

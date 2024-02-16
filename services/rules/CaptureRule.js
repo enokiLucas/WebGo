@@ -29,7 +29,7 @@ class CaptureRule {
 
 		// Check each group for captures
 		oppositeColorGroups.forEach(group => {
-			console.log(group);
+			// console.log(group);
 			// Check if the group has no liberties
 			if (!hasLiberties(group)) {
 				// Remove the captured group from the board
