@@ -23,7 +23,7 @@ export class RulesControl {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 
-		console.log(this.boardMatrix);
+		//console.log(this.boardMatrix);
 	}
 
 	getCellValue(x, y) {
