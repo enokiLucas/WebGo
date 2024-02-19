@@ -1,6 +1,7 @@
-class GameStateManager {
+class GameStateManager { //Remember to fix SGF
 	constructor() {
-		this.moves = [];
+		this.movesHistory = [];
+		this.moveKey = 1;
 		this.currentPlayer = 'black'; // Initialize with black
 		this.boardSize = 13;
 	}
@@ -22,7 +23,9 @@ class GameStateManager {
 	}
 
 	resetGameState() {
-		this.moves = []; // Reset the moves array
+		this.movesHistory = [];
+		this.resetPlayer();
+		this.moveKey = 1;
 	}
 
 	togglePlayer() {
@@ -33,14 +36,22 @@ class GameStateManager {
 		return this.currentPlayer;
 	}
 
-	addMove(color, position) {
-		this.moves.push({ color, position });
+	addMove(coordinates, metadata = {}) { //Go to handle Intersection Click and change the module
+		const move = {
+			branch: 0, // Default branch
+			key: this.moveKey++
+			player: this.currentPlayer,
+			coordinates: coordinates,
+			metadata: metadata
+		};
+		this.movesHistory.push(move);
+		this.togglePlayer();
 	}
-
+/*
 	getSGFMoves() {
 		return this.moves.map(move => `;${move.color}[${move.position}]`).join('');
 	}
-
+*/
 	makeMove(color, position) {
 		// Logic to handle a move
 		this.addMove(color, position);
@@ -50,10 +61,8 @@ class GameStateManager {
 	}
 
 	makePass(color) {
-		this.addMove(color, ""); // Add a pass move to SGF
+		this.addMove(null, { pass: true }); // Add a pass move movesHistory
 		this.togglePlayer(); // Switch turns
-		document.dispatchEvent(new CustomEvent('Pass', {
-			detail: { currentPlayer: this.currentPlayer }}));
 	}
 }
 
