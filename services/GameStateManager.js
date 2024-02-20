@@ -61,7 +61,7 @@ class GameStateManager { //Remember to fix SGF
 	}
 
 	makePass() {
-		this.recordMove(null, { pass: true }); // Add a pass move movesHistory
+		this.recordMove(null, null, { pass: true }); // Add a pass move movesHistory
 		this.togglePlayer(); // Switch turns
 	}
 }
