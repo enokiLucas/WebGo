@@ -48,13 +48,13 @@ class GameStateManager { //Remember to fix SGF
 		this.movesHistory.push(move);
 	}
 /*
-	getSGFMoves() {
+	getSGFMoves() { // Move this to SGF utils
 		return this.moves.map(move => `;${move.color}[${move.position}]`).join('');
 	}
 */
-	makeMove(x, y) {
+	makeMove(x, y, metadata) {
 		// Logic to handle a move
-		this.recordMove(x, y);
+		this.recordMove(x, y, metadata);
 		this.togglePlayer();
 		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
 		document.dispatchEvent(event);

@@ -12,16 +12,18 @@ export function handleIntersectionClick(board, event, ghostStone) {
 
 	placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer());
 
-	//Convert the board coordinates to SGF positions.
+	//Convert the event coordinates into SGF positions.
 	const sgfPosition = convertToSGFPosition(x, y);
 
-	// Update the logical board
+	//Convert the event coordinates into board relative ones
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
+
+		// Update the logical board
 	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	// Add move to the game state
-	gameStateManager.makeMove(getPlayerSGFColor(gameStateManager.getCurrentPlayer()), sgfPosition);
+	gameStateManager.makeMove(boardX, boardY, {});
 
 	// Change the color of the ghost stone
 	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
