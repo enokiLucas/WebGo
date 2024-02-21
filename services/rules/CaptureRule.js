@@ -40,6 +40,12 @@ class CaptureRule {
 	// Optionally, check for suicide (not implemented here)
 	}
 
+	createMetadata(group) {
+		return {
+			type: capture,
+			stone: group
+		};
+	}
 
 }
 

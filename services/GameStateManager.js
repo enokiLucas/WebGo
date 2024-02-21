@@ -52,9 +52,8 @@ class GameStateManager { //Remember to fix SGF
 		return this.moves.map(move => `;${move.color}[${move.position}]`).join('');
 	}
 */
-	makeMove(x, y, metadata) {
+	makeMove(x, y, metadata = {}) {
 		// Logic to handle a move
-		this.recordMove(x, y, metadata);
 		this.togglePlayer();
 		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
 		document.dispatchEvent(event);
