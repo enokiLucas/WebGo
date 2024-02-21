@@ -32,19 +32,25 @@ class CaptureRule {
 			// console.log(group);
 			// Check if the group has no liberties
 			if (!hasLiberties(group)) {
+
 				// Remove the captured group from the board
 				this.removeGroup(board, group);
+
+				// Dispatch an event with metadata about the capture
+				const metadata = {
+					type: capture,
+					captured_stones_color: color,
+					stones: group
+				};
+				const captureEvent = new CustomEvent('new-metadata', {
+					detail: captureMetadata
+				});
+				document.dispatchEvent(captureEvent);
+
 			}
 		});
 
 	// Optionally, check for suicide (not implemented here)
-	}
-
-	createMetadata(group) {
-		return {
-			type: capture,
-			stone: group
-		};
 	}
 
 }
