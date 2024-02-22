@@ -22,13 +22,19 @@ export function handleIntersectionClick(board, event, ghostStone) {
 		// Update the logical board
 	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
 
-	// Add move to the game state
-	gameStateManager.makeMove(boardX, boardY, {});
-
 	// Change the color of the ghost stone
 	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
 
 	// Check the liberties of a group of stones and capture then if necessary
 	// The x, y coordinates need to be relative to the boardMatrix
 	captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
+
+	//Get metadata for movesHistory.
+	const metadata = document.addEventListener('new-metadata', (event) => {
+		return const captureDetail = event.detail;
+	});
+
+	// Keep it as the last method
+	// Add move to the game state
+	gameStateManager.makeMove(boardX, boardY, metadata = {});
 }
