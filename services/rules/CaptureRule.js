@@ -37,12 +37,12 @@ class CaptureRule {
 
 				// Dispatch an event with metadata about the capture
 				const metadata = {
-					type: capture,
+					type: 'capture',
 					captured_stones_color: color,
 					stones: group
 				};
 				const captureEvent = new CustomEvent('new-metadata', {
-					detail: captureMetadata
+					detail: metadata
 				});
 				document.dispatchEvent(captureEvent);
 
