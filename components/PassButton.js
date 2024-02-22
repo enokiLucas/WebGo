@@ -18,10 +18,10 @@ class PassButton extends HTMLElement {
 		button.addEventListener('click', () => {
 			gameStateManager.makePass(getPlayerSGFColor(gameStateManager.getCurrentPlayer()));
 		});
-
+/*
 		// Change the color of the ghost stone
 		ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
-
+*/
 		this.shadowRoot.appendChild(button);
 	}
 

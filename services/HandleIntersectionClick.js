@@ -5,6 +5,19 @@ import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js';
 import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 
+let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
+
+// Set up an event listener for capture metadata
+document.addEventListener('new-metadata', (event) => {
+	if(event.detail) {
+		lastMoveMetadata = event.detail;
+	} else {
+		lastMoveMetadata = {};
+	}
+	// Possibly trigger the move logic here if it needs to wait for metadata
+	// Or ensure makeMove is called after this event is processed
+});
+
 export function handleIntersectionClick(board, event, ghostStone) {
 	// Place a stone on the board at the clicked intersection
 	const x = event.target.cx.baseVal.value;
@@ -29,12 +42,9 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// The x, y coordinates need to be relative to the boardMatrix
 	captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
 
-	//Get metadata for movesHistory.
-	document.addEventListener('new-metadata', (event) => {
-		const captureDetail = event.detail;
-	});
-
 	// Keep it as the last method
 	// Add move to the game state
-	gameStateManager.makeMove(boardX, boardY, metadata = {});
+	gameStateManager.makeMove(boardX, boardY, lastMoveMetadata);
+	// Reset lastMoveMetadata if necessary
+	lastMoveMetadata = {};
 }
