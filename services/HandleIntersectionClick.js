@@ -30,8 +30,8 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	//Get metadata for movesHistory.
-	const metadata = document.addEventListener('new-metadata', (event) => {
-		return const captureDetail = event.detail;
+	document.addEventListener('new-metadata', (event) => {
+		const captureDetail = event.detail;
 	});
 
 	// Keep it as the last method

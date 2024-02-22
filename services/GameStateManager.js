@@ -39,7 +39,7 @@ class GameStateManager { //Remember to fix SGF
 	recordMove(x, y, metadata = {}) { //Go to handle Intersection Click and change the module
 		const move = {
 			branch: 0, // Default branch
-			key: this.moveKey++
+			key: this.moveKey++,
 			player: this.currentPlayer,
 			x: x,
 			y: y,
