@@ -1,4 +1,5 @@
 import { gameStateManager } from './GameStateManager.js';
+import { koRule } from './rules/KoRule.js';
 
 export class RulesControl {
 	constructor() {
@@ -34,6 +35,7 @@ export class RulesControl {
 	updateBoardState() {
 		const currentBoardState = this.boardMatrix.flat().join('');
 		this.boardStatesHistory.push(currentBoardState);
+		console.log(this.boardStatesHistory)  //test.
 	}
 
 	getPreviousBoardState() {
@@ -43,6 +45,18 @@ export class RulesControl {
 		}
 		return this.boardStatesHistory[this.boardStatesHistory.length - 2];
 	}
+
+	// Centralized method to check if a a move is valid.
+	 isMoveValid(x, y, player) {
+			// Check for Ko
+			if (koRule.checkForKo(this.boardMatrix, x, y, player)) {
+				console.log("Move violates Ko rule.");
+				return false;
+			}
+
+			// Future rule checks (e.g., suicide) can be added here
+			return true; // Move is valid if all checks pass
+    }
 }
 
 // Export a single instance

@@ -32,8 +32,9 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
 
-		// Update the logical board
+	// Update the logical board
 	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
+
 
 	// Change the color of the ghost stone
 	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
