@@ -3,6 +3,7 @@ import { gameStateManager } from './GameStateManager.js';
 export class RulesControl {
 	constructor() {
 		this.boardMatrix = this.initializeBoardMatrix();
+		this.boardStatesHistory = [];
 	}
 
 	initializeBoardMatrix(size) {
@@ -28,6 +29,19 @@ export class RulesControl {
 
 	getCellValue(x, y) {
 		return this.boardMatrix[x][y];
+	}
+
+	updateBoardState() {
+		const currentBoardState = this.boardMatrix.flat().join('');
+		this.boardStatesHistory.push(currentBoardState);
+	}
+
+	getPreviousBoardState() {
+		// Return the state before the last move
+		if (this.boardStatesHistory.length < 2) {
+			return null; // Not enough history to have a previous state
+		}
+		return this.boardStatesHistory[this.boardStatesHistory.length - 2];
 	}
 }
 
