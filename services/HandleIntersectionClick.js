@@ -31,6 +31,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 
 	// Validate move before executing it
 	if (rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer())) {
+		// Methods that handle the execition of a move.
 		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
 		const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
 		rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer()); // Update the logical board
@@ -41,6 +42,6 @@ export function handleIntersectionClick(board, event, ghostStone) {
 		gameStateManager.makeMove(boardX, boardY, lastMoveMetadata); //Add move to the game state
 		lastMoveMetadata = {}; //Reset lastMoveMetadata if necessary
 	} else {
-		console.log('Move Invalid');
+		alert(validationResponse.message); // Display an alert or a custom pop-up with the invalid move message
 	}
 }
