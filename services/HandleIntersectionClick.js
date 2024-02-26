@@ -19,33 +19,38 @@ document.addEventListener('new-metadata', (event) => {
 });
 
 export function handleIntersectionClick(board, event, ghostStone) {
-	// Place a stone on the board at the clicked intersection
+	// Save the coordinates of the event.
 	const x = event.target.cx.baseVal.value;
 	const y = event.target.cy.baseVal.value;
-
-	placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer());
-
-	//Convert the event coordinates into SGF positions.
-	const sgfPosition = convertToSGFPosition(x, y);
-
-	//Convert the event coordinates into board relative ones
+	// Convert the event coordinates into board relative ones
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
 
-	// Update the logical board
-	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
 
+	// Validate move before executing it
+	if (rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer())) {
+		// Place the stone on the board
+		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer());
 
-	// Change the color of the ghost stone
-	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
+		//Convert the event coordinates into SGF positions.
+		const sgfPosition = convertToSGFPosition(x, y);
 
-	// Check the liberties of a group of stones and capture then if necessary
-	// The x, y coordinates need to be relative to the boardMatrix
-	captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
+		// Update the logical board
+		rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
 
-	// Keep it as the last method
-	// Add move to the game state
-	gameStateManager.makeMove(boardX, boardY, lastMoveMetadata);
-	// Reset lastMoveMetadata if necessary
-	lastMoveMetadata = {};
+		// Change the color of the ghost stone
+		ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
+
+		// Check the liberties of a group of stones and capture then if necessary
+		// The x, y coordinates need to be relative to the boardMatrix
+		captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
+
+		// Keep it as the last method
+		// Add move to the game state
+		gameStateManager.makeMove(boardX, boardY, lastMoveMetadata);
+		// Reset lastMoveMetadata if necessary
+		lastMoveMetadata = {};
+	} else {
+		console.log('Move Invalid');
+	}
 }
