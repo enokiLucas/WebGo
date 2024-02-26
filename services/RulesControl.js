@@ -54,7 +54,7 @@ export class RulesControl {
 		*
 		*/
 		// Check for Ko
-		if (koRule.checkForKo(this.boardMatrix, x, y, player)) {
+		if (koRule.checkForKo(x, y, player)) {
 			console.log("Move violates Ko rule.");
 			return {isValid: false, ruleBreak: 1, message: "Move violates Ko rule."};
 		}

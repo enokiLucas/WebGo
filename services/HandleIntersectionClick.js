@@ -30,7 +30,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	const validationResponse = rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	// Validate move before executing it
-	if (rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer())) {
+	if (validationResponse.isValid) {
 		// Methods that handle the execition of a move.
 		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
 		const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
