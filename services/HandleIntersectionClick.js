@@ -26,30 +26,20 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
 
+	// Validate move
+	const validationResponse = rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	// Validate move before executing it
 	if (rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer())) {
-		// Place the stone on the board
-		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer());
-
-		//Convert the event coordinates into SGF positions.
-		const sgfPosition = convertToSGFPosition(x, y);
-
-		// Update the logical board
-		rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer());
-
-		// Change the color of the ghost stone
-		ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer());
-
-		// Check the liberties of a group of stones and capture then if necessary
-		// The x, y coordinates need to be relative to the boardMatrix
-		captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());
-
+		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
+		const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
+		rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer()); // Update the logical board
+		ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer()); // Change the color of the ghost stone
+		captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());// Check the liberties of a group of stones and capture then if necessary
 		// Keep it as the last method
-		// Add move to the game state
-		gameStateManager.makeMove(boardX, boardY, lastMoveMetadata);
-		// Reset lastMoveMetadata if necessary
-		lastMoveMetadata = {};
+
+		gameStateManager.makeMove(boardX, boardY, lastMoveMetadata); //Add move to the game state
+		lastMoveMetadata = {}; //Reset lastMoveMetadata if necessary
 	} else {
 		console.log('Move Invalid');
 	}
