@@ -48,14 +48,19 @@ export class RulesControl {
 
 	// Centralized method to check if a a move is valid.
 	isMoveValid(x, y, player) {
+		/* List of rules
+		*  0: No rules were broken and the move is valid
+		*  1: Ko rule.
+		*
+		*/
 		// Check for Ko
 		if (koRule.checkForKo(this.boardMatrix, x, y, player)) {
 			console.log("Move violates Ko rule.");
-			return false;
+			return {isValid: false, ruleBreak: 1, message: "Move violates Ko rule."};
 		}
 
 		// Future rule checks (e.g., suicide) can be added here
-		return true; // Move is valid if all checks pass
+		return {isValid: true, ruleBreak: 0, message: null}; // Move is valid if all checks pass
 	}
 }
 
