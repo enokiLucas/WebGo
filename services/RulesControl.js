@@ -43,7 +43,7 @@ export class RulesControl {
 		if (this.boardStatesHistory.length < 2) {
 			return null; // Not enough history to have a previous state
 		}
-		return this.boardStatesHistory[this.boardStatesHistory.length - 2];
+		return this.boardStatesHistory[this.boardStatesHistory.length - 1];
 	}
 
 	// Centralized method to check if a a move is valid.

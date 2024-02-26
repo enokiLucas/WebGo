@@ -59,7 +59,7 @@ class GameStateManager { //Remember to fix SGF
 		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
 		document.dispatchEvent(event);
 
-		console.log(this.movesHistory);// Test
+		//console.log(this.movesHistory);// Test
 	}
 
 	makePass() {

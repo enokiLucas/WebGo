@@ -29,12 +29,15 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Validate move
 	const validationResponse = rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer());
 
+	console.log(validationResponse.message); // Test
+
 	// Validate move before executing it
 	if (validationResponse.isValid) {
 		// Methods that handle the execition of a move.
 		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
 		const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
 		rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer()); // Update the logical board
+		rulesControl.updateBoardState(); //Update the BoardState
 		ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer()); // Change the color of the ghost stone
 		captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());// Check the liberties of a group of stones and capture then if necessary
 		// Keep it as the last method
