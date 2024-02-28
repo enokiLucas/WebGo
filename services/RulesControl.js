@@ -36,7 +36,7 @@ export class RulesControl {
 	updateBoardState() {
 		const currentBoardState = this.boardMatrix.flat().join('');
 		this.boardStatesHistory.push(currentBoardState);
-		console.log(this.boardStatesHistory)  //test.
+		//console.log(this.boardStatesHistory)  //test.
 	}
 
 	getPreviousBoardState() {
@@ -57,16 +57,19 @@ export class RulesControl {
 	isMoveValid(x, y, player) {
 		let validMove = { isValid: true, ruleBreak: 0, captures: [], message: '' };
 
+		// Potential captures analysis (moved up before suicide check)
+		const potentialCaptures = captureRule.analyzeCaptures(x, y, player);
+		if (potentialCaptures.length > 0) {
+			validMove.captures = potentialCaptures;
+			validMove.message = 'Capture stones.';
+		}
+
 		// Ko rule check
-		if (koRule.checkForKo(x, y, player, this.boardMatrix)) {
+		if (koRule.checkForKo(x, y, player)) {
 			return { isValid: false, ruleBreak: 1, message: 'Move violates Ko rule.' };
 		}
 
-		// Potential captures analysis (moved up before suicide check)
-		const potentialCaptures = captureRule.analyzeCaptures(x, y, player, this.boardMatrix);
-		if (potentialCaptures.length > 0) {
-			validMove.captures = potentialCaptures;
-		}
+
 /*
 		// Suicide rule check (after potential captures)
 		// We now check for suicide only if there are no potential captures
