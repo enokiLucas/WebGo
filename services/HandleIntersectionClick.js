@@ -18,6 +18,18 @@ document.addEventListener('new-metadata', (event) => {
 	// Or ensure makeMove is called after this event is processed
 });
 
+function updateBoard() {
+	placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
+	const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
+	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer()); // Update the logical board
+	rulesControl.updateBoardState(); //Update the BoardState
+	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer()); // Change the color of the ghost stone
+
+	// Keep it as the last method
+	gameStateManager.makeMove(boardX, boardY, lastMoveMetadata); //Add move to the game state
+	lastMoveMetadata = {}; //Reset lastMoveMetadata if necessary
+}
+
 export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the coordinates of the event.
 	const x = event.target.cx.baseVal.value;
@@ -26,25 +38,23 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
 	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
 
-	// Validate move
-	const validationResponse = rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer());
+	// Save the validation result.
+	const validationResult = rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer());
 
 	console.log(validationResponse.message); // Test
 
-	// Validate move before executing it
-	if (validationResponse.isValid) {
-		// Methods that handle the execition of a move.
-		placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
-		const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
-		rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer()); // Update the logical board
-		rulesControl.updateBoardState(); //Update the BoardState
-		ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer()); // Change the color of the ghost stone
-		captureRule.processCaptures(board, boardX, boardY, gameStateManager.getCurrentPlayer());// Check the liberties of a group of stones and capture then if necessary
-		// Keep it as the last method
+	if (validationResult.isValid) {
+		// Apply the move
+		updateBoard();
 
-		gameStateManager.makeMove(boardX, boardY, lastMoveMetadata); //Add move to the game state
-		lastMoveMetadata = {}; //Reset lastMoveMetadata if necessary
+		// Execute any captures identified during validation
+		if (validationResult.captures.length > 0) {
+			captureRule.removeStones(board, validationResult.captures);
+		}
+
+	// Proceed with game flow, e.g., end turn, update UI
 	} else {
-		alert(validationResponse.message); // Display an alert or a custom pop-up with the invalid move message
+		// Handle invalid move, e.g., display error message
+		alert(validationResult.message);
 	}
 }

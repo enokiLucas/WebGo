@@ -24,7 +24,7 @@ class CaptureRule {
 	}
 
 	// Method to remove a group of stones from the board
-	removeGroup(board, group) {
+	removeStones(board, group) {
 		group.forEach(stone => {
 			// Update the boardMatrix
 			rulesControl.updateCell(stone.x, stone.y, null);
