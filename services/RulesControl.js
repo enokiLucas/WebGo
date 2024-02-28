@@ -48,19 +48,26 @@ export class RulesControl {
 
 	// Centralized method to check if a a move is valid.
 	isMoveValid(x, y, player) {
-		/* List of rules
-		*  0: No rules were broken and the move is valid
-		*  1: Ko rule.
-		*
-		*/
-		// Check for Ko
-		if (koRule.checkForKo(x, y, player)) {
-			console.log("Move violates Ko rule.");
-			return {isValid: false, ruleBreak: 1, message: "Move violates Ko rule."};
+		let validMove = { isValid: true, ruleBreak: 0, captures: [], message: '' };
+
+		// Ko rule check
+		if (koRule.checkForKo(x, y, player, this.boardMatrix)) {
+			return { isValid: false, ruleBreak: 1, message: 'Move violates Ko rule.' };
 		}
 
-		// Future rule checks (e.g., suicide) can be added here
-		return {isValid: true, ruleBreak: 0, message: null}; // Move is valid if all checks pass
+		// Potential captures analysis (moved up before suicide check)
+		const potentialCaptures = captureRule.analyzeCaptures(x, y, player, this.boardMatrix);
+		if (potentialCaptures.length > 0) {
+			validMove.captures = potentialCaptures;
+		}
+
+		// Suicide rule check (after potential captures)
+		// We now check for suicide only if there are no potential captures
+		if (validMove.captures.length === 0 && suicideRule.checkSuicide(x, y, player, this.boardMatrix)) {
+			return { isValid: false, ruleBreak: 2, message: 'Move violates Suicide rule.' };
+		}
+
+		return validMove;
 	}
 }
 
