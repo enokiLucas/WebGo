@@ -18,12 +18,12 @@ document.addEventListener('new-metadata', (event) => {
 	// Or ensure makeMove is called after this event is processed
 });
 
-function updateBoard() {
-	placeStoneOnBoard(board, x, y, gameStateManager.getCurrentPlayer()) // Place the stone on the board;
+function updateBoard(board, x, y, boardX, boardY, player, ghostStone) {
+	placeStoneOnBoard(board, x, y, player) // Place the stone on the board;
 	const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
-	rulesControl.updateCell(boardX, boardY, gameStateManager.getCurrentPlayer()); // Update the logical board
+	rulesControl.updateCell(boardX, boardY, player); // Update the logical board
 	rulesControl.updateBoardState(); //Update the BoardState
-	ghostStone.setAttribute('fill', gameStateManager.getCurrentPlayer()); // Change the color of the ghost stone
+	ghostStone.setAttribute('fill', player); // Change the color of the ghost stone
 
 	// Keep it as the last method
 	gameStateManager.makeMove(boardX, boardY, lastMoveMetadata); //Add move to the game state
@@ -41,11 +41,11 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, gameStateManager.getCurrentPlayer());
 
-	console.log(validationResponse.message); // Test
+	console.log(validationResult.message); // Test
 
 	if (validationResult.isValid) {
 		// Apply the move
-		updateBoard();
+		updateBoard(board, x, y, boardX, boardY, gameStateManager.getCurrentPlayer(), ghostStone);
 
 		// Execute any captures identified during validation
 		if (validationResult.captures.length > 0) {
