@@ -47,11 +47,9 @@ export class RulesControl {
 		return this.boardStatesHistory[this.boardStatesHistory.length - 1];
 	}
 
-	createSimulatedBoardMatrix(x, y, player) {
+	createSimulatedBoardMatrix() {
 		// Create a deep copy of the current board matrix
 		const simulatedBoardMatrix = this.boardMatrix.map(row => [...row]);
-		// Apply the proposed move
-		simulatedBoardMatrix[x][y] = player;
 		return simulatedBoardMatrix;
 }
 

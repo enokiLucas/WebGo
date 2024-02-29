@@ -1,6 +1,6 @@
 import { rulesControl } from '../RulesControl.js';
 import { gameStateManager } from '../GameStateManager.js';
-import { identifyGroups, hasLiberties } from '../../utils/RulesUtil.js';
+import { identifyGroups, hasLiberties, toggleColor } from '../../utils/RulesUtil.js';
 
 
 class CaptureRule {
@@ -43,7 +43,7 @@ class CaptureRule {
 		// Dispatch an event with metadata about the capture to handleIntersectionClick
 		const metadata = {
 			type: 'capture',
-			captured_stones_color: color,
+			captured_stones_color: toggleColor(gameStateManager.getCurrentPlayer()),
 			stones: group
 		};
 		const captureEvent = new CustomEvent('new-metadata', {
