@@ -26,7 +26,7 @@ export class RulesControl {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
 
-		//console.log(this.boardMatrix);
+		//console.log(this.boardMatrix); // test
 	}
 
 	getCellValue(x, y) {
@@ -47,6 +47,15 @@ export class RulesControl {
 		return this.boardStatesHistory[this.boardStatesHistory.length - 1];
 	}
 
+	createSimulatedBoardMatrix(x, y, player) {
+		// Create a deep copy of the current board matrix
+		const simulatedBoardMatrix = this.boardMatrix.map(row => [...row]);
+		// Apply the proposed move
+		simulatedBoardMatrix[x][y] = player;
+		return simulatedBoardMatrix;
+}
+
+
 	// Centralized method to check if a a move is valid.
 	/* List of rules
 	 *
@@ -54,11 +63,11 @@ export class RulesControl {
 	 * 1: Ko rule.
 	 * 2: Capture rule.
 	 */
-	isMoveValid(x, y, player) {
+	isMoveValid(x, y, matrix, player) {
 		let validMove = { isValid: true, ruleBreak: 0, captures: [], message: '' };
 
 		// Potential captures analysis (moved up before suicide check)
-		const potentialCaptures = captureRule.analyzeCaptures(x, y, player);
+		const potentialCaptures = captureRule.analyzeCaptures(x, y, matrix);
 		if (potentialCaptures.length > 0) {
 			validMove.captures = potentialCaptures;
 			validMove.message = 'Capture stones.';

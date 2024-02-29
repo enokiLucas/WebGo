@@ -7,19 +7,21 @@ class CaptureRule {
 	constructor() {}
 
 	// Method to analyze potential captures without removing stones
-	analyzeCaptures(x, y, color) {
+	analyzeCaptures(x, y, matrix) {
 		const potentialCaptures = [];
 		// Identify opposite color groups around the last move
-		const oppositeColorGroups = identifyGroups(x, y, true);
+		const oppositeColorGroups = identifyGroups(x, y, matrix, true);
+		console.log(oppositeColorGroups); // test
 
 		oppositeColorGroups.forEach(group => {
 			// Check if the group has no liberties
-			if (!hasLiberties(group)) {
+			if (!hasLiberties(group, matrix)) {
 				// Instead of removing, add group to potential captures
 				potentialCaptures.push(...group);
 			}
 		});
 
+		//console.log(potentialCaptures); //test
 		return potentialCaptures; // Return all groups that would be captured
 	}
 
