@@ -1,6 +1,7 @@
 import { gameStateManager } from './GameStateManager.js';
 import { koRule } from './rules/KoRule.js';
 import { captureRule } from './rules/CaptureRule.js';
+import { suicideRule } from './rules/SuicideRule.js';
 
 export class RulesControl {
 	constructor() {
@@ -60,6 +61,7 @@ export class RulesControl {
 	 * 0: No rules were broken.
 	 * 1: Ko rule.
 	 * 2: Capture rule.
+	 * 3: Suicide rule
 	 */
 	isMoveValid(x, y, matrix, player) {
 		let validMove = { isValid: true, ruleBreak: 0, captures: [], message: '' };
@@ -73,17 +75,12 @@ export class RulesControl {
 
 		// Ko rule check
 		if (koRule.checkForKo(x, y, player)) {
-			return { isValid: false, ruleBreak: 1, message: 'Move violates Ko rule.' };
+			return { isValid: false, ruleBreak: 1, message: 'This move causes a repetion in the board and thus violates the Ko rule.' };
 		}
 
-
-/*
-		// Suicide rule check (after potential captures)
-		// We now check for suicide only if there are no potential captures
-		if (validMove.captures.length === 0 && suicideRule.checkSuicide(x, y, player, this.boardMatrix)) {
-			return { isValid: false, ruleBreak: 2, message: 'Move violates Suicide rule.' };
+		if (suicideRule.checkForSuicide(x, y, player, matrix)) {
+			return { isValid: false, ruleBreak: 3, message: 'This move is a suicide and therefore, is invalid'}
 		}
-*/
 
 		return validMove;
 	}
