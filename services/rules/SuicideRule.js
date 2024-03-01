@@ -11,7 +11,7 @@ class SuicideRule {
 		// If the identified group (or groups) has no liberties, the move is considered suicide
 		// This assumes 'identifyGroups' returns an array of groups, each being an array of positions
 		for (let group of groups) {
-			if (!this.hasLiberties(group, simulatedMatrix)) {
+			if (!hasLiberties(group, simulatedMatrix)) {
 				return true; // The move results in a group without liberties, hence suicide
 			}
 		}

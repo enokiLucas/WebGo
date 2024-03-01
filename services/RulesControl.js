@@ -59,9 +59,9 @@ export class RulesControl {
 	/* List of rules
 	 *
 	 * 0: No rules were broken.
-	 * 1: Ko rule.
-	 * 2: Capture rule.
-	 * 3: Suicide rule
+	 * 1: Capture Rule.
+	 * 2: Ko Rule.
+	 * 3: Suicide Rule
 	 */
 	isMoveValid(x, y, matrix, player) {
 		let validMove = { isValid: true, ruleBreak: 0, captures: [], message: '' };
@@ -75,7 +75,7 @@ export class RulesControl {
 
 		// Ko rule check
 		if (koRule.checkForKo(x, y, player)) {
-			return { isValid: false, ruleBreak: 1, message: 'This move causes a repetion in the board and thus violates the Ko rule.' };
+			return { isValid: false, ruleBreak: 2, message: 'This move causes a repetion in the board and thus violates the Ko rule.' };
 		}
 
 		if (suicideRule.checkForSuicide(x, y, player, matrix)) {
