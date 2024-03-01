@@ -1,36 +1,22 @@
-import { hasLiberties } from '../RulesUtil.js'; // Adjust path as necessary
+import { hasLiberties, identifyGroups } from '../../utils/RulesUtil.js';
 
 class SuicideRule {
-	constructor() {
-		// Initialization if needed
-	}
+	constructor() {}
 
-	// Method to check if placing a stone is a suicide move
-	isSuicideMove(x, y, player, simulatedBoardMatrix) {
-		// Assuming the simulatedBoardMatrix already reflects the placement of the stone
+	// Method to check if a specific move by a player results in a suicide
+	checkForSuicide(x, y, player, simulatedMatrix) {
+		// Identify the group for the newly placed stone, considering stones of the same color
+		const groups = identifyGroups(x, y, simulatedMatrix, false);
 
-		// Construct the group including the newly placed stone
-		let group = this.constructGroupForStone(x, y, simulatedBoardMatrix);
-
-		// If the newly formed group has no liberties, it's a suicide move
-		if (!hasLiberties(group, simulatedBoardMatrix)) {
-			return true;
+		// If the identified group (or groups) has no liberties, the move is considered suicide
+		// This assumes 'identifyGroups' returns an array of groups, each being an array of positions
+		for (let group of groups) {
+			if (!this.hasLiberties(group, simulatedMatrix)) {
+				return true; // The move results in a group without liberties, hence suicide
+			}
 		}
 
-		return false;
-	}
-
-	// Helper method to construct a group for the newly placed stone
-	constructGroupForStone(x, y, matrix) {
-		// Start with the placed stone
-		let group = [{ x, y }];
-
-		// You might want to expand this to actually construct the group
-		// by finding connected stones of the same color. However, if your
-		// rules assume only immediate liberties matter for the suicide rule,
-		// this simplistic approach might suffice.
-
-		return group;
+		return false; // The move does not result in suicide
 	}
 }
 
