@@ -59,30 +59,30 @@ export class RulesControl {
 	/* List of rules
 	 *
 	 * 0: No rules were broken.
-	 * 1: Capture Rule.
-	 * 2: Ko Rule.
-	 * 3: Suicide Rule
+	 * 1: Ko Rule.
+	 * 2: Suicide Rule.
 	 */
 	isMoveValid(x, y, matrix, player) {
-		let validMove = { isValid: true, ruleBreak: 0, captures: [], message: '' };
+		const potentialCaptures = captureRule.analyzeCaptures(x, y, matrix, player);
 
-		// Potential captures analysis (moved up before suicide check)
-		const potentialCaptures = captureRule.analyzeCaptures(x, y, matrix);
+		// If captures are possible, check for Ko due to these captures
 		if (potentialCaptures.length > 0) {
-			validMove.captures = potentialCaptures;
-			validMove.message = 'Capture stones.';
+			if (koRule.checkForKo(x, y, player)) {
+				// Move is invalid due to Ko after a capture
+				return { isValid: false, captures: [], ruleBreak: 1, message: 'Invalid move due to Ko.' };
+			}
+			// Valid capture, not a Ko
+			return { isValid: true, captures: potentialCaptures, ruleBreak: 0, message: 'Capture is valid.' };
 		}
 
-		// Ko rule check
-		if (koRule.checkForKo(x, y, player)) {
-			return { isValid: false, ruleBreak: 2, message: 'This move causes a repetion in the board and thus violates the Ko rule.' };
-		}
-
+		// No captures, check for suicide
 		if (suicideRule.checkForSuicide(x, y, player, matrix)) {
-			return { isValid: false, ruleBreak: 3, message: 'This move is a suicide and therefore, is invalid'}
+			// Move is invalid due to suicide
+			return { isValid: false, captures: [], ruleBreak: 2, message: 'Invalid move due to suicide.' };
 		}
 
-		return validMove;
+		// Move is valid if it's neither capture-related Ko nor suicide
+		return { isValid: true, captures: [], ruleBreak: 0, message: 'Move is valid.' };
 	}
 }
 
