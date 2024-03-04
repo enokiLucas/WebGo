@@ -2,7 +2,7 @@
 	background-color: #585b70; /* Surface 2 */
 	color: #fab387; /* Peach */
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	height: 70vh;
 	width: 40vh;
 	margin: 10px;
@@ -10,8 +10,22 @@
 	border-radius: 30px;
 }
 
+.panel-header {
+	display: flex;
+	width: 40vh;
+	align-items: center;
+	padding: 0;
+	margin: 0;
+}
+
+.panel-body {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+}
+
 .tab-content-container {
-	flex: 3;
+	flex: 1;
 	padding: 20px;
 	margin-top: -1px; /* Aligns with the tabs */
 }
@@ -24,7 +38,6 @@
 	/*list-style-type: none; /* Removes default list styling */
 	margin: 0;
 	border-left: 3px solid #e99e7e;
-	flex: 1;
 }
 
 .tab {

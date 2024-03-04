@@ -1,25 +1,30 @@
 <div class="game-control-panel">
 
-	<div class="tab-content-container">
-		<!-- Tab content goes here -->
-		<div id="starter-tab" class="tab-content active">
-			<starter-tab></starter-tab>
-		</div>
-
-		<div id="timer-tab" class="tab-content">
-			<timer-tab></timer-tab>
-		</div>
-
-		<div id="test-tab" class="tab-content">
-			<test-tab></test-tab>
-		</div>
+	<div class="panel-header">
+		<timer-tab></timer-tab>
 	</div>
 
-	<div class="tabs">
-		<!-- Tab headers go here -->
-		<button class="tab" data-tab="starter-tab">Starter</button>
-		<button class="tab" data-tab="timer-tab">Timer Tab</button>
-		<button class="tab" data-tab="test-tab">Test Tab</button>
-		<!-- Add more tabs as needed -->
+	<div class="panel-body">
+
+		<div class="tab-content-container">
+
+			<!-- Tab content goes here -->
+			<div id="starter-tab" class="tab-content active">
+				<starter-tab></starter-tab>
+			</div>
+
+			<div id="test-tab" class="tab-content">
+				<test-tab></test-tab>
+			</div>
+		</div>
+
+		<div class="tabs">
+			<!-- Tab headers go here -->
+			<button class="tab" data-tab="starter-tab">Starter</button>
+			<button class="tab" data-tab="timer-tab">Timer Tab</button>
+			<button class="tab" data-tab="test-tab">Test Tab</button>
+			<!-- Add more tabs as needed -->
+		</div>
+
 	</div>
 </div>
