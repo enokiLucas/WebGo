@@ -1,21 +1,25 @@
+
+
 .game-control-panel {
 	background-color: #585b70; /* Surface 2 */
 	color: #fab387; /* Peach */
 	display: flex;
 	flex-direction: column;
-	height: 70vh;
-	width: 40vh;
-	margin: 10px;
+	width: 100%;
+	aspect-ratio: 4/7;
+	/*max-width: 40vh;*/
+	max-height: 70vh;
+	margin: 10px auto;
 	border: 2px solid #f5e0dc;
 	border-radius: 30px;
+	/*overflow: hidden; /* Ensure the children don't overflow */
 }
 
 .panel-header {
 	display: flex;
-	width: 40vh;
+	width: 100%;
 	align-items: center;
 	padding: 0;
-	margin: 0;
 }
 
 .panel-body {
@@ -27,7 +31,7 @@
 .tab-content-container {
 	flex: 1;
 	padding: 20px;
-	margin-top: -1px; /* Aligns with the tabs */
+	/*margin-top: -1px; /* Aligns with the tabs */
 }
 
 .tabs {
@@ -38,6 +42,7 @@
 	/*list-style-type: none; /* Removes default list styling */
 	margin: 0;
 	border-left: 3px solid #e99e7e;
+	flex: none /*Do not grow beyond the content*/
 }
 
 .tab {
