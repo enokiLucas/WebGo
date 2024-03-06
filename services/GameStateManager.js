@@ -7,7 +7,7 @@ class GameStateManager { //Remember to fix SGF
 	}
 
 	set boardSize(newSize) {
-		this.boardSize = newSize;
+		this._boardSize = newSize;
 		// Emit an event
 		document.dispatchEvent(new CustomEvent('board-size-changed', {
 			detail: { size: newSize }
