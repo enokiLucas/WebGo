@@ -15,7 +15,7 @@ class GameStateManager { //Remember to fix SGF
 	}
 
 	resetPlayer() {
-		this.currentPlayer = 'black'; // Reset the players turns
+		this._currentPlayer = 'black'; // Reset the players turns
 	}
 
 	get boardSize() {
@@ -29,7 +29,7 @@ class GameStateManager { //Remember to fix SGF
 	}
 
 	togglePlayer() {
-		this.currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
+		this._currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
 	}
 
 	get currentPlayer() {
