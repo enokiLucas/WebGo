@@ -40,16 +40,16 @@ export function handleIntersectionClick(board, event, ghostStone) {
 
 	// Create a simulated boardMatrix and place the stone.
 	const simulatedMatrix = rulesControl.createSimulatedBoardMatrix();
-	simulatedMatrix[boardX][boardY] = gameStateManager.getCurrentPlayer();
+	simulatedMatrix[boardX][boardY] = gameStateManager.currentPlayer;
 
 	// Save the validation result.
-	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.getCurrentPlayer());
+	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
 	//console.log(validationResult.message); // Test
 
 	if (validationResult.isValid) {
 		// Apply the move
-		updateBoard(board, x, y, boardX, boardY, gameStateManager.getCurrentPlayer(), ghostStone);
+		updateBoard(board, x, y, boardX, boardY, gameStateManager.currentPlayer, ghostStone);
 
 		// Execute any captures identified during validation
 		if (validationResult.captures.length > 0) {

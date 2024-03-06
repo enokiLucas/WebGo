@@ -2,11 +2,11 @@ class GameStateManager { //Remember to fix SGF
 	constructor() {
 		this.movesHistory = [];
 		this.moveKey = 1;
-		this.currentPlayer = 'black'; // Initialize with black
-		this.boardSize = 13;
+		this._currentPlayer = 'black'; // Initialize with black
+		this._boardSize = 13;
 	}
 
-	setBoardSize(newSize) {
+	set boardSize(newSize) {
 		this.boardSize = newSize;
 		// Emit an event
 		document.dispatchEvent(new CustomEvent('board-size-changed', {
@@ -18,8 +18,8 @@ class GameStateManager { //Remember to fix SGF
 		this.currentPlayer = 'black'; // Reset the players turns
 	}
 
-	getBoardSize() {
-		return this.boardSize;
+	get boardSize() {
+		return this._boardSize;
 	}
 
 	resetGameState() {
@@ -32,8 +32,8 @@ class GameStateManager { //Remember to fix SGF
 		this.currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
 	}
 
-	getCurrentPlayer() {
-		return this.currentPlayer;
+	get currentPlayer() {
+		return this._currentPlayer;
 	}
 
 	recordMove(x, y, metadata = {}) { //Go to handle Intersection Click and change the module

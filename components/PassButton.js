@@ -16,7 +16,7 @@ class PassButton extends HTMLElement {
 		button.textContent = 'Pass';
 
 		button.addEventListener('click', () => {
-			gameStateManager.makePass(getPlayerSGFColor(gameStateManager.getCurrentPlayer()));
+			gameStateManager.makePass(getPlayerSGFColor(gameStateManager.currentPlayer));
 		});
 /*
 		// Change the color of the ghost stone

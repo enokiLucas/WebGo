@@ -1,5 +1,5 @@
-import { gameStateManager } from '../services/GameStateManager.js';
 import { loadStyles } from '../utils/StyleLoader.js';
+import { gameStateManager } from '../services/GameStateManager.js'
 
 class BoardButtonSize extends HTMLElement {
 	constructor() {
@@ -20,7 +20,7 @@ class BoardButtonSize extends HTMLElement {
 
 		// Add event listener
 		button.addEventListener('click', () => {
-			gameStateManager.setBoardSize(this.boardSize);
+			gameStateManager.boardSize = this.boardSize;
 		});
 
 		this.shadowRoot.appendChild(button);

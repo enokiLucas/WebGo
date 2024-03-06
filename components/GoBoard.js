@@ -17,7 +17,7 @@ class GoBoard extends HTMLElement {
 	async connectedCallback() {
 		await loadStyles(this.shadowRoot, '../assets/styles/GoBoard.css');
 		// Called when the element is inserted into the DOM
-		this.initializeBoard(gameStateManager.getBoardSize());
+		this.initializeBoard(gameStateManager.boardSize);
 
 		// Listen to board size change events
 		document.addEventListener('board-size-changed', (event) => {
@@ -33,8 +33,8 @@ class GoBoard extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (name === 'size') {
-			gameStateManager.setBoardSize(parseInt(newValue));
-			this.initializeBoard(gameStateManager.getBoardSize());
+			gameStateManager.boardSize = parseInt(newValue);
+			this.initializeBoard(gameStateManager.boardSize);
 		}
 	}
 
@@ -60,7 +60,7 @@ class GoBoard extends HTMLElement {
 
 		addEventListeners(
 			boardElement,
-			gameStateManager.getBoardSize(),
+			gameStateManager.boardSize,
 			this.ghostStone,
 			handleIntersectionHover,
 			handleIntersectionClick
