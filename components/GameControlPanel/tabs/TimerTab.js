@@ -7,7 +7,7 @@ class TimerTab extends HTMLElement {
 		super();
 		this.attachShadow({ mode: 'open' });
 
-		document.addEventListener('board-size-changed', (event) => { this.updateTimerDisplay(gameStateManager.timeControlConfig.method); });
+		document.addEventListener('board-size-changed', (event) => { this.resetTimer(gameStateManager.timerControler.method); });
 	}
 
 	async connectedCallback() {
@@ -47,7 +47,7 @@ class TimerTab extends HTMLElement {
 	}
 
 	//Change the timer depending on the time keeping method.
-	async updateTimerDisplay(method) {
+	async resetTimer(method) {
 		const timerContainer = document.getElementById('timer-body');
 		try {
 			// Clear the current timer display
