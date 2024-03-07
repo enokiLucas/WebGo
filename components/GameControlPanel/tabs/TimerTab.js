@@ -48,7 +48,7 @@ class TimerTab extends HTMLElement {
 
 	//Change the timer depending on the time keeping method.
 	async resetTimer(method) {
-		const timerContainer = document.getElementById('timer-body');
+		const timerContainer = this.shadowRoot.getElementById('timer-body');
 		try {
 			// Clear the current timer display
 			timerContainer.innerHTML = '';
