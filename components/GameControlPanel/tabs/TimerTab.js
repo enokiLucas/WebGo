@@ -6,7 +6,8 @@ class TimerTab extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
-		// Initialize state such as player turn, captured stones, etc.
+
+		document.addEventListener('board-size-changed', (event) => { this.updateTimerDisplay(gameStateManager.timeControlConfig.method); });
 	}
 
 	async connectedCallback() {
@@ -43,7 +44,31 @@ class TimerTab extends HTMLElement {
 			timerDisplay.classList.remove('white-turn');
 			timerDisplay.querySelector('.player-turn').textContent = "Black's Turn";
 		});
+	}
 
+	//Change the timer depending on the time keeping method.
+	async updateTimerDisplay(method) {
+		const timerContainer = document.getElementById('timer-body');
+		try {
+			// Clear the current timer display
+			timerContainer.innerHTML = '';
+
+			// Fetch and display the HTML for the selected timer method
+			const methodHTML = await this.getMethodHTML(method);
+			timerContainer.innerHTML = methodHTML;
+
+			// Optionally, re-initialize or reset any timer logic here
+			} catch (error) {
+				console.error("Failed to load timer method HTML:", error);
+			}
+	}
+
+	async getMethodHTML(method) {
+		const response = await fetch(`/services/time/${method}/${method}.html`);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		return response.text();
 	}
 
 }

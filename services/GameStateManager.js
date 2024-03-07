@@ -4,7 +4,7 @@ class GameStateManager { //Remember to fix SGF
 		this.moveKey = 1;
 		this._currentPlayer = 'black'; // Initialize with black
 		this._boardSize = 13;
-		this._timerControler = { method: 'absoluteTime', totalTime: 1200 };
+		this._timerControler = { method: 'AbsoluteTime', totalTime: 1200 };
 	}
 
 	get timerControler() {
