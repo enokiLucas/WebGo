@@ -23,12 +23,16 @@ class GameStateManager { //Remember to fix SGF
 		}));
 	}
 
-	resetPlayer() {
-		this._currentPlayer = 'black'; // Reset the players turns
-	}
-
 	get boardSize() {
 		return this._boardSize;
+	}
+
+	get currentPlayer() {
+		return this._currentPlayer;
+	}
+
+	resetPlayer() {
+		this._currentPlayer = 'black'; // Reset the players turns
 	}
 
 	resetGameState() {
@@ -39,10 +43,6 @@ class GameStateManager { //Remember to fix SGF
 
 	togglePlayer() {
 		this._currentPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
-	}
-
-	get currentPlayer() {
-		return this._currentPlayer;
 	}
 
 	recordMove(x, y, metadata = {}) { //Go to handle Intersection Click and change the module
