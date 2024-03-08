@@ -78,7 +78,6 @@ class TimerTab extends HTMLElement {
 		const newScore = gameStateManager.getCaptureCounter();
 		//console.log(newScore[e.detail.player]);
 		const captureCounter = this.shadowRoot.querySelector(`.captures-counter.${e.detail.player}-section`);
-		console.log(captureCounter);
 		captureCounter.textContent = `Captures: ${e.detail.captures}`;
 	}
 
