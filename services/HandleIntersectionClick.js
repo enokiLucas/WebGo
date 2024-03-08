@@ -45,7 +45,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
-	//console.log(validationResult.message); // Test
+	//console.log(validationResult.captures); // TEST
 
 	if (validationResult.isValid) {
 		// Apply the move
@@ -54,6 +54,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 		// Execute any captures identified during validation
 		if (validationResult.captures.length > 0) {
 			captureRule.removeStones(board, validationResult.captures);
+			gameStateManager.addCaptures(gameStateManager.currentPlayer, validationResult.captures.length);
 		}
 
 	// Proceed with game flow, e.g., end turn, update UI
