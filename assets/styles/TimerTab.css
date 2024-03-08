@@ -21,7 +21,9 @@
 	/* No initial animation */
 }
 
-#timer-body {
+#timer-head,
+#timer-body,
+#timer-captures {
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
