@@ -5,7 +5,7 @@ class GameStateManager { //Remember to fix SGF
 		this._currentPlayer = 'black'; // Initialize with black
 		this._boardSize = 13;
 		this._timerControler = { method: 'AbsoluteTime', totalTime: 1200 }; // Define the method of time keeping
-		this.captureCounts = { black: 0, white: 0 }; // Track how many stones each player captured.
+		this.captureCounter = { black: 0, white: 0 }; // Track how many stones each player captured.
 	}
 
 	get timerControler() {
@@ -35,17 +35,17 @@ class GameStateManager { //Remember to fix SGF
 	// Function to increment capture count
 	addCaptures(playerColor, captures) {
 		const player = playerColor === 'black' ? 'white' : 'black';
-		this.captureCounts[player] += captures;
+		this.captureCounter[player] += captures;
 		// Optionally, emit an event with the new capture count
 		document.dispatchEvent(new CustomEvent('captures-changed', {
-			detail: { player, captures: this.captureCounts[player] }
+			detail: { player, captures: this.captureCounter[player] }
 		}));
-		console.log(this.captureCounts); //TEST
+		//console.log(this.captureCounter); //TEST
 	}
 
 	// Getter for capture counts
-	getCaptureCounts() {
-		return this.captureCounts;
+	getCaptureCounter() {
+		return this.captureCounter;
 	}
 
 	resetPlayer() {
@@ -56,7 +56,7 @@ class GameStateManager { //Remember to fix SGF
 		this.movesHistory = [];
 		this.resetPlayer();
 		this.moveKey = 1;
-		this.captureCounts = { black: 0, white: 0 };
+		this.captureCounter = { black: 0, white: 0 };
 	}
 
 	togglePlayer() {

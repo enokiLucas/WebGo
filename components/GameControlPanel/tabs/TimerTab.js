@@ -8,6 +8,8 @@ class TimerTab extends HTMLElement {
 		this.attachShadow({ mode: 'open' });
 
 		document.addEventListener('board-size-changed', (event) => { this.resetTimer(gameStateManager.timerControler.method); });
+
+		document.addEventListener('captures-changed', this.updateCaptureDisplay.bind(this));
 	}
 
 	async connectedCallback() {
@@ -69,6 +71,15 @@ class TimerTab extends HTMLElement {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
 		return response.text();
+	}
+
+	//Update the capture display.
+	updateCaptureDisplay(e) {
+		const newScore = gameStateManager.getCaptureCounter();
+		//console.log(newScore[e.detail.player]);
+		const captureCounter = this.shadowRoot.querySelector(`.captures-counter.${e.detail.player}-section`);
+		console.log(captureCounter);
+		captureCounter.textContent = `Captures: ${e.detail.captures}`;
 	}
 
 }
