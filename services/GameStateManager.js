@@ -1,10 +1,11 @@
 class GameStateManager { //Remember to fix SGF
 	constructor() {
 		this.movesHistory = [];
-		this.moveKey = 1;
+		this.moveKey = 1; // index for the moves.
 		this._currentPlayer = 'black'; // Initialize with black
 		this._boardSize = 13;
-		this._timerControler = { method: 'AbsoluteTime', totalTime: 1200 };
+		this._timerControler = { method: 'AbsoluteTime', totalTime: 1200 }; // Define the method of time keeping
+		this.captureCounts = { black: 0, white: 0 }; // Track captures for each player
 	}
 
 	get timerControler() {
@@ -30,7 +31,22 @@ class GameStateManager { //Remember to fix SGF
 	get currentPlayer() {
 		return this._currentPlayer;
 	}
+/*
+	// Function to increment capture count
+	addCaptures(playerColor, captures) {
+		this.captureCounts[playerColor] += captures;
+		// Optionally, emit an event with the new capture count
+		document.dispatchEvent(new CustomEvent('captures-changed', {
+			detail: { playerColor, captures: this.captureCounts[playerColor] }
+		}));
+	}
 
+	// Getter for capture counts
+	getCaptureCounts() {
+		return this.captureCounts;
+		console.log(this.captureCounts); //TEST
+	}
+*/
 	resetPlayer() {
 		this._currentPlayer = 'black'; // Reset the players turns
 	}
@@ -39,6 +55,7 @@ class GameStateManager { //Remember to fix SGF
 		this.movesHistory = [];
 		this.resetPlayer();
 		this.moveKey = 1;
+		this.captureCounts = { black: 0, white: 0 };
 	}
 
 	togglePlayer() {
@@ -68,7 +85,7 @@ class GameStateManager { //Remember to fix SGF
 		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
 		document.dispatchEvent(event);
 
-		//console.log(this.movesHistory);// Test
+		//console.log(this.movesHistory);// TEST
 	}
 
 	makePass() {

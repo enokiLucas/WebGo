@@ -43,7 +43,7 @@ class CaptureRule {
 		// Dispatch an event with metadata about the capture to handleIntersectionClick
 		const metadata = {
 			type: 'capture',
-			captured_stones_color: toggleColor(gameStateManager.getCurrentPlayer()),
+			captured_stones_color: toggleColor(gameStateManager.currentPlayer),
 			stones: group
 		};
 		const captureEvent = new CustomEvent('new-metadata', {

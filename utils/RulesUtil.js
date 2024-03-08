@@ -7,7 +7,7 @@ export function toggleColor(color) {
 }
 
 export function isValidCoordinate(x, y) {
-	const size = gameStateManager.BoardSize;
+	const size = gameStateManager.boardSize;
 	return x >= 0 && x < size && y >= 0 && y < size;
 }
 
