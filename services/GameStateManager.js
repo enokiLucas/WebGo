@@ -57,6 +57,7 @@ class GameStateManager { //Remember to fix SGF
 		this.resetPlayer();
 		this.moveKey = 1;
 		this.captureCounter = { black: 0, white: 0 };
+		document.dispatchEvent(new CustomEvent('new-game'));
 	}
 
 	togglePlayer() {
