@@ -1,36 +1,43 @@
-import { startCountdown } from './timeUtils.js';
+import { startCountdown, formatTime } from './timeUtils.js';
 
 class AbsoluteTimeControl {
-  constructor(playerOneTime, playerTwoTime, onTimeUpdate, onTimeOut) {
-    this.playerOneTime = playerOneTime;
-    this.playerTwoTime = playerTwoTime;
-    this.onTimeUpdate = onTimeUpdate; // Callback to update the UI with the remaining time
-    this.onTimeOut = onTimeOut; // Callback when a player's time runs out
-    this.currentPlayer = 1; // Assume player 1 starts
-    this.timerId = null;
-  }
+    constructor(playerOneTime, playerTwoTime, onTimeUpdate, onTimeOut) {
+        this.playerOneTime = playerOneTime; // Time in seconds
+        this.playerTwoTime = playerTwoTime;
+        this.onTimeUpdate = onTimeUpdate; // Callback to update UI
+        this.onTimeOut = onTimeOut;
+        this.currentPlayer = 1; // 1 for player one, 2 for player two
+        this.timerId = null;
+    }
 
-  switchPlayer() {
-    // Pause current timer
-    clearInterval(this.timerId);
+    switchPlayer() {
+        this.pauseTimer();
+        this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+        this.startPlayerTimer();
+    }
 
-    // Switch current player
-    this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+    pauseTimer() {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+    }
 
-    // Start countdown for the new current player
-    this.startPlayerTimer();
-  }
+    startPlayerTimer() {
+        const time = this.currentPlayer === 1 ? this.playerOneTime : this.playerTwoTime;
+        this.timerId = startCountdown(
+            time,
+            (remainingTime) => {
+                const formattedTime = formatTime(remainingTime);
+                this.onTimeUpdate(this.currentPlayer, formattedTime);
+            },
+            () => {
+                this.onTimeOut(this.currentPlayer);
+            }
+        );
+    }
 
-  startPlayerTimer() {
-    const totalTimeInSeconds = this.currentPlayer === 1 ? this.playerOneTime : this.playerTwoTime;
-    this.timerId = startCountdown(totalTimeInSeconds, (remainingTime) => {
-      this.onTimeUpdate(this.currentPlayer, remainingTime);
-
-      if (remainingTime <= 0) {
-        this.onTimeOut(this.currentPlayer); // Notify game state manager of timeout
-      }
-    });
-  }
-
-  // Additional methods to start, pause, and stop the game timer could be implemented as needed
+    // Consider adding methods to start, stop, or reset the entire game timer if needed
 }
+
+export default AbsoluteTimeControl;
