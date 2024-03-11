@@ -1,8 +1,7 @@
 import { loadHTML } from '../../../utils/HTMLLoader.js';
 import { loadStyles } from '../../../utils/StyleLoader.js';
 import { gameStateManager } from '../../../services/GameStateManager.js';
-
-import '../../../services/time/Timer.js';
+import { timer } from '../../../services/time/timer.js';
 
 class TimerTab extends HTMLElement {
 	constructor() {

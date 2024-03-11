@@ -1,22 +1,11 @@
 import { gameStateManager } from '../GameStateManager.js';
 
-class Timer extends HTMLElement {
+class Timer {
 	constructor() {
-		super();
 		this.timeMinutes = { black: 2, white: 2};
 		this.time = {};
 		this.timerPath = {};
 		this.intervalID = null;
-	}
-
-	connectedCallback() {
-		this.setTime();
-		this.setTimerPath();
-
-		document.addEventListener('moveMade', () => switchTimer());
-		document.addEventListener('passMade', () => switchTimer());
-
-		this.updateCountdown(gameStateManager.currentPlayer);
 	}
 
 	setTime() {
@@ -45,11 +34,11 @@ class Timer extends HTMLElement {
 				//TODO end the game.
 			} else {
 				const minutes = Math.floor(this.time[player] / 60);
-			let seconds = this.time[player] % 60;
-			seconds = seconds < 10 ? `0${seconds}` : seconds;
+				let seconds = this.time[player] % 60;
+				seconds = seconds < 10 ? `0${seconds}` : seconds;
 
-			this.timerPath[player].textContent = `${minutes}:${seconds}`;
-			this.time[player]--;
+				this.timerPath[player].textContent = `${minutes}:${seconds}`;
+				this.time[player]--;
 			}
 		}, 1000);
 	}
@@ -68,5 +57,4 @@ class Timer extends HTMLElement {
 	}
 }
 
-// Define the custom element using the 'custom-timer' tag name.
-customElements.define('timer-base', Timer);
+export const timer = new Timer();
