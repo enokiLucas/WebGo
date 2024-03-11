@@ -2,27 +2,30 @@ import { loadHTML } from '../../../utils/HTMLLoader.js';
 import { loadStyles } from '../../../utils/StyleLoader.js';
 import { gameStateManager } from '../../../services/GameStateManager.js';
 
+import '../../../services/time/Timer.js';
+
 class TimerTab extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
-		document.addEventListener('new-game', (event) => { this.resetTimer(gameStateManager.timerControler.method); });
-		document.addEventListener('new-game', this.updateCaptureDisplay.bind(this));
+		//document.addEventListener('new-game', (event) => { this.resetTimer(gameStateManager.timerControler.method); });
+		//document.addEventListener('new-game', this.updateCaptureDisplay.bind(this));
 	}
 
 	async connectedCallback() {
 		await loadHTML(this.shadowRoot, '../../../assets/html/TimerTab.html');
 		await loadStyles(this.shadowRoot, '../../../assets/styles/TimerTab.css');
 		document.addEventListener('moveMade', this.updateTimerDisplay);
-		document.addEventListener('Pass', this.updateTimerDisplay);
+		document.addEventListener('passMade', this.updateTimerDisplay);
 	}
 
 	disconnectedCallback() {
 		// Remove the event listener when the component is removed from the DOM
 		document.removeEventListener('moveMade', this.updateTimerDisplay);
+		document.removeEventListener('passMade', this.updateTimerDisplay);
 	}
 
-	//Change the color of the display
+	//Change the color of the display //TODO Fix the color problem
 	updateTimerDisplay = (e) => {
 		const currentPlayer = e.detail.currentPlayer;
 		const timerDisplay = this.shadowRoot.querySelector('.timer');
@@ -45,7 +48,7 @@ class TimerTab extends HTMLElement {
 			timerDisplay.querySelector('.player-turn').textContent = "Black's Turn";
 		});
 	}
-
+/*
 	//Change the timer depending on the time keeping method.
 	async resetTimer(method) {
 		const timerContainer = this.shadowRoot.getElementById('timer-body');
@@ -70,7 +73,7 @@ class TimerTab extends HTMLElement {
 		}
 		return response.text();
 	}
-
+*/
 	//Update the capture display.
 	updateCaptureDisplay(e) {
 		const newScore = gameStateManager.getCaptureCounter();

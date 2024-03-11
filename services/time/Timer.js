@@ -54,10 +54,6 @@ class Timer extends HTMLElement {
 		}, 1000);
 	}
 
-	pauseCountdown() {
-
-	}
-
 	switchTimer() {
 		// Pause the current countdown.
 		if (this.intervalId !== null) {
@@ -71,3 +67,6 @@ class Timer extends HTMLElement {
 		this.updateCountdown(currentPlayer);
 	}
 }
+
+// Define the custom element using the 'custom-timer' tag name.
+customElements.define('timer-base', Timer);
