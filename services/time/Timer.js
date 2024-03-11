@@ -1,21 +1,28 @@
+import { gameStateManager } from '../GameStateManager.js';
+
 class Timer extends HTMLElement {
 	constructor() {
 		super();
 		this.timeMinutes = { black: 2, white: 2};
 		this.time = {};
 		this.timerPath = {};
+		this.intervalID = null;
 	}
 
 	connectedCallback() {
 		this.setTime();
 		this.setTimerPath();
 
+		document.addEventListener('moveMade', () => switchTimer());
+		document.addEventListener('passMade', () => switchTimer());
+
+		this.updateCountdown(gameStateManager.currentPlayer);
 	}
 
 	setTime() {
 		this.time = {
-			black: 60 * this.timeMinutes['black'];
-			white: 60 * this.timeMinutes['white'];
+			black: 60 * this.timeMinutes['black'],
+			white: 60 * this.timeMinutes['white']
 		}
 	}
 
@@ -27,17 +34,40 @@ class Timer extends HTMLElement {
 	}
 
 	updateCountdown(player = 'black') {
-		setInterval( () => {
-			const minutes = Math.floor(this.time[player] / 60);
+		if (this.intervalID !== null) {
+			clearInterval(this.intervalId);
+		}
+
+
+		this.intervalId = setInterval(() => {
+			if (this.time[player] <= 0) {
+				clearInterval(this.intervalId);
+				//TODO end the game.
+			} else {
+				const minutes = Math.floor(this.time[player] / 60);
 			let seconds = this.time[player] % 60;
 			seconds = seconds < 10 ? `0${seconds}` : seconds;
 
 			this.timerPath[player].textContent = `${minutes}:${seconds}`;
 			this.time[player]--;
+			}
 		}, 1000);
 	}
 
-	pauseCountdown(event) {
+	pauseCountdown() {
 
+	}
+
+	switchTimer() {
+		// Pause the current countdown.
+		if (this.intervalId !== null) {
+			clearInterval(this.intervalId);
+		}
+
+		// Toggle the player using GameStateManager.
+		GameStateManager.togglePlayer();
+		// Retrieve the new current player from GameStateManager and update the countdown for them.
+		const currentPlayer = GameStateManager.getCurrentPlayer();
+		this.updateCountdown(currentPlayer);
 	}
 }

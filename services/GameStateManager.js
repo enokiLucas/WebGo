@@ -92,8 +92,10 @@ class GameStateManager { //Remember to fix SGF TODO
 	}
 
 	makePass() {
+		const event = new CustomEvent('passMade');
 		this.recordMove(null, null, { pass: true }); // Add a pass move movesHistory
 		this.togglePlayer(); // Switch turns
+		document.dispatchEvent(event);
 	}
 }
 
