@@ -1,43 +1,51 @@
-import { startCountdown, formatTime } from './timeUtils.js';
+import TimeControlBase from '../TimeControlBase.js';
 
-class AbsoluteTimeControl {
-    constructor(playerOneTime, playerTwoTime, onTimeUpdate, onTimeOut) {
-        this.playerOneTime = playerOneTime; // Time in seconds
-        this.playerTwoTime = playerTwoTime;
-        this.onTimeUpdate = onTimeUpdate; // Callback to update UI
-        this.onTimeOut = onTimeOut;
-        this.currentPlayer = 1; // 1 for player one, 2 for player two
-        this.timerId = null;
-    }
+class AbsoluteTimeControl extends TimeControlBase {
+	constructor(onTimeUpdate, onTimeOut, totalTimeBlack, totalTimeWhite) {
+		super(onTimeUpdate, onTimeOut);
+		this.totalTimeBlack = totalTimeBlack; // Total time in seconds for black
+		this.totalTimeWhite = totalTimeWhite; // Total time in seconds for white
+		this.remainingTimeBlack = totalTimeBlack;
+		this.remainingTimeWhite = totalTimeWhite;
+		this.activePlayer = 'black'; // "black" or "white"
+	}
 
-    switchPlayer() {
-        this.pauseTimer();
-        this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
-        this.startPlayerTimer();
-    }
+	start() {
+		this.pause(); // Ensure any existing timer is cleared
+		// Decide which player's time to start based on `activePlayer`
+		this.scheduleNextTick(this.activePlayer === 'black' ? this.remainingTimeBlack : this.remainingTimeWhite);
+	}
 
-    pauseTimer() {
-        if (this.timerId) {
-            clearInterval(this.timerId);
-            this.timerId = null;
-        }
-    }
+	scheduleNextTick(remainingTime) {
+		this.timerId = setTimeout(() => {
+			if (remainingTime <= 0) {
+				clearTimeout(this.timerId);
+				this.onTimeOut(this.activePlayer);
+			} else {
+				// Update the time for the active player
+				if (this.activePlayer === 'black') {
+					this.remainingTimeBlack = remainingTime - 1;
+					this.onTimeUpdate('black', this.formatTime(this.remainingTimeBlack));
+				} else {
+					this.remainingTimeWhite = remainingTime - 1;
+					this.onTimeUpdate('white', this.formatTime(this.remainingTimeWhite));
+				}
+				this.scheduleNextTick(remainingTime - 1);
+			}
+		}, 1000);
+	}
 
-    startPlayerTimer() {
-        const time = this.currentPlayer === 1 ? this.playerOneTime : this.playerTwoTime;
-        this.timerId = startCountdown(
-            time,
-            (remainingTime) => {
-                const formattedTime = formatTime(remainingTime);
-                this.onTimeUpdate(this.currentPlayer, formattedTime);
-            },
-            () => {
-                this.onTimeOut(this.currentPlayer);
-            }
-        );
-    }
+	// Call this method to switch the active player and restart the timer
+	switchPlayer() {
+		this.activePlayer = this.activePlayer === 'black' ? 'white' : 'black';
+		this.start();
+	}
 
-    // Consider adding methods to start, stop, or reset the entire game timer if needed
+	reset() {
+		this.pause(); // Stop the current countdown
+		// Reset the times to their original values
+		this.remainingTimeBlack = this.totalTimeBlack;
+		this.remainingTimeWhite = this.totalTimeWhite;
+		// Resetting doesn't start the timer automatically
+	}
 }
-
-export default AbsoluteTimeControl;
