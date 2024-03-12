@@ -16,6 +16,7 @@ class TimerTab extends HTMLElement {
 		await loadStyles(this.shadowRoot, '../../../assets/styles/TimerTab.css');
 		document.addEventListener('moveMade', this.updateTimerDisplay);
 		document.addEventListener('passMade', this.updateTimerDisplay);
+		this.testTimer();
 	}
 
 	disconnectedCallback() {
@@ -24,7 +25,7 @@ class TimerTab extends HTMLElement {
 		document.removeEventListener('passMade', this.updateTimerDisplay);
 	}
 
-	//Change the color of the display //TODO Fix the color problem
+	//Change the color of the display.
 	updateTimerDisplay = (e) => {
 		const currentPlayer = e.detail.player === 'black' ? 'white' : 'black';
 		const timerDisplay = this.shadowRoot.querySelector('.timer');
@@ -81,9 +82,25 @@ class TimerTab extends HTMLElement {
 		captureCounter.textContent = `Captures: ${e.detail.captures}`;
 	}
 
+	/*setTimerPath() {
+		const blackPath = this.shadowRoot.getElementById('black-timer');
+		const whitePath = this.shadowRoot.getElementById('white-timer');
+
+		this.timerPath = {
+			black: blackPath,
+			white: whitePath
+		};
+
+		console.log(this.timerPath.black);
+	}*/
+
 	testTimer() {
-		timer.ssetTime();
-		timer.setTimerPath();
+		timer.setTime();
+		timer.setTimerPath(this.shadowRoot);
+
+		console.log(timer.timerPath.black);
+		console.log(timer.time);
+
 	}
 
 }
