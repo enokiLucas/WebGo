@@ -68,7 +68,7 @@ class GameStateManager { //Remember to fix SGF TODO
 		const move = {
 			branch: 0, // Default branch
 			key: this.moveKey++,
-			player: this.currentPlayer,
+			player: this._currentPlayer,
 			x: x,
 			y: y,
 			metadata: metadata
@@ -82,20 +82,22 @@ class GameStateManager { //Remember to fix SGF TODO
 */
 	makeMove(x, y, metadata = {}) {
 		// Logic to handle a move
-		const event = new CustomEvent('moveMade', { detail: { currentPlayer: this.currentPlayer } });
+		const event = new CustomEvent('moveMade', { detail: { player: this.currentPlayer } });
 		this.recordMove(x, y, metadata);
 		this.togglePlayer();
 		document.dispatchEvent(event);
 
 		//console.log(this.movesHistory);// TEST
-		console.log(event.detail.currentPlayer); //TEST
+		console.log(`makeMove: ${event.detail.player}`); //TEST
 	}
 
 	makePass() {
-		const event = new CustomEvent('passMade', { detail: {currentPlayer: this.currentPlayer } });
+		const event = new CustomEvent('passMade', { detail: {player: this.currentPlayer } });
 		this.recordMove(null, null, { pass: true }); // Add a pass move movesHistory
 		this.togglePlayer(); // Switch turns
 		document.dispatchEvent(event);
+
+		console.log(`makePass: ${event.detail.player}`); //TEST
 	}
 }
 

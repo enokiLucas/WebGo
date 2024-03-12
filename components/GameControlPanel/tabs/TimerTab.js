@@ -26,7 +26,7 @@ class TimerTab extends HTMLElement {
 
 	//Change the color of the display //TODO Fix the color problem
 	updateTimerDisplay = (e) => {
-		const currentPlayer = e.detail.currentPlayer;
+		const currentPlayer = e.detail.player === 'black' ? 'white' : 'black';
 		const timerDisplay = this.shadowRoot.querySelector('.timer');
 
 		//Change the clor during normal play.
@@ -47,7 +47,7 @@ class TimerTab extends HTMLElement {
 			timerDisplay.querySelector('.player-turn').textContent = "Black's Turn";
 		});
 	}
-/*
+
 	//Change the timer depending on the time keeping method.
 	async resetTimer(method) {
 		const timerContainer = this.shadowRoot.getElementById('timer-body');
@@ -72,13 +72,18 @@ class TimerTab extends HTMLElement {
 		}
 		return response.text();
 	}
-*/
+
 	//Update the capture display.
 	updateCaptureDisplay(e) {
 		const newScore = gameStateManager.getCaptureCounter();
 		//console.log(newScore[e.detail.player]);
 		const captureCounter = this.shadowRoot.querySelector(`.captures-counter.${e.detail.player}-section`);
 		captureCounter.textContent = `Captures: ${e.detail.captures}`;
+	}
+
+	testTimer() {
+		timer.ssetTime();
+		timer.setTimerPath();
 	}
 
 }
