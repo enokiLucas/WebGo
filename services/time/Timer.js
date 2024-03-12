@@ -15,15 +15,15 @@ class Timer {
 		}
 	}
 
-	setTimerPath() {
+	setTimerPath(pathToShadowRoot) {
 		this.timerPath = {
-			black: this.shadowRoot.getElementById('black-timer'),
-			white: this.shadowRoot.getElementById('white-timer')
+			black: pathToShadowRoot.getElementById('black-timer'),
+			white: pathToShadowRoot.getElementById('white-timer')
 		};
 	}
 
 	updateCountdown(player = 'black') {
-		if (this.intervalID !== null) {
+		if (this.intervalId !== null) {
 			clearInterval(this.intervalId);
 		}
 
