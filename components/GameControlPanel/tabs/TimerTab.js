@@ -86,6 +86,8 @@ class TimerTab extends HTMLElement {
 		timer.setTimerPath(this.shadowRoot);
 		timer.startCountdown();
 		document.addEventListener('moveMade', (e) => timer.switchTimer(e.detail.player));
+
+		timer.setTimerBeforeMatch();
 	}
 
 }
