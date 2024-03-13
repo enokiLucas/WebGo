@@ -7,8 +7,6 @@ class TimerTab extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
-		//document.addEventListener('new-game', (event) => { this.resetTimer(gameStateManager.timerControler.method); });
-		//document.addEventListener('new-game', this.updateCaptureDisplay.bind(this));
 	}
 
 	async connectedCallback() {

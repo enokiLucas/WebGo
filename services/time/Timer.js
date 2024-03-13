@@ -25,9 +25,6 @@ class Timer {
 	}
 
 	startCountdown(player = 'black') {
-		// Ensure any previous timer for this player is cleared before starting a new one
-		//this.stopTimer(player);
-
 		// Update the countdown every second
 		this.intervalID[player] = setInterval(() => {
 			if (this.time[player] <= 0) {
