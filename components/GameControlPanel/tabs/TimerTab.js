@@ -82,25 +82,16 @@ class TimerTab extends HTMLElement {
 		captureCounter.textContent = `Captures: ${e.detail.captures}`;
 	}
 
-	/*setTimerPath() {
-		const blackPath = this.shadowRoot.getElementById('black-timer');
-		const whitePath = this.shadowRoot.getElementById('white-timer');
-
-		this.timerPath = {
-			black: blackPath,
-			white: whitePath
-		};
-
-		console.log(this.timerPath.black);
-	}*/
-
-	testTimer() {
+	testTimer() { //TEST
 		timer.setTime();
 		timer.setTimerPath(this.shadowRoot);
 		timer.updateCountdown();
 
-		console.log(timer.timerPath.black);
-		console.log(timer.time);
+		document.addEventListener('moveMade', timer.switchTimer());
+		document.addEventListener('passMade', timer.switchTimer());
+
+		//console.log(timer.timerPath.black);
+		//console.log(timer.time);
 
 	}
 

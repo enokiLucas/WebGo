@@ -50,9 +50,9 @@ class Timer {
 		}
 
 		// Toggle the player using GameStateManager.
-		GameStateManager.togglePlayer();
+		gameStateManager.togglePlayer();
 		// Retrieve the new current player from GameStateManager and update the countdown for them.
-		const currentPlayer = GameStateManager.getCurrentPlayer();
+		const currentPlayer = gameStateManager.currentPlayer;
 		this.updateCountdown(currentPlayer);
 	}
 }
