@@ -97,6 +97,7 @@ class TimerTab extends HTMLElement {
 	testTimer() {
 		timer.setTime();
 		timer.setTimerPath(this.shadowRoot);
+		timer.updateCountdown();
 
 		console.log(timer.timerPath.black);
 		console.log(timer.time);
