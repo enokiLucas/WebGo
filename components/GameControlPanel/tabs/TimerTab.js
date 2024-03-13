@@ -17,7 +17,7 @@ class TimerTab extends HTMLElement {
 		document.addEventListener('moveMade', this.updateTimerDisplay);
 		document.addEventListener('passMade', this.updateTimerDisplay);
 		this.testTimer();
-		document.addEventListener('moveMade', (event) => timer.stopCountdown(event.detail.player));
+		document.addEventListener('moveMade', (e) => timer.switchTimer(e.detail.player));
 	}
 
 	disconnectedCallback() {
@@ -87,16 +87,6 @@ class TimerTab extends HTMLElement {
 		timer.setTime();
 		timer.setTimerPath(this.shadowRoot);
 		timer.startCountdown();
-		//timer.switchTimer();
-
-
-
-		//document.addEventListener('moveMade', timer.switchTimer());
-		//document.addEventListener('passMade', timer.switchTimer());
-
-		//console.log(timer.timerPath.black);
-		//console.log(timer.time);
-
 	}
 
 }

@@ -6,6 +6,8 @@ class Timer {
 		this.time = {};
 		this.timerPath = {};
 		this.intervalID = { black: null, white: null };
+
+		this.currentPlayer = 'black';
 	}
 
 	setTime() {
@@ -49,18 +51,10 @@ class Timer {
 		}
 	}
 
-	switchTimer() {
-		// Determine the player to switch to
-		const nextPlayer = this.currentPlayer === 'black' ? 'white' : 'black';
-
-		// Stop the current player's timer
-		this.stopCountdown(this.currentPlayer);
-
-		// Update the currentPlayer to the next player
-		this.currentPlayer = nextPlayer;
-
-		// Start the timer for the new current player
-		this.startCountdown(this.currentPlayer);
+	switchTimer(player) {
+		this.stopCountdown(player);
+		const nextPlayer = player === 'black' ? 'white' : 'black';
+		this.startCountdown(nextPlayer);
 	}
 }
 
