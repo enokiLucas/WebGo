@@ -27,7 +27,7 @@ class Timer {
 		this.intervalID[player] = setInterval(() => {
 			if (this.time[player] <= 0) {
 				this.stopCountdown(player);
-				// TODO: Handle time out for player
+				document.dispatchEvent(new CustomEvent('end-game', { detail: { type: 'Time out' } }));
 			} else {
 				this.convertToClock(player);
 				this.time[player]--; // Decrement the timer
