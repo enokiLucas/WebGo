@@ -7,14 +7,14 @@ class GameEndManager {
 	handleEndGame(event) {
 		const { reason, player } = event.detail;
 		switch (reason) {
-		case 'resignation':
-			this.handleResignation(player);
+			case 'resignation':
+				this.handleResignation(player);
 			break;
-		case 'timeout':
-			this.handleTimeout(player);
+			case 'timeout':
+				this.handleTimeout(player);
 			break;
-		case 'consecutivePasses':
-			this.handleConsecutivePasses();
+			case 'consecutivePasses':
+				this.handleConsecutivePasses();
 			break;
 		// Add other cases as needed
 		}
