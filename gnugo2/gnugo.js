@@ -22,6 +22,24 @@ var Module = {
         // You might call a function to setup the game board or to trigger
         // the dead stones detection, for example.
     }
+/*
+    // Custom print functions to handle standard output and errors
+    print: function(text) {
+        console.log('stdout: ' + text);
+    },
+    printErr: function(text) {
+        console.error('stderr: ' + text);
+    },
+		*/
+
+
+		// Customizing stdin, stdout, stderr
+		// Modify how gnuGO interacts with the terminal.
+    stdin: function() {
+        // Handle standard input (if needed)
+        return null; // Return null if no more input
+    }
+
 };
 
 // --pre-jses are emitted after the Module integration code, so that they can
