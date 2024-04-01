@@ -59,40 +59,40 @@ function updateResponseDisplay() {
 
 // Modified sendGTPCommand to interface with GNU Go's WebAssembly Module
 function sendGTPCommand() {
-if (!Module.onRuntimeInitialized) {
-        console.error("GNU Go module or GTP command interface not ready.");
-        return;
-    }
+	if (!Module.onRuntimeInitialized) {
+		console.error("GNU Go module or GTP command interface not ready.");
+		return;
+	}
 
-    const commandInput = document.getElementById('gtpCommand');
-    const command = commandInput.value.trim();
+	const commandInput = document.getElementById('gtpCommand');
+	const command = commandInput.value.trim();
 
-    if (command) {
-        console.log(`Sending GTP command: ${command}`);
-        Module.enqueueInput(command + "\n"); // Ensure to append a newline to simulate pressing "Enter"
-    } else {
-        console.error("Invalid command format.");
-    }
+	if (command) {
+		console.log(`Sending GTP command: ${command}`);
+		Module.enqueueInput(command + "\n"); // Ensure to append a newline to simulate pressing "Enter"
+	} else {
+		console.error("Invalid command format.");
+	}
 
-    commandInput.value = ''; // Clear the input field after enqueuing the command
+	commandInput.value = ''; // Clear the input field after enqueuing the command
 }
 
 // Define a function to handle new responses. This function can do anything you need, like updating the UI or logging to the console.
 function handleNewResponse(message, isError = false) {
-    // Log the message to the console. Use console.error for error messages.
-    if (isError) {
-        console.error(message);
-    } else {
-        console.log(message);
-    }
+	// Log the message to the console. Use console.error for error messages.
+	if (isError) {
+		console.error(message);
+	} else {
+		console.log(message);
+	}
 
-    // If you have a specific element in your HTML where you want to display these messages, update it here.
-    const responseElement = document.getElementById('gtpResponse');
-    if(responseElement) {
-        responseElement.textContent += message + '\n'; // Append new messages with a newline for readability.
-    }
+	// If you have a specific element in your HTML where you want to display these messages, update it here.
+	const responseElement = document.getElementById('gtpResponse');
+	if(responseElement) {
+		responseElement.textContent += message + '\n'; // Append new messages with a newline for readability.
+	}
 
-    // If you need to do more with the messages, like parsing GTP responses, you can add that logic here.
+	// If you need to do more with the messages, like parsing GTP responses, you can add that logic here.
 }
 
 // Ensure the sendGTPCommand function is called when the "Send Command" button is clicked
