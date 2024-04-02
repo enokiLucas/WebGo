@@ -24,7 +24,7 @@ var Module = {
 				// You might call a function to setup the game board or to trigger
 				// the dead stones detection, for example.
 		},
-
+/*
 		// Custom print functions to handle standard output and errors
 		print: function(text) {
 				console.log('stdout: ' + text);
@@ -32,7 +32,7 @@ var Module = {
 		printErr: function(text) {
 				console.error('stderr hello: ' + text);
 		},
-
+*/
 
 
 		// Customizing stdin, stdout, stderr
