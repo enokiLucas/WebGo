@@ -1,93 +1,75 @@
-// Initialization flag to indicate when the module is ready
-let moduleReady = false;
-// Queue to store commands entered by the user.
-let inputQueue = [];
+let gtpResponses = [];
+let commandQueue = [];
+let isProcessingCommand = false;
 
-// Function to initialize the GNUGo Module with GTP mode enabled
 var Module = {
-	arguments: ['--mode', 'gtp'],
-
-	// Function to add commands to the queue.
-	enqueueInput: function(text) {
-		/* TEST the following is commented for testing porpusses.
-		inputQueue.push(...text.split('').map(c => c.charCodeAt(0)));
-		// Append a newline character to simulate pressing Enter.
-		inputQueue.push(10);
-		*/
-
-
-		console.log(`Enqueuing command: ${text}`); // Log the command for testing
-    inputQueue.push(...text.split('').map(c => c.charCodeAt(0)));
-    // Append a newline character to simulate pressing Enter.
-    inputQueue.push(10);
-	},
-
-	onRuntimeInitialized: function() {
-		console.log("GNU Go WebAssembly module loaded successfully.");
-		moduleReady = true; // Set the module as ready
-	},
-
-	// Override stdin to read from the input queue instead of prompting the user.
-	stdin: function() {
-		if (inputQueue.length > 0) {
-			return inputQueue.shift();
-		}
-		return null;
-	},
-
-	// Custom print functions to handle standard output and errors
-	print: function(text) {
-		console.log('stdout: ' + text);
-		handleNewResponse(text);
-		console.log('hello form print'); // TEST
-	},
-	printErr: function(text) {
-		console.error('stderr: ' + text);
-		handleNewResponse(`Error: ${text}`, true);
-		console.log('hello from error'); // TEST
-	},
+    arguments: ['--mode', 'gtp'],
+    onRuntimeInitialized: function() {
+        console.log("GNU Go WebAssembly module loaded successfully.");
+        processNextCommand(); // Start processing commands if any
+    },
+    print: function(text) {
+        console.log('stdout: ', text);
+        handleNewResponse(text);
+        isProcessingCommand = false; // Command processing finished, ready for next command
+        processNextCommand(); // Process the next command in the queue
+    },
+    printErr: function(text) {
+        console.error('stderr: ', text);
+        handleNewResponse(`Error: ${text}`, true);
+        isProcessingCommand = false; // Even on error, ready for next command
+        processNextCommand(); // Continue with next command
+    },
+    stdin: function() {
+        if (!commandQueue.length) {
+            return null;
+        }
+        if (!isProcessingCommand) {
+            isProcessingCommand = true; // Mark as processing
+            const commandAscii = commandQueue.shift(); // Get the next command
+            return commandAscii.shift(); // Return the first character of the command
+        }
+        return null;
+    }
 };
 
-// Function to handle new responses. This function can do anything you need,
-// like updating the UI or logging to the console.
-function handleNewResponse(message, isError = false) {
-	// Log the message to the console. Use console.error for error messages.
-	if (isError) {
-		console.error(message);
-	} else {
-		console.log(message);
-	}
-
-	// Update the display with the latest response
-	const responseElement = document.getElementById('gtpResponse');
-	if (responseElement) {
-		responseElement.textContent += message + '\n'; // Append new messages with a newline for readability.
-	}
+function enqueueCommand(command) {
+    // Split the command into ASCII codes and add a newline character
+    const commandAscii = command.split('').map(c => c.charCodeAt(0)).concat(10);
+    commandQueue.push(commandAscii); // Enqueue the ASCII command
+    if (!isProcessingCommand) {
+        processNextCommand(); // Immediately try processing if not already
+    }
 }
 
-// Function to send GTP commands to GNU Go's WebAssembly Module
+function processNextCommand() {
+    // Check if ready to process next command
+    if (commandQueue.length > 0 && !isProcessingCommand) {
+        Module.stdin(); // Trigger stdin to process the next command
+    }
+}
+
 function sendGTPCommand() {
-	if (!moduleReady) {
-		console.error("GNU Go module or GTP command interface not ready.");
-		return;
-	}
-
-	const commandInput = document.getElementById('gtpCommand');
-	const command = commandInput.value.trim();
-
-	if (command) {
-		console.log(`Sending GTP command: ${command}`);
-		Module.enqueueInput(command); //ALERT maybe in the future use (command + "\n") to append a new line
-	} else {
-		console.error("Invalid command format.");
-	}
-
-	commandInput.value = ''; // Clear the input field after enqueuing the command
+    const commandInput = document.getElementById('gtpCommand');
+    const command = commandInput.value.trim();
+    if (command) {
+        console.log(`Enqueuing GTP command: ${command}`);
+        enqueueCommand(command);
+    } else {
+        console.error("Invalid command format.");
+    }
+    commandInput.value = ''; // Clear the input after enqueuing
 }
 
-// Ensure the sendGTPCommand function is called when the "Send Command" button is clicked
-document.addEventListener('DOMContentLoaded', () => {
-	const sendButton = document.getElementById('sendCommandButton');
-	sendButton.addEventListener('click', sendGTPCommand);
-});
+function handleNewResponse(message, isError = false) {
+    const responseElement = document.getElementById('gtpResponse');
+    const responseText = isError ? `Error: ${message}` : message;
+    console.log(responseText); // Log to console
+    if (responseElement) {
+        responseElement.textContent += `${responseText}\n`;
+    }
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('sendCommandButton').addEventListener('click', sendGTPCommand);
+});
