@@ -15,6 +15,7 @@ var Module = {
 		inputQueue.push(10);
 		*/
 
+
 		console.log(`Enqueuing command: ${text}`); // Log the command for testing
     inputQueue.push(...text.split('').map(c => c.charCodeAt(0)));
     // Append a newline character to simulate pressing Enter.
@@ -38,11 +39,12 @@ var Module = {
 	print: function(text) {
 		console.log('stdout: ' + text);
 		handleNewResponse(text);
-		console.log('hello form print');
+		console.log('hello form print'); // TEST
 	},
 	printErr: function(text) {
 		console.error('stderr: ' + text);
 		handleNewResponse(`Error: ${text}`, true);
+		console.log('hello from error'); // TEST
 	},
 };
 
@@ -88,3 +90,4 @@ document.addEventListener('DOMContentLoaded', () => {
 	const sendButton = document.getElementById('sendCommandButton');
 	sendButton.addEventListener('click', sendGTPCommand);
 });
+
