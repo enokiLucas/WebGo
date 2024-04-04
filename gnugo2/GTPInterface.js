@@ -3,8 +3,7 @@ let gtpResponses = [];
 
 // Initialize the GNU Go WebAssembly module with a custom Module object
 var Module = {
-	// Specify GTP mode as a command-line argument
-	arguments: ['--mode', 'gtp'],
+
 
 	// This function is called once the module is fully initialized and ready
 	onRuntimeInitialized: function() {
