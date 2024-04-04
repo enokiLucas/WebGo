@@ -1,75 +1,65 @@
+// Define a global variable to store GTP command responses
 let gtpResponses = [];
-let commandQueue = [];
-let isProcessingCommand = false;
 
+// Initialize the GNU Go WebAssembly module with a custom Module object
 var Module = {
+	// Specify GTP mode as a command-line argument
 	arguments: ['--mode', 'gtp'],
+
+	// This function is called once the module is fully initialized and ready
 	onRuntimeInitialized: function() {
 		console.log("GNU Go WebAssembly module loaded successfully.");
-		processNextCommand(); // Start processing commands if any
+		// The module is now ready to receive GTP commands
 	},
-	print: function(text) {
-		console.log('stdout: ', text);
-		handleNewResponse(text);
-		isProcessingCommand = false; // Command processing finished, ready for next command
-		processNextCommand(); // Process the next command in the queue
-	},
-	printErr: function(text) {
-		console.error('stderr: ', text);
-		handleNewResponse(`Error: ${text}`, true);
-		isProcessingCommand = false; // Even on error, ready for next command
-		processNextCommand(); // Continue with next command
-	},
+
+	// Override stdin to control how the module reads input
+	// This is not directly used in our example since we're focusing on sending commands via the GTP interface
 	stdin: function() {
-		if (!commandQueue.length) {
-			return null;
-		}
-		if (!isProcessingCommand) {
-			isProcessingCommand = true; // Mark as processing
-			const commandAscii = commandQueue.shift(); // Get the next command
-			return commandAscii.shift(); // Return the first character of the command
-		}
-		return null;
-	}
+		// This function could be implemented to read input if necessary for your application
+	},
+
+	// Override print to capture standard output from the GNU Go module
+	print: function(text) {
+		console.log('GNU Go says:', text);
+		gtpResponses.push(text); // Store the response for later use
+		updateResponseDisplay(); // Update the display with the new response
+	},
+
+	// Override printErr to capture error output from the GNU Go module
+	printErr: function(text) {
+		console.error('GNU Go error:', text);
+		gtpResponses.push('Error: ' + text); // Store the error response
+		updateResponseDisplay(); // Update the display with the new error message
+	},
 };
 
-function enqueueCommand(command) {
-	// Split the command into ASCII codes and add a newline character
-	const commandAscii = command.split('').map(c => c.charCodeAt(0)).concat(10);
-	commandQueue.push(commandAscii); // Enqueue the ASCII command
-	if (!isProcessingCommand) {
-		processNextCommand(); // Immediately try processing if not already
+// Function to update the UI with the latest GTP responses
+function updateResponseDisplay() {
+	const gtpResponseElement = document.getElementById('gtpResponse');
+	if (gtpResponseElement) {
+		gtpResponseElement.textContent = gtpResponses.join('\n') + '\n';
 	}
 }
 
-function processNextCommand() {
-	// Check if ready to process next command
-	if (commandQueue.length > 0 && !isProcessingCommand) {
-		Module.stdin(); // Trigger stdin to process the next command
-	}
-}
-
+// Function to send a GTP command to the GNU Go module
 function sendGTPCommand() {
 	const commandInput = document.getElementById('gtpCommand');
 	const command = commandInput.value.trim();
+
 	if (command) {
-		console.log(`Enqueuing GTP command: ${command}`);
-		enqueueCommand(command);
+		console.log(`Sending GTP command: ${command}`);
+		// Normally, we'd send the command to GNU Go here. For this example, we simulate a response.
+		// In a real implementation, you would use Module.ccall or another method to pass the command to the GNU Go module.
+		// Example: Module.ccall('send_gtp_command', 'void', ['string'], [command]);
+		Module.print(`Simulated response to '${command}'`);
 	} else {
-		console.error("Invalid command format.");
+		console.error("No GTP command entered.");
 	}
-	commandInput.value = ''; // Clear the input after enqueuing
+
+	commandInput.value = ''; // Clear the command input field
 }
 
-function handleNewResponse(message, isError = false) {
-	const responseElement = document.getElementById('gtpResponse');
-	const responseText = isError ? `Error: ${message}` : message;
-	console.log(responseText); // Log to console
-	if (responseElement) {
-		responseElement.textContent += `${responseText}\n`;
-	}
-}
-
+// Ensure the web page is fully loaded before setting up event listeners
 document.addEventListener('DOMContentLoaded', () => {
 	document.getElementById('sendCommandButton').addEventListener('click', sendGTPCommand);
 });
