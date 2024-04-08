@@ -13,9 +13,9 @@ var Module = {
 
 	// Override stdin to control how the module reads input
 	// This is not directly used in our example since we're focusing on sending commands via the GTP interface
-	stdin: function() {
+	//stdin: function() {
 		// This function could be implemented to read input if necessary for your application
-	},
+	//},
 
 	// Override print to capture standard output from the GNU Go module
 	print: function(text) {
