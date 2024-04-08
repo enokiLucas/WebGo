@@ -998,7 +998,7 @@ var tempI64;
 	}
 
 	//TEST: try to change the input method for the browser.
-	var inputQueue = ['hello']; //TEST
+	var inputQueue = ['hello'];
 	// Replace the popup for a queue sysem.
 	var FS_stdin_getChar = () => {
 			if (!FS_stdin_getChar_buffer.length) {
@@ -1044,8 +1044,11 @@ var tempI64;
 				//////////// TEST
 				// Modified Browser part
         if (typeof window != 'undefined') {
+					console.log('hello from Module');
+					console.log(inputQueue);
             // Instead of using window.prompt, check if there's something in inputQueue
-            if (inputQueue.length > 0) {
+            if (Module.inputQueue.length > 0) {
+
                 // Dequeue the next command from the inputQueue
                 result = inputQueue.shift();
                 // Ensure result ends with a newline to simulate pressing "Enter"

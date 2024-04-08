@@ -2,10 +2,10 @@
 
 // Assuming Module is globally available
 var Module = {
-	inputQueue: [],
+
 
 	print: function(text) {
-		console.log(text); // You can handle regular output here
+		console.log('Hello from print: '+text); // You can handle regular output here
 	},
 
 	printErr: function(text) {
