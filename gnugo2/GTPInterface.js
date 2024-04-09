@@ -23,14 +23,19 @@ function enqueueInputFromTextBox() {
 	const command = commandInput.value.trim() + "\n"; // Include newline to simulate Enter
 	commandInput.value = ''; // Clear the command input box
 
-	console.log(Module.inputQueue);
+	console.log('Hello from interface: ' + command);
 
 	// Convert command string to ASCII values and enqueue them
-	for (let i = 0; i < command.length; i++) {
+	/*for (let i = 0; i < command.length; i++) {
 		Module.inputQueue.push(command.charCodeAt(i));
-	}
+	}*/
 
-	console.log(`Enqueued command: ${command.trim()}`);
+	//console.log(`Enqueued command: ${command.trim()}`);
+	const gtpCommand = new CustomEvent('new-gtp-command', {
+		detail: command
+	});
+	document.dispatchEvent(gtpCommand);
+
 }
 
 // Set up event listeners once the DOM is fully loaded

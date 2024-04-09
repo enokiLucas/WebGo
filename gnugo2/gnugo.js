@@ -1044,16 +1044,13 @@ var tempI64;
 				//////////// TEST
 				// Modified Browser part
         if (typeof window != 'undefined') {
-					console.log('hello from Module');
-					console.log(inputQueue);
-            // Instead of using window.prompt, check if there's something in inputQueue
-            if (Module.inputQueue.length > 0) {
-
-                // Dequeue the next command from the inputQueue
-                result = inputQueue.shift();
-                // Ensure result ends with a newline to simulate pressing "Enter"
-                result += '\n';
-            }
+					//console.log('hello from Module: ' + inputQueue);
+					const command = document.addEventListener('new-gtp-command', (e) => {
+						return e.detail;
+					})
+					console.log('hello from Module: ' + result);
+					result = command;
+					result += '\n';
         }
 
 
