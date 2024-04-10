@@ -1059,7 +1059,7 @@ var tempI64;
 							if (queueCommands.length > 0) {
 								let newCommand = queueCommands.shift();
 								newCommand += '\n';
-								return newCommand;
+								return newCommand; // This return is stopping the function
 							}
 							testKey++;
 							await new Promise(resolve => setTimeout(resolve,1000));
