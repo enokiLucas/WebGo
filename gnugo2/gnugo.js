@@ -1044,26 +1044,28 @@ var tempI64;
 				//////////// TEST-input
 				// Modified Browser part
         if (typeof window != 'undefined') {
-					const queueCommands = [];
+					const queueCommand = [];
 					const queueResponse = [];
+					let loopShouldContinue = true;
 					let testKey = 1;
-					//console.log('hello from Module: ' + inputQueue);
+
 					const addCommandToQueue = document.addEventListener('new-gtp-command', (event) => {
-						queueCommands.push(event.detail);
-						console.log('Hello from addCommandToQueue: '+queueCommands);
+						queueCommand.push(event.detail);
+						console.log('Hello from addCommandToQueue: '+queueCommand);
+						loopShouldContinue = false;
 					})
 
 					async function mainLoop() {
-						while (true) {
+						do {
 							console.log('Hello from the mainLoop: '+testKey);
-							if (queueCommands.length > 0) {
-								let newCommand = queueCommands.shift();
-								newCommand += '\n';
-								return newCommand; // This return is stopping the function
+							if (queueCommand.length > 0) {
+								result = queueCommand.shift();
+								result += '\n';
 							}
 							testKey++;
 							await new Promise(resolve => setTimeout(resolve,1000));
-						}
+						} while (loopShouldContinue);
+						console.log('Loop Exit');
 					}
 					mainLoop().catch(console.error);
 
