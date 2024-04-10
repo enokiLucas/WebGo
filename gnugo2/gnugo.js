@@ -1067,8 +1067,14 @@ var tempI64;
 						} while (loopShouldContinue);
 						console.log('Loop Exit');
 					}
-					mainLoop().catch(console.error);
 
+					function startMainLoop () {
+
+						mainLoop();
+						loopShouldContinue = true;
+					}
+
+					startMainLoop();
 					console.log('hello from Module: ' + result);
 
         }
