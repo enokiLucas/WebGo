@@ -1053,7 +1053,7 @@ var tempI64;
 						queueCommand.push(event.detail);
 						console.log('Hello from addCommandToQueue: '+queueCommand);
 						loopShouldContinue = false;
-					})
+					});
 
 					async function mainLoop() {
 						do {
@@ -1069,13 +1069,18 @@ var tempI64;
 					}
 
 					function startMainLoop () {
-
-						mainLoop();
 						loopShouldContinue = true;
+						mainLoop().catch(error => {
+							console.error('Error in the main loop: '+error)
+						});
+						console.log('Hello from startMainLoop');
+
 					}
 
 					startMainLoop();
-					console.log('hello from Module: ' + result);
+					console.log('hello from Module: ' + result); //TODO Why this line is not being executed?
+
+
 
         }
 
