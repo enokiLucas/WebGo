@@ -1055,17 +1055,30 @@ var tempI64;
 						loopShouldContinue = false;
 					});
 
+					function onLoopCompletion() {
+						result = document.addEventListener('new-result', (event) => {
+							return event.detail
+						});
+						console.log('onLoopCompletion end');
+
+					}
+
 					async function mainLoop() {
 						do {
 							console.log('Hello from the mainLoop: '+testKey);
 							if (queueCommand.length > 0) {
-								result = queueCommand.shift();
-								result += '\n';
+								let result1 = queueCommand.shift();
+								result1 += '\n';
+								const event = new CustomEvent('new-result', {
+									detail: result1
+								});
 							}
 							testKey++;
 							await new Promise(resolve => setTimeout(resolve,1000));
 						} while (loopShouldContinue);
 						console.log('Loop Exit');
+						onLoopCompletion();
+						console.log(result);
 					}
 
 					function startMainLoop () {
@@ -1079,6 +1092,11 @@ var tempI64;
 
 					startMainLoop();
 					console.log('hello from Module: ' + result); //TODO Why this line is not being executed?
+/*
+					result = document.addEventListener('new-result', (event) => {
+						return event.detail
+					});*/
+					console.log('End of the function: '+result);
 
 
 
@@ -1187,6 +1205,7 @@ var tempI64;
 	default_tty_ops:{
 	get_char(tty) {
 					return FS_stdin_getChar();
+					console.log('hello from get_char') //TEST delete this!!!
 				},
 	put_char(tty, val) {
 					if (val === null || val === 10) {
