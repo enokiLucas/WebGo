@@ -1062,16 +1062,14 @@ var tempI64;
 						while (true) {
 							console.log('Hello from the mainLoop: '+testKey);
 							if (queueCommands.length > 0) {
-								let nextCommand = queueCommands.shift();
-								nextCommand += '\n';
-								return nextCommand;
+								result = queueCommands.shift();
+								result += '\n';
 							}
 							testKey++;
 							await new Promise(resolve => setTimeout(resolve,6000));
 						}
 					}
-
-					result = mainLoop();
+					mainLoop();
 
 					console.log('hello from Module: ' + result);
 
