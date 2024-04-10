@@ -1048,28 +1048,24 @@ var tempI64;
 					const queueResponse = [];
 					let testKey = 1;
 					//console.log('hello from Module: ' + inputQueue);
-					const newCommand = document.addEventListener('new-gtp-command', (e) => {
-						return e.detail;
+					const addCommandToQueue = document.addEventListener('new-gtp-command', (event) => {
+						queueCommands.push(event.detail);
+						console.log('Hello from addCommandToQueue: '+queueCommands);
 					})
-
-					function addInputToQueue(input) {
-						inputQueue.push(input);
-					}
-
-					addInputToQueue(newCommand);
 
 					async function mainLoop() {
 						while (true) {
 							console.log('Hello from the mainLoop: '+testKey);
 							if (queueCommands.length > 0) {
-								result = queueCommands.shift();
-								result += '\n';
+								let newCommand = queueCommands.shift();
+								newCommand += '\n';
+								return newCommand;
 							}
 							testKey++;
-							await new Promise(resolve => setTimeout(resolve,6000));
+							await new Promise(resolve => setTimeout(resolve,1000));
 						}
 					}
-					mainLoop();
+					mainLoop().catch(console.error);
 
 					console.log('hello from Module: ' + result);
 
