@@ -1041,16 +1041,37 @@ var tempI64;
 						result += '\n';
 					}
 				} */
-				//////////// TEST
+				//////////// TEST-input
 				// Modified Browser part
         if (typeof window != 'undefined') {
+					const queueCommands = [];
+					const queueResponse = [];
 					//console.log('hello from Module: ' + inputQueue);
-					const command = document.addEventListener('new-gtp-command', (e) => {
+					const newCommand = document.addEventListener('new-gtp-command', (e) => {
 						return e.detail;
 					})
+
+					function addInputToQueue(input) {
+						inputQueue.push(input);
+					}
+
+					addInputToQueue(newCommand);
+
+					async function mainLoop() {
+						while (true) {
+							if (queueCommands.length > 0) {
+								let nextCommand = queueCommands.shift();
+								nextCommand += '\n';
+								return nextCommand;
+							}
+							await new Promise(resolve => setTimeout(resolve,10));
+						}
+					}
+
+					result = mainLoop();
+
 					console.log('hello from Module: ' + result);
-					result = command;
-					result += '\n';
+
         }
 
 

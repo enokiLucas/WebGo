@@ -23,7 +23,7 @@ function enqueueInputFromTextBox() {
 	const command = commandInput.value.trim() + "\n"; // Include newline to simulate Enter
 	commandInput.value = ''; // Clear the command input box
 
-	console.log('Hello from interface: ' + command);
+	//console.log('Hello from interface: ' + command); //TEST
 
 	// Convert command string to ASCII values and enqueue them
 	/*for (let i = 0; i < command.length; i++) {

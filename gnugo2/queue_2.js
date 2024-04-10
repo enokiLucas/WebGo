@@ -12,3 +12,14 @@ function addInputToQueue(input) {
 addInputToQueue(newCommand);
 
 result = queueCommands.shift();
+
+async function mainLoop() {
+	while (true) {
+		if (queueCommands.length > 0) {
+			result = queueCommands.shift();
+		}
+		await new Promise(resolve => setTimeout(resolve,100));
+	}
+}
+
+mainLoop().catch(console.error);
