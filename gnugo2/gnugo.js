@@ -1043,60 +1043,56 @@ var tempI64;
 				} */
 				//////////// TEST-input
 				// Modified Browser part
-        if (typeof window != 'undefined') {
+				if (typeof window != 'undefined') {
 					const queueCommand = [];
-					const queueResponse = [];
 					let loopShouldContinue = true;
 					let testKey = 1;
+					let result = '';  // This will hold the last processed command
 
-					const addCommandToQueue = document.addEventListener('new-gtp-command', (event) => {
-						queueCommand.push(event.detail);
-						console.log('Hello from addCommandToQueue: '+queueCommand);
-						//loopShouldContinue = false;
-					});
-
-					async function mainLoop() {
-						do {
-							console.log('Hello from the mainLoop: '+testKey);
-							if (queueCommand.length > 0) {
-								let result1 = queueCommand.shift();
-								result1 += '\n';
-								const event1 = new CustomEvent('new-result', {
-									detail: result1
-								});
-								document.dispatchEvent(event1);
-							}
-							testKey++;
-							await new Promise(resolve => setTimeout(resolve,1000));
-						} while (loopShouldContinue);
-						console.log('Loop Exit');
+					// Function to process command
+					function processCommand(command) {
+						result = command + '\n';  // Process and update result
+						console.log('Processed Command:', result);
+						// If needed, you can call other functions here directly
+						handleResult(result);
 					}
 
-					async function startMainLoop () {
+					// Example of a function that could handle the result
+					function handleResult(processedResult) {
+						console.log('Handling Result:', processedResult);
+						// Additional logic to use the result
+					}
+
+					// Function to process commands from the queue
+					async function mainLoop() {
+						do {
+							console.log('Hello from the mainLoop:', testKey);
+							if (queueCommand.length > 0) {
+								let command = queueCommand.shift();
+								processCommand(command);
+							}
+							testKey++;
+							await new Promise(resolve => setTimeout(resolve, 1000));
+						} while (loopShouldContinue);
+							console.log('Loop Exit');
+					}
+
+					// Start the main loop
+					async function startMainLoop() {
 						loopShouldContinue = true;
-						mainLoop().catch(error => {
-							console.error('Error in the main loop: '+error)
+						await mainLoop().catch(error => {
+							console.error('Error in the main loop:', error);
 						});
 						console.log('Hello from startMainLoop');
 					}
 
 					async function controlFunction() {
 						await startMainLoop();
-						console.log('hello from controlFunction: ' + result);
-
-						result = document.addEventListener('new-result', (event) => {
-							loopShouldContinue = false;
-							console.log('result receiving event');
-							return event.detail;
-						});
-						console.log(result);
+						console.log('hello from controlFunction:', result);
 					}
 
 					controlFunction();
-
-
-        }
-
+}
 
 				/////////// TEST-END
 				else if (typeof readline == 'function') {
