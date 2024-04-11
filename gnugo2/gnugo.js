@@ -1049,6 +1049,12 @@ var tempI64;
 					let testKey = 1;
 					let result = '';  // This will hold the last processed command
 
+				const addCommandToQueue = document.addEventListener('new-gtp-command', (event) => {
+					queueCommand.push(event.detail);
+					console.log('Hello from addCommandToQueue: '+queueCommand);
+					loopShouldContinue = false;
+				});
+
 					// Function to process command
 					function processCommand(command) {
 						result = command + '\n';  // Process and update result
