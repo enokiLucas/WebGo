@@ -1052,16 +1052,8 @@ var tempI64;
 					const addCommandToQueue = document.addEventListener('new-gtp-command', (event) => {
 						queueCommand.push(event.detail);
 						console.log('Hello from addCommandToQueue: '+queueCommand);
-						loopShouldContinue = false;
+						//loopShouldContinue = false;
 					});
-
-					function onLoopCompletion() {
-						result = document.addEventListener('new-result', (event) => {
-							return event.detail
-						});
-						console.log('onLoopCompletion end');
-
-					}
 
 					async function mainLoop() {
 						do {
@@ -1069,35 +1061,38 @@ var tempI64;
 							if (queueCommand.length > 0) {
 								let result1 = queueCommand.shift();
 								result1 += '\n';
-								const event = new CustomEvent('new-result', {
+								const event1 = new CustomEvent('new-result', {
 									detail: result1
 								});
+								document.dispatchEvent(event1);
 							}
 							testKey++;
 							await new Promise(resolve => setTimeout(resolve,1000));
 						} while (loopShouldContinue);
 						console.log('Loop Exit');
-						onLoopCompletion();
-						console.log(result);
 					}
 
-					function startMainLoop () {
+					async function startMainLoop () {
 						loopShouldContinue = true;
 						mainLoop().catch(error => {
 							console.error('Error in the main loop: '+error)
 						});
 						console.log('Hello from startMainLoop');
-
 					}
 
-					startMainLoop();
-					console.log('hello from Module: ' + result); //TODO Why this line is not being executed?
-/*
-					result = document.addEventListener('new-result', (event) => {
-						return event.detail
-					});*/
-					console.log('End of the function: '+result);
+					async function controlFunction() {
+						await startMainLoop();
+						console.log('hello from controlFunction: ' + result);
 
+						result = document.addEventListener('new-result', (event) => {
+							loopShouldContinue = false;
+							console.log('result receiving event');
+							return event.detail;
+						});
+						console.log(result);
+					}
+
+					controlFunction();
 
 
         }
