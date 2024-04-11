@@ -997,8 +997,6 @@ var tempI64;
 		return u8array;
 	}
 
-	//TEST: try to change the input method for the browser.
-	var inputQueue = ['hello'];
 	// Replace the popup for a queue sysem.
 	var FS_stdin_getChar = () => {
 			if (!FS_stdin_getChar_buffer.length) {
@@ -1047,12 +1045,11 @@ var tempI64;
 					const queueCommand = [];
 					let loopShouldContinue = true;
 					let testKey = 1;
-					let result = '';  // This will hold the last processed command
 
 				const addCommandToQueue = document.addEventListener('new-gtp-command', (event) => {
 					queueCommand.push(event.detail);
 					console.log('Hello from addCommandToQueue: '+queueCommand);
-					loopShouldContinue = false;
+					//loopShouldContinue = false;
 				});
 
 					// Function to process command
@@ -1076,6 +1073,7 @@ var tempI64;
 							if (queueCommand.length > 0) {
 								let command = queueCommand.shift();
 								processCommand(command);
+								console.log('command processed');
 							}
 							testKey++;
 							await new Promise(resolve => setTimeout(resolve, 1000));

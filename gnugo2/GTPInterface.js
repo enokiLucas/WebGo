@@ -4,9 +4,9 @@
 var Module = {
 
 
-	print: function(text) {
+	/*print: function(text) {
 		console.log('Hello from print: '+text); // You can handle regular output here
-	},
+	},*/
 
 	printErr: function(text) {
 		console.error(text); // Handle error output here
