@@ -5,7 +5,7 @@
  */
 
 // WebGLWorker client code
-var Module = typeof Module != 'undefined' ? Module : {};
+var Module = typeof Module != 'undefined' ? Module : {};// Module declaration from the original Glue Code.
 
 
 function assert(x) {
