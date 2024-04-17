@@ -1067,7 +1067,7 @@ function shouldPreventDefault(event) {
   });
 });
 
-['unload'].forEach((event) => {
+['pagehide'].forEach((event) => {
   window.addEventListener(event, (event) => {
     worker.postMessage({ target: 'window', event: cloneObject(event) });
   });

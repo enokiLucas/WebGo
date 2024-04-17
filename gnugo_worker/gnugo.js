@@ -5,6 +5,8 @@
  */
 
 // WebGLWorker client code
+var Module = typeof Module != 'undefined' ? Module : {};
+
 
 function assert(x) {
   if (!x) throw 'failed assert';
@@ -788,7 +790,7 @@ function shouldPreventDefault(event) {
   });
 });
 
-['unload'].forEach((event) => {
+['pagehide'].forEach((event) => {
   window.addEventListener(event, (event) => {
     worker.postMessage({ target: 'window', event: cloneObject(event) });
   });
