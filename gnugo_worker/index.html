@@ -274,7 +274,7 @@ function intArrayToString(array) {
   return ret.join('');
 }
 
-  var filename = 'gnugo.js';
+  var filename = 'gnugo.worker.js'; //TEST
   if ((',' + window.location.search.substr(1) + ',').indexOf(',noProxy,') < 0) {
     console.log('running code in a web worker');
 /**
@@ -874,7 +874,7 @@ var SUPPORT_BASE64_EMBEDDING;
 // Worker
 
 var filename;
-filename ||= './gnugo.js';
+filename ||= './gnugo.worker.js';//TEST
 
 var workerURL = filename;
 if (SUPPORT_BASE64_EMBEDDING) {
