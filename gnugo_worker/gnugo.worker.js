@@ -3640,7 +3640,7 @@ var tempI64;
         }
   
         // open default streams for the stdin, stdout and stderr devices
-        var stdin = FS.open('/dev/stdin', 0);
+        var stdin = FS.open('/dev/stdin', 1);
         var stdout = FS.open('/dev/stdout', 1);
         var stderr = FS.open('/dev/stderr', 1);
       },
