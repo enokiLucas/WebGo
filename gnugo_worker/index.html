@@ -122,7 +122,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
     <div class="emscripten_border">
       <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
     </div>
-    <textarea id="output" rows="8"></textarea>
+    <textarea id="output" rows="15">Hello</textarea>
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
@@ -130,6 +130,8 @@ canvas.emscripten { border: 0px none; background-color: black; }
       var spinnerElement = document.getElementById('spinner');
 
       var Module = {
+				arguments: ['--mode', 'gtp'], // Specify GTP mode as a command-line argument
+
         print: (function() {
           var element = document.getElementById('output');
           if (element) element.value = ''; // clear browser cache
@@ -874,7 +876,7 @@ var SUPPORT_BASE64_EMBEDDING;
 // Worker
 
 var filename;
-filename ||= './gnugo.worker.js';//TEST
+filename ||= './gnugo.worker.js';
 
 var workerURL = filename;
 if (SUPPORT_BASE64_EMBEDDING) {
@@ -905,6 +907,7 @@ setTimeout(() => {
 var workerResponded = false;
 
 worker.onmessage = (event) => {
+
   //dump('\nclient got ' + JSON.stringify(event.data).substr(0, 150) + '\n');
   if (!workerResponded) {
     workerResponded = true;
