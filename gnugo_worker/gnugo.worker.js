@@ -722,7 +722,7 @@ var tempI64;
 			// yet been started so that we can call runtimeKeepalivePush when it
 			// gets it timing set for the first time.
 			Browser.mainLoop.running = false;
-			Browser.mainLoop.runner = function Browser_mainLoop_runner() {
+			Browser.mainLoop.runner = function Browser_mainLoop_runner() { //ALERT exit condition
 				if (ABORT) return;
 				if (Browser.mainLoop.queue.length > 0) {
 					var start = Date.now();
