@@ -13,10 +13,9 @@
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
 var Module = typeof Module != 'undefined' ? Module : {};
-
+console.log('hello from below the Module');
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-
 
 // Sometimes an existing Module object exists with properties
 // meant to overwrite the default module functionality. Here
@@ -697,6 +696,7 @@ var tempI64;
 	var setMainLoop = (browserIterationFunc, fps, simulateInfiniteLoop, arg, noSetTiming) => {
 			Browser.mainLoop.func = browserIterationFunc;
 			Browser.mainLoop.arg = arg;
+			Browser.mainLoop.shouldContinue = true;  // NEW: Flag to control whether the main loop should continue
 
 			// Closure compiler bug(?): Closure does not see that the assignment
 			//   var thisMainLoopId = Browser.mainLoop.currentlyRunningMainloop
@@ -709,8 +709,7 @@ var tempI64;
 			/** @type{number} */
 			var thisMainLoopId = (() => Browser.mainLoop.currentlyRunningMainloop)();
 			function checkIsRunning() {
-				if (thisMainLoopId < Browser.mainLoop.currentlyRunningMainloop) {
-
+				if (thisMainLoopId < Browser.mainLoop.currentlyRunningMainloop || !Browser.mainLoop.shouldContinue) { // NEW: Check against shouldContinue
 					return false;
 				}
 				return true;
@@ -740,6 +739,7 @@ var tempI64;
 						}
 					}
 					Browser.mainLoop.updateStatus();
+					console.log('hello from worker');
 
 					// catches pause/resume main loop from blocker execution
 					if (!checkIsRunning()) return;
@@ -792,7 +792,13 @@ var tempI64;
 			if (simulateInfiniteLoop) {
 				throw 'unwind';
 			}
-		};
+	};
+
+	function controlMainLoop(command) { // New: Control command to stop the main loop
+	if (command === 'stop') {
+		Browser.mainLoop.shouldContinue = false; // NEW: Control command to stop the main loop
+		}
+	}
 
 	var handleException = (e) => {
 			// Certain exception types we do not treat as errors since they are used for
