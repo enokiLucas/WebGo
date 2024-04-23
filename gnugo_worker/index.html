@@ -1118,7 +1118,7 @@ function shouldPreventDefault(event) {
 
         document.getElementById('startBtn').addEventListener('click', function() {
             if (!worker) {
-                worker = new Worker('worker.js');
+                worker = new Worker('gnugo.worker.js');
                 console.log('Worker started');
 
                 worker.onmessage = function(event) {
