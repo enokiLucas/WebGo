@@ -1113,7 +1113,7 @@ function shouldPreventDefault(event) {
 
 		</script>
 		<!--Break script--->
-		<script> //TODO: fix the start and send messages
+		<script>
 			var worker;
 
         document.getElementById('startBtn').addEventListener('click', function() {
@@ -1141,7 +1141,8 @@ function shouldPreventDefault(event) {
                 console.log('Sending message to worker');
                 worker.postMessage({
                     cmd: 'test',
-                    payload: 'Hello from main thread'
+                    payload: 'Hello from main thread',
+                    target: 'window' // TEST cases from the switch message.data.targer
                 });
             } else {
                 console.log('Worker is not initialized');
