@@ -126,9 +126,19 @@ canvas.emscripten { border: 0px none; background-color: black; }
 
 		<!--TEST area-->
 		<h1>Web Worker Demo</h1>
+
     <button id="startBtn">Start Worker</button>
-    <button id="sendMsgBtn">Send Message</button>
+
+    <p>
+        <label for="messageInput">Message to Worker:</label>
+        <input type="text" id="messageInput" placeholder="Type your message here">
+        <button id="sendMsgBtn">Send Message</button>
+    </p>
+
     <button id="stopBtn">Stop Worker</button>
+
+
+		<!--/TEST area--->
 
 		<script type='text/javascript'>
 			var statusElement = document.getElementById('status');
@@ -1137,15 +1147,19 @@ function shouldPreventDefault(event) {
         });
 
         document.getElementById('sendMsgBtn').addEventListener('click', function() {
-            if (worker) {
-                console.log('Sending message to worker');
+            var input = document.getElementById('messageInput').value.trim();
+            if (worker && input) {
+                console.log('Sending message to worker:', input);
                 worker.postMessage({
-                    cmd: 'test',
-                    payload: 'Hello from main thread',
+                    cmd: 'test',  // You can change 'test' to any command your worker is programmed to understand
+                    payload: input,
                     target: 'window' // TEST cases from the switch message.data.targer
                 });
-            } else {
+                document.getElementById('messageInput').value = ''; // Clear input after sending
+            } else if (!worker) {
                 console.log('Worker is not initialized');
+            } else {
+                console.log('Input is empty, please write something');
             }
         });
 
