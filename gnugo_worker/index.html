@@ -124,6 +124,12 @@ canvas.emscripten { border: 0px none; background-color: black; }
 		</div>
 		<textarea id="output" rows="15">Hello</textarea>
 
+		<!--TEST area-->
+		<h1>Web Worker Demo</h1>
+    <button id="startBtn">Start Worker</button>
+    <button id="sendMsgBtn">Send Message</button>
+    <button id="stopBtn">Stop Worker</button>
+
 		<script type='text/javascript'>
 			var statusElement = document.getElementById('status');
 			var progressElement = document.getElementById('progress');
@@ -197,6 +203,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
 				};
 			};
 		</script>
+		<!--Break script-->
 		<script>
 var ASSERTIONS = 0;
 /**
@@ -904,6 +911,13 @@ setTimeout(() => {
 }, 0); // delay til next frame, to make sure html is ready
 }
 
+worker.onmessage = function(event) { //TEST
+    console.log("Message from worker:", event.data);
+};
+worker.onerror = function(error) {
+    console.error("Worker error:", error.message);
+};//TEST
+
 var workerResponded = false;
 
 worker.onmessage = (event) => {
@@ -1097,6 +1111,52 @@ function shouldPreventDefault(event) {
 		document.body.appendChild(script);
 	}
 
-</script>
+		</script>
+		<!--Break script--->
+		<script> //TODO: fix the start and send messages
+			var worker;
+
+        document.getElementById('startBtn').addEventListener('click', function() {
+            if (!worker) {
+                worker = new Worker('worker.js');
+                console.log('Worker started');
+
+                worker.onmessage = function(event) {
+                    console.log('Message from worker:', event.data);
+                    if (event.data.cmd === 'testResponse') {
+                        alert('Response from worker: ' + event.data.result);
+                    }
+                };
+
+                worker.onerror = function(error) {
+                    console.error('Worker error:', error.message, error);
+                };
+            } else {
+                console.log('Worker already running');
+            }
+        });
+
+        document.getElementById('sendMsgBtn').addEventListener('click', function() {
+            if (worker) {
+                console.log('Sending message to worker');
+                worker.postMessage({
+                    cmd: 'test',
+                    payload: 'Hello from main thread'
+                });
+            } else {
+                console.log('Worker is not initialized');
+            }
+        });
+
+        document.getElementById('stopBtn').addEventListener('click', function() {
+            if (worker) {
+                worker.terminate();
+                worker = null;
+                console.log('Worker terminated');
+            } else {
+                console.log('No worker to terminate');
+            }
+        });
+		</script>
 	</body>
 </html>

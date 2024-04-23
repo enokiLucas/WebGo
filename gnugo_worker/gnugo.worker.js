@@ -126,6 +126,7 @@ readAsync = (filename, onload, onerror, binary = true) => {
 // ENVIRONMENT_IS_NODE.
 if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
 	if (ENVIRONMENT_IS_WORKER) { // Check worker, not web, since window could be polyfilled
+		console.log('environment is worker');
 		scriptDirectory = self.location.href;
 	} else if (typeof document != 'undefined' && document.currentScript) { // web
 		scriptDirectory = document.currentScript.src;
@@ -694,6 +695,7 @@ var tempI64;
 		* @param {boolean=} noSetTiming
 		*/
 	var setMainLoop = (browserIterationFunc, fps, simulateInfiniteLoop, arg, noSetTiming) => {
+		console.log('hello from setMainLoop');
 			Browser.mainLoop.func = browserIterationFunc;
 			Browser.mainLoop.arg = arg;
 			Browser.mainLoop.shouldContinue = true;  // NEW: Flag to control whether the main loop should continue
@@ -7435,6 +7437,7 @@ function callMain(args = []) {
 }
 
 function run(args = arguments_) {
+	console.log('hello from run')//TEST
 
 	if (runDependencies > 0) {
 		return;
