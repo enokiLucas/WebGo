@@ -1083,7 +1083,7 @@ function shouldPreventDefault(event) {
 		return true; // NO keypress, NO back navigation
 	}
 };
-
+/*
 ['keydown', 'keyup', 'keypress', 'blur', 'visibilitychange'].forEach((event) => {
 	document.addEventListener(event, (event) => {
 		worker.postMessage({ target: 'document', event: cloneObject(event) });
@@ -1093,7 +1093,7 @@ function shouldPreventDefault(event) {
 		}
 	});
 });
-
+*/
 ['pagehide'].forEach((event) => {
 	window.addEventListener(event, (event) => {
 		worker.postMessage({ target: 'window', event: cloneObject(event) });
@@ -1123,7 +1123,7 @@ function shouldPreventDefault(event) {
 
 		</script>
 		<!--Break script--->
-		<script>
+		<script> //TEST script
 			var worker;
 
         document.getElementById('startBtn').addEventListener('click', function() {
@@ -1148,12 +1148,13 @@ function shouldPreventDefault(event) {
 
         document.getElementById('sendMsgBtn').addEventListener('click', function() {
             var input = document.getElementById('messageInput').value.trim();
+            console.log('maybe trim?');
             if (worker && input) {
                 console.log('Sending message to worker:', input);
                 worker.postMessage({
                     cmd: 'test',  // You can change 'test' to any command your worker is programmed to understand
-                    payload: input,
-                    target: 'window' // TEST cases from the switch message.data.targer
+                    payload: input //Put the ',' back if you umcomment the line below
+                    //target: 'window' // TEST cases from the switch message.data.targer
                 });
                 document.getElementById('messageInput').value = ''; // Clear input after sending
             } else if (!worker) {
