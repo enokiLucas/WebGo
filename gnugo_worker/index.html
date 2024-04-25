@@ -921,12 +921,12 @@ setTimeout(() => {
 }, 0); // delay til next frame, to make sure html is ready
 }
 
-worker.onmessage = function(event) { //TEST
+/*worker.onmessage = function(event) { //TEST
     console.log("Message from worker:", event.data);
 };
 worker.onerror = function(error) {
     console.error("Worker error:", error.message);
-};//TEST
+};*///TEST
 
 var workerResponded = false;
 
@@ -1153,8 +1153,8 @@ function shouldPreventDefault(event) {
                 console.log('Sending message to worker:', input);
                 worker.postMessage({
                     cmd: 'test',  // You can change 'test' to any command your worker is programmed to understand
-                    payload: input //Put the ',' back if you umcomment the line below
-                    //target: 'window' // TEST cases from the switch message.data.targer
+                    payload: input, //Put the ',' back if you umcomment the line below
+                    target: 'custom' // TEST cases from the switch message.data.targer
                 });
                 document.getElementById('messageInput').value = ''; // Clear input after sending
             } else if (!worker) {
