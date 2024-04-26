@@ -127,15 +127,15 @@ canvas.emscripten { border: 0px none; background-color: black; }
 		<!--TEST area-->
 		<h1>Web Worker Demo</h1>
 
-    <button id="startBtn">Start Worker</button>
+		<button id="startBtn">Start Worker</button>
 
-    <p>
-        <label for="messageInput">Message to Worker:</label>
-        <input type="text" id="messageInput" placeholder="Type your message here">
-        <button id="sendMsgBtn">Send Message</button>
-    </p>
+		<p>
+				<label for="messageInput">Message to Worker:</label>
+				<input type="text" id="messageInput" placeholder="Type your message here">
+				<button id="sendMsgBtn">Send Message</button>
+		</p>
 
-    <button id="stopBtn">Stop Worker</button>
+		<button id="stopBtn">Stop Worker</button>
 
 
 		<!--/TEST area--->
@@ -922,10 +922,10 @@ setTimeout(() => {
 }
 
 /*worker.onmessage = function(event) { //TEST
-    console.log("Message from worker:", event.data);
+		console.log("Message from worker:", event.data);
 };
 worker.onerror = function(error) {
-    console.error("Worker error:", error.message);
+		console.error("Worker error:", error.message);
 };*///TEST
 
 var workerResponded = false;
@@ -1126,53 +1126,53 @@ function shouldPreventDefault(event) {
 		<script> //TEST script
 			var worker;
 
-        document.getElementById('startBtn').addEventListener('click', function() {
-            if (!worker) {
-                worker = new Worker('gnugo.worker.js');
-                console.log('Worker started');
+				document.getElementById('startBtn').addEventListener('click', function() {
+						if (!worker) {
+								worker = new Worker('gnugo.worker.js');
+								console.log('Worker started');
 
-                worker.onmessage = function(event) {
-                    console.log('Message from worker:', event.data);
-                    if (event.data.cmd === 'testResponse') {
-                        alert('Response from worker: ' + event.data.result);
-                    }
-                };
+								worker.onmessage = function(event) {
+										console.log('Message from worker:', event.data);
+										if (event.data.cmd === 'testResponse') {
+												alert('Response from worker: ' + event.data.result);
+										}
+								};
 
-                worker.onerror = function(error) {
-                    console.error('Worker error:', error.message, error);
-                };
-            } else {
-                console.log('Worker already running');
-            }
-        });
+								worker.onerror = function(error) {
+										console.error('Worker error:', error.message, error);
+								};
+						} else {
+								console.log('Worker already running');
+						}
+				});
 
-        document.getElementById('sendMsgBtn').addEventListener('click', function() {
-            var input = document.getElementById('messageInput').value.trim();
-            console.log('maybe trim?');
-            if (worker && input) {
-                console.log('Sending message to worker:', input);
-                worker.postMessage({
-                    cmd: 'test',  // You can change 'test' to any command your worker is programmed to understand
-                    payload: input, //Put the ',' back if you umcomment the line below
-                    target: 'custom' // TEST cases from the switch message.data.targer
-                });
-                document.getElementById('messageInput').value = ''; // Clear input after sending
-            } else if (!worker) {
-                console.log('Worker is not initialized');
-            } else {
-                console.log('Input is empty, please write something');
-            }
-        });
+				document.getElementById('sendMsgBtn').addEventListener('click', function() {
+						var input = document.getElementById('messageInput').value.trim();
+						//console.log('maybe trim?');
+						if (worker && input) {
+								//console.log('Sending message to worker:', input);
+								worker.postMessage({
+										cmd: 'test',  // You can change 'test' to any command your worker is programmed to understand
+										payload: input, //Put the ',' back if you umcomment the line below
+										target: 'custom' // TEST cases from the switch message.data.targer
+								});
+								document.getElementById('messageInput').value = ''; // Clear input after sending
+						} else if (!worker) {
+								console.log('Worker is not initialized');
+						} else {
+								console.log('Input is empty, please write something');
+						}
+				});
 
-        document.getElementById('stopBtn').addEventListener('click', function() {
-            if (worker) {
-                worker.terminate();
-                worker = null;
-                console.log('Worker terminated');
-            } else {
-                console.log('No worker to terminate');
-            }
-        });
+				document.getElementById('stopBtn').addEventListener('click', function() {
+						if (worker) {
+								worker.terminate();
+								worker = null;
+								console.log('Worker terminated');
+						} else {
+								console.log('No worker to terminate');
+						}
+				});
 		</script>
 	</body>
 </html>
