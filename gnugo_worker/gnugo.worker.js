@@ -7369,7 +7369,7 @@ function onMessageFromMainEmscriptenThread(message) {
 		}
 		case 'custom': {
 			if (Module['onCustomMessage']) {
-				Module['onCustomMessage'](message);
+				Module['onCustomMessage'](message.data);
 			} else {
 				throw 'Custom message received but worker Module.onCustomMessage not implemented.';
 			}
@@ -7512,7 +7512,9 @@ Module['onCustomMessage'] = function(message) {
     if (message.cmd === 'terminalCommand') {
         console.log("Processing terminal command:", message.payload);
         processTerminalCommand(message.payload);
-    }
+    }else {
+			console.log('not terminalCommand', message.payload);
+		}
 };
 
 /**

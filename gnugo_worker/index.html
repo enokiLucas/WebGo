@@ -1152,7 +1152,7 @@ function shouldPreventDefault(event) {
 						if (worker && input) {
 								//console.log('Sending message to worker:', input);
 								worker.postMessage({
-										cmd: 'test',  // You can change 'test' to any command your worker is programmed to understand
+										cmd: 'terminalCommand',  // You can change 'test' to any command your worker is programmed to understand
 										payload: input, //Put the ',' back if you umcomment the line below
 										target: 'custom' // TEST cases from the switch message.data.targer
 								});
