@@ -7505,27 +7505,30 @@ run();
 // ======================
 
 /**
- * Custom message handler for processing terminal-like commands.
- * This function is set to handle messages where target is 'custom'.
- */
+* Custom message handler for processing terminal-like commands.
+* This function is set to handle messages where target is 'custom'.
+*/
 Module['onCustomMessage'] = function(message) {
-    if (message.cmd === 'terminalCommand') {
-        console.log("Processing terminal command:", message.payload);
-        processTerminalCommand(message.payload);
-    }else {
+		if (message.cmd === 'terminalCommand') {
+				console.log("Processing terminal command:", message.payload);
+				processTerminalCommand(message.payload);
+		}else {
 			console.log('not terminalCommand', message.payload);
 		}
 };
 
 /**
- * Processes commands as if they were terminal commands.
- * @param {string} command The command string to process.
- */
+* Processes commands as if they were terminal commands.
+* @param {string} command The command string to process.
+*/
 function processTerminalCommand(command) {
-    console.log("Command received:", command);
-    // Implement the actual command processing logic here
-    // Example response back to the main thread
-    self.postMessage({ result: 'Command processed: ' + command });
+		console.log("Command received:", command);
+		// Implement the actual command processing logic here
+		// Example response back to the main thread
+		self.postMessage({
+			result: 'Command processed: ' + command,
+			target: 'custom'
+		});
 }
 
 // ======================
