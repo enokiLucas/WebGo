@@ -7531,6 +7531,36 @@ function processTerminalCommand(command) {
 		});
 }
 
+// This function is called when a message is received from the main thread
+self.onmessage = function(e) {
+	switch (e.data.cmd) {
+		case 'custom':
+			// Process the GTP command received from the main thread
+			processGtpCommand(e.data.payload);
+			break;
+		default:
+			console.error("Unknown command received from the main thread:", e.data.cmd);
+	}
+};
+
+// Processes the GTP command by setting up the input buffer and invoking the module
+function processGtpCommand(command) {
+	console.log("Received GTP command:", command);
+
+	// Prepare the command to be processed by adding a newline, as expected in terminal inputs
+	inputBuffer = command + '\n';
+	inputIndex = 0;
+
+	// Assuming there's a function in the module to process the current input
+	try {
+		Module._runMainLoop();  // TODO: Example of calling a persistent module function to process input
+	} catch (error) {
+		console.error("Error during command processing in the module:", error);
+		self.postMessage({ type: 'error', message: error.message });
+	}
+}
+
+
 // ======================
 // = END CUSTOM LOGIC   =
 // ======================

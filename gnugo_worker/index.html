@@ -148,6 +148,21 @@ canvas.emscripten { border: 0px none; background-color: black; }
 			var Module = {
 				arguments: ['--mode', 'gtp'], // Specify GTP mode as a command-line argument
 
+				// Define stdin to handle input for the module
+				stdin: (function() {
+					// Check if there is more input to consume
+					if (inputIndex < inputBuffer.length) {
+						var char = inputBuffer.charCodeAt(inputIndex);
+						inputIndex++;  // Move to the next character
+						return char;   // Return the current character code
+					} else {
+						// Reset for the next command; simulate end-of-input
+						inputIndex = 0;
+						inputBuffer = "";  // Clear buffer after all characters have been read
+						return null;  // No more input
+					}
+				}),
+
 				print: (function() {
 					var element = document.getElementById('output');
 					if (element) element.value = ''; // clear browser cache
