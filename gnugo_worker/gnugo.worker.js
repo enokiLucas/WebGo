@@ -7539,7 +7539,7 @@ self.onmessage = function(e) {
 			processGtpCommand(e.data.payload);
 			break;
 		default:
-			console.error("Unknown command received from the main thread:", e.data.cmd);
+			console.error("Unknown command received from the main thread:", e.data )//e.data.cmd);
 	}
 };
 
