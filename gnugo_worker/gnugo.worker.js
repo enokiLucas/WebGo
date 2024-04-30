@@ -7503,60 +7503,27 @@ run();
 // ======================
 // = START CUSTOM LOGIC =
 // ======================
+importScripts('gnugo.js');  // Import the WebAssembly module
 
-/**
-* Custom message handler for processing terminal-like commands.
-* This function is set to handle messages where target is 'custom'.
-*/
-Module['onCustomMessage'] = function(message) {
-		if (message.cmd === 'terminalCommand') {
-				console.log("Processing terminal command:", message.payload);
-				processTerminalCommand(message.payload);
-		}else {
-			console.log('not terminalCommand', message.payload);
-		}
+Module['onRuntimeInitialized'] = function() {
+	// Module is initialized and ready to receive commands
+	postMessage('GNU Go is ready.');
 };
 
-/**
-* Processes commands as if they were terminal commands.
-* @param {string} command The command string to process.
-*/
-function processTerminalCommand(command) {
-		console.log("Command received:", command);
-		// Implement the actual command processing logic here
-		// Example response back to the main thread
-		self.postMessage({
-			result: 'Command processed: ' + command,
-			target: 'custom'
-		});
-}
-
-// This function is called when a message is received from the main thread
 self.onmessage = function(e) {
-	switch (e.data.cmd) {
-		case 'custom':
-			// Process the GTP command received from the main thread
-			processGtpCommand(e.data.payload);
-			break;
-		default:
-			console.error("Unknown command received from the main thread:", e.data )//e.data.cmd);
-	}
+	const command = e.data;
+	processCommand(command);
 };
 
-// Processes the GTP command by setting up the input buffer and invoking the module
-function processGtpCommand(command) {
-	console.log("Received GTP command:", command);
-
-	// Prepare the command to be processed by adding a newline, as expected in terminal inputs
-	inputBuffer = command + '\n';
-	inputIndex = 0;
-
-	// Assuming there's a function in the module to process the current input
+function processCommand(command) {
+	// Assuming you have a function to handle tty input in your Module
+	// Push command to the tty buffer
+	FS_stdin_getChar_buffer = intArrayFromString(command + "\n", true);
 	try {
-		Module._runMainLoop();  // TODO: Example of calling a persistent module function to process input
+		// Trigger processing in the module, assuming there's a main or similar loop
+		Module._mainLoop();  // This function needs to be adapted to your specific setup
 	} catch (error) {
-		console.error("Error during command processing in the module:", error);
-		self.postMessage({ type: 'error', message: error.message });
+		postMessage('Error processing command: ' + error.message);
 	}
 }
 
