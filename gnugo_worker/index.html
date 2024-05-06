@@ -1117,9 +1117,12 @@ function shouldPreventDefault(event) {
 				};
 
 				function sendCommand() {
-						const commandInput = document.getElementById('commandInput');
-						worker.postMessage(commandInput.value);  // Send the command to the worker
-						commandInput.value = '';  // Clear the input box
+					const command = document.getElementById('commandInput').value;
+					worker.postMessage({
+						type: 'command',  // Indicate that this message is a command
+						payload: command
+					});  // Send the command to the worker
+					document.getElementById('commandInput').value = '';  // Clear input after sending
 				}
 			</script>
 	</body>

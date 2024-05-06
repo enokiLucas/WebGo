@@ -7496,15 +7496,20 @@ run();
 // ======================
 
 importScripts('gnugo.js');  // Import the WebAssembly module
-
+/*
 Module['onRuntimeInitialized'] = function() {
 	// Module is initialized and ready to receive commands
-	postMessage('GNU Go is ready.');
+	postMessage('GNU Go is ready!!!!');
 };
-
+*/
 self.onmessage = function(e) {
-	const command = e.data;
-	processCommand(command);
+	// Check the type of the message
+	if (e.data.type === 'command') {
+		processCommand(e.data.payload);
+	} else {
+		// Handle other types of messages or ignore them
+		console.log("Received non-command message:", e.data);
+	}
 };
 
 function processCommand(command) {
