@@ -7496,12 +7496,14 @@ run();
 // ======================
 
 importScripts('gnugo.js');  // Import the WebAssembly module
-/*
+/* TEST initialization
 Module['onRuntimeInitialized'] = function() {
 	// Module is initialized and ready to receive commands
 	postMessage('GNU Go is ready!!!!');
 };
-*/
+END */
+
+/* TEST message: call process message from main thread
 self.onmessage = function(e) {
 	// Check the type of the message
 	if (e.data.type === 'command') {
@@ -7511,7 +7513,9 @@ self.onmessage = function(e) {
 		console.log("Received non-command message:", e.data);
 	}
 };
+END */
 
+/* TEST function that process commands from the main thread, called by message.
 function processCommand(command) {
 	// Assuming you have a function to handle tty input in your Module
 	// Push command to the tty buffer
@@ -7523,7 +7527,9 @@ function processCommand(command) {
 		postMessage('Error processing command: ' + error.message);
 	}
 }
+END */
 
+/* TEST
 // Modify the default_tty_ops object in your module setup
 Module['default_tty_ops'].put_char = function(tty, val) {
 	if (val === null || val === '\n'.charCodeAt(0)) {
@@ -7536,7 +7542,9 @@ Module['default_tty_ops'].put_char = function(tty, val) {
 		if (val !== 0) tty.output.push(val);
 	}
 };
+END */
 
+/* TEST DON'T KNOW WHAT THIS DOES
 Module['default_tty_ops'].fsync = function(tty) {
 	if (tty.output && tty.output.length > 0) {
 		const outputString = UTF8ArrayToString(tty.output, 0);
@@ -7544,6 +7552,7 @@ Module['default_tty_ops'].fsync = function(tty) {
 		tty.output = [];
 	}
 };
+END */
 
 
 
