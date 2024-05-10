@@ -7495,13 +7495,14 @@ run();
 // = START CUSTOM LOGIC =
 // ======================
 
+/*TEST initialization
 importScripts('gnugo.js');  // Import the WebAssembly module
-/* TEST initialization
+
 Module['onRuntimeInitialized'] = function() {
 	// Module is initialized and ready to receive commands
 	postMessage('GNU Go is ready!!!!');
 };
-END */
+// END */
 
 /* TEST message: call process message from main thread
 self.onmessage = function(e) {
@@ -7513,7 +7514,7 @@ self.onmessage = function(e) {
 		console.log("Received non-command message:", e.data);
 	}
 };
-END */
+// END */
 
 /* TEST function that process commands from the main thread, called by message.
 function processCommand(command) {
@@ -7527,7 +7528,7 @@ function processCommand(command) {
 		postMessage('Error processing command: ' + error.message);
 	}
 }
-END */
+// END */
 
 /* TEST
 // Modify the default_tty_ops object in your module setup
@@ -7542,7 +7543,7 @@ Module['default_tty_ops'].put_char = function(tty, val) {
 		if (val !== 0) tty.output.push(val);
 	}
 };
-END */
+// END */
 
 /* TEST DON'T KNOW WHAT THIS DOES
 Module['default_tty_ops'].fsync = function(tty) {
@@ -7552,9 +7553,7 @@ Module['default_tty_ops'].fsync = function(tty) {
 		tty.output = [];
 	}
 };
-END */
-
-
+// END */
 
 // ======================
 // = END CUSTOM LOGIC   =
