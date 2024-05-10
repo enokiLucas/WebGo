@@ -7502,7 +7502,7 @@ Module['onRuntimeInitialized'] = function() {
 	// Module is initialized and ready to receive commands
 	postMessage('GNU Go is ready!!!!');
 };
-// END */
+// END */ ALERT The problem is here
 
 /* TEST message: call process message from main thread
 self.onmessage = function(e) {
