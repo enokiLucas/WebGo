@@ -7442,6 +7442,7 @@ function run(args = arguments_) {
   }
 
   function doRun() {
+		console.log('doRun');
     // run may have just been called through dependencies being fulfilled just in this very frame,
     // or while the async setStatus time below was happening
     if (calledRun) return;
@@ -7454,7 +7455,7 @@ function run(args = arguments_) {
 
     preMain();
 
-    if (Module['onRuntimeInitialized']) Module['onRuntimeInitialized']();
+    //if (Module['onRuntimeInitialized']) Module['onRuntimeInitialized']();//TEST
 
     if (shouldRunNow) callMain(args);
 
@@ -7502,9 +7503,9 @@ Module['onRuntimeInitialized'] = function() {
 	// Module is initialized and ready to receive commands
 	postMessage('GNU Go is ready!!!!');
 };
-// END */ ALERT The problem is here
+// END */ //ALERT The problem is here
 
-/* TEST message: call process message from main thread
+// TEST message: call process message from main thread
 self.onmessage = function(e) {
 	// Check the type of the message
 	if (e.data.type === 'command') {
@@ -7515,8 +7516,12 @@ self.onmessage = function(e) {
 	}
 };
 // END */
+/*ALERT cannot type into the text input
+ * similar error happened before
+ * search for the prompt
+ */
 
-/* TEST function that process commands from the main thread, called by message.
+// TEST function that process commands from the main thread, called by message.
 function processCommand(command) {
 	// Assuming you have a function to handle tty input in your Module
 	// Push command to the tty buffer
@@ -7530,7 +7535,7 @@ function processCommand(command) {
 }
 // END */
 
-/* TEST
+// TEST
 // Modify the default_tty_ops object in your module setup
 Module['default_tty_ops'].put_char = function(tty, val) {
 	if (val === null || val === '\n'.charCodeAt(0)) {
@@ -7545,7 +7550,7 @@ Module['default_tty_ops'].put_char = function(tty, val) {
 };
 // END */
 
-/* TEST DON'T KNOW WHAT THIS DOES
+// TEST ALERT DON'T KNOW WHAT THIS DOES
 Module['default_tty_ops'].fsync = function(tty) {
 	if (tty.output && tty.output.length > 0) {
 		const outputString = UTF8ArrayToString(tty.output, 0);
