@@ -7519,6 +7519,9 @@ self.onmessage = function(e) {
 /*ALERT cannot type into the text input
  * similar error happened before
  * search for the prompt
+ *
+ * search for the following on the Web Go integration with...
+ * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
 
 // TEST function that process commands from the main thread, called by message.
