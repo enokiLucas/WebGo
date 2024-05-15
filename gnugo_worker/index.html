@@ -1068,7 +1068,7 @@ function shouldPreventDefault(event) {
 		return true; // NO keypress, NO back navigation
 	}
 };
-
+/* ALERT This block prevents the typing of instrucitions.
 ['keydown', 'keyup', 'keypress', 'blur', 'visibilitychange'].forEach((event) => {
 	document.addEventListener(event, (event) => {
 		worker.postMessage({ target: 'document', event: cloneObject(event) });
@@ -1078,7 +1078,7 @@ function shouldPreventDefault(event) {
 		}
 	});
 });
-
+*/
 ['unload'].forEach((event) => {
 	window.addEventListener(event, (event) => {
 		worker.postMessage({ target: 'window', event: cloneObject(event) });
@@ -1112,6 +1112,7 @@ function shouldPreventDefault(event) {
 			// ======================
 			// = START CUSTOM LOGIC =
 			// ======================
+
 				const worker = new Worker('gnugo.worker.js');
 
 				function sendCommandToGo() {
@@ -1124,6 +1125,7 @@ function shouldPreventDefault(event) {
 							data: commandBuffer
 						});
 					}
+					console.log('hello: ' + command);
 				}
 
 

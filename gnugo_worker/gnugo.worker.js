@@ -7503,13 +7503,17 @@ run();
  * search for the following on the Web Go integration with...
  * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
-
+/*
 self.onmessage = function(e) {
 	if (e.data.type === 'inputCommand') {
 		FS.writeStream(FS.open('/dev/stdin', 'w'), e.data.data);
 	}
 };
+*/
 
+self.onmessage = function(e) {
+	console.log('hello from worker: ');
+}
 // ======================
 // = END CUSTOM LOGIC   =
 // ======================
