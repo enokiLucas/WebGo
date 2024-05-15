@@ -7504,6 +7504,12 @@ run();
  * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
 
+self.onmessage = function(e) {
+	if (e.data.type === 'inputCommand') {
+		FS.writeStream(FS.open('/dev/stdin', 'w'), e.data.data);
+	}
+};
+
 // ======================
 // = END CUSTOM LOGIC   =
 // ======================
