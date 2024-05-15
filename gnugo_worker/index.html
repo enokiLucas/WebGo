@@ -1111,20 +1111,6 @@ function shouldPreventDefault(event) {
 			<script>
 				const worker = new Worker('gnugo.worker.js');
 
-				worker.onmessage = function(e) {
-						const outputArea = document.getElementById('output');
-						outputArea.value += e.data + '\n';  // Append new output to the textarea
-						outputArea.scrollTop = outputArea.scrollHeight;  // Auto-scroll to the bottom
-				};
-
-				function sendCommand() {
-					const command = document.getElementById('commandInput').value;
-					worker.postMessage({
-						type: 'command',  // Indicate that this message is a command
-						payload: command
-					});  // Send the command to the worker
-					document.getElementById('commandInput').value = '';  // Clear input after sending
-				}
 			</script>
 	</body>
 </html>

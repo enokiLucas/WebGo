@@ -7496,26 +7496,6 @@ run();
 // = START CUSTOM LOGIC =
 // ======================
 
-/*TEST initialization
-importScripts('gnugo.js');  // Import the WebAssembly module
-
-Module['onRuntimeInitialized'] = function() {
-	// Module is initialized and ready to receive commands
-	postMessage('GNU Go is ready!!!!');
-};
-// END */ //ALERT The problem is here
-
-// TEST message: call process message from main thread
-self.onmessage = function(e) {
-	// Check the type of the message
-	if (e.data.type === 'command') {
-		processCommand(e.data.payload);
-	} else {
-		// Handle other types of messages or ignore them
-		console.log("Received non-command message:", e.data);
-	}
-};
-// END */
 /*ALERT cannot type into the text input
  * similar error happened before
  * search for the prompt
@@ -7523,45 +7503,6 @@ self.onmessage = function(e) {
  * search for the following on the Web Go integration with...
  * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
-
-// TEST function that process commands from the main thread, called by message.
-function processCommand(command) {
-	// Assuming you have a function to handle tty input in your Module
-	// Push command to the tty buffer
-	FS_stdin_getChar_buffer = intArrayFromString(command + "\n", true);
-	try {
-		// Trigger processing in the module, assuming there's a main or similar loop
-		Module._mainLoop();  // This function needs to be adapted to your specific setup
-	} catch (error) {
-		postMessage('Error processing command: ' + error.message);
-	}
-}
-// END */
-
-// TEST
-// Modify the default_tty_ops object in your module setup
-Module['default_tty_ops'].put_char = function(tty, val) {
-	if (val === null || val === '\n'.charCodeAt(0)) {
-		if (tty.output && tty.output.length > 0) {
-			const outputString = UTF8ArrayToString(tty.output, 0);
-			postMessage(outputString);  // Send output back to the main thread
-			tty.output = [];
-		}
-	} else {
-		if (val !== 0) tty.output.push(val);
-	}
-};
-// END */
-
-// TEST ALERT DON'T KNOW WHAT THIS DOES
-Module['default_tty_ops'].fsync = function(tty) {
-	if (tty.output && tty.output.length > 0) {
-		const outputString = UTF8ArrayToString(tty.output, 0);
-		postMessage(outputString);
-		tty.output = [];
-	}
-};
-// END */
 
 // ======================
 // = END CUSTOM LOGIC   =
