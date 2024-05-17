@@ -1122,10 +1122,9 @@ function shouldPreventDefault(event) {
 					if (Module && Module.worker) {
 						Module.worker.postMessage({
 							type: 'inputCommand',
-							data: commandBuffer
+							data: commandBuffer,
 						});
 					}
-					console.log('hello: ' + command);
 				}
 
 
