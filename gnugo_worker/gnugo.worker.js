@@ -7429,6 +7429,7 @@ function callMain(args = []) {
 }
 
 function run(args = arguments_) {
+	console.log('Hello from run');
 
   if (runDependencies > 0) {
     return;
@@ -7455,7 +7456,7 @@ function run(args = arguments_) {
 
     preMain();
 
-    //if (Module['onRuntimeInitialized']) Module['onRuntimeInitialized']();//TEST
+    if (Module['onRuntimeInitialized']) Module['onRuntimeInitialized']();//TEST
 
     if (shouldRunNow) callMain(args);
 
@@ -7470,8 +7471,7 @@ function run(args = arguments_) {
       }, 1);
       doRun();
     }, 1);
-  } else
-  {
+  } else{
     doRun();
   }
 }
@@ -7503,16 +7503,28 @@ run();
  * search for the following on the Web Go integration with...
  * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
-/*
-self.onmessage = function(e) {
-	if (e.data.type === 'inputCommand') {
-		FS.writeStream(FS.open('/dev/stdin', 'w'), e.data.data);
-	}
-};
-*/
 
-self.onmessage = function(e) {
-	console.log('hello from worker: ');
+function main() {
+	self.onmessage = function(e) {
+		if (e.data.type === 'inputCommand') {
+			var stream;
+			try {
+				// Open the file for writing
+				stream = FS.open('/dev/stdin', 'w');
+
+				// Write the data to the file
+				FS.write(stream, e.data.data, 0, e.data.data.length, 0);
+
+				// Always close the file after you're done
+				FS.close(stream);
+			} catch (err) {
+				console.error('Error writing to /dev/stdin:', err);
+				if (stream) {
+					FS.close(stream);
+				}
+			}
+		}
+	};
 }
 // ======================
 // = END CUSTOM LOGIC   =
