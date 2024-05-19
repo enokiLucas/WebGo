@@ -1110,7 +1110,7 @@ function shouldPreventDefault(event) {
 // = START CUSTOM LOGIC =
 // ======================
 
-//const worker = new Worker('gnugo.worker.js');
+Module.worker = new Worker('gnugo.worker.js');
 
 function sendMessageToWorker() {
 	const command = document.getElementById('commandInput').value;
@@ -1122,6 +1122,8 @@ function sendMessageToWorker() {
 			data: commandBuffer,
 			case: 'custom'
 		});
+	} else {
+		console.log('Module: ' + Module + '\n' + 'Module.worker: ' + Module.worker);
 	}
 }
 

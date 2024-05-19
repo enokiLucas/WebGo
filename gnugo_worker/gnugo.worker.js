@@ -7285,7 +7285,8 @@ function messageResender() {
   }
 }
 
-//ALERT create Module.onCustomMessage !!!
+//ALERT working
+//TODO create Module.onCustomMessage !!!
 function onMessageFromMainEmscriptenThread(message) {
 	console.log('Hello from onMessageFromMainEmscriptenThread'); //TEST
 	console.log('calledMain: '+calledMain); //TEST
@@ -7369,6 +7370,7 @@ function onMessageFromMainEmscriptenThread(message) {
         Module['onCustomMessage'](message);
       } else {
         throw 'Custom message received but worker Module.onCustomMessage not implemented.';
+				console.log('Custom message received but worker Module.onCustomMessage not implemented.');
       }
       break;
     }
