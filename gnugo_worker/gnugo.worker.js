@@ -7285,7 +7285,12 @@ function messageResender() {
   }
 }
 
+//ALERT create Module.onCustomMessage !!!
 function onMessageFromMainEmscriptenThread(message) {
+	console.log('Hello from onMessageFromMainEmscriptenThread'); //TEST
+	console.log('calledMain: '+calledMain); //TEST
+	console.log('message data.preMain: '+message.data.preMain); //TEST
+
   if (!calledMain && !message.data.preMain) {
     if (!messageBuffer) {
       messageBuffer = [];
@@ -7429,7 +7434,7 @@ function callMain(args = []) {
 }
 
 function run(args = arguments_) {
-	console.log('Hello from run');
+	//console.log('Hello from run'); TEST
 
   if (runDependencies > 0) {
     return;
@@ -7443,7 +7448,7 @@ function run(args = arguments_) {
   }
 
   function doRun() {
-		console.log('doRun');
+		//console.log('doRun'); TEST
     // run may have just been called through dependencies being fulfilled just in this very frame,
     // or while the async setStatus time below was happening
     if (calledRun) return;
@@ -7503,8 +7508,8 @@ run();
  * search for the following on the Web Go integration with...
  * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
-
-function main() {
+/*
+function processMessage() {
 	self.onmessage = function(e) {
 		if (e.data.type === 'inputCommand') {
 			var stream;
@@ -7526,6 +7531,7 @@ function main() {
 		}
 	};
 }
+*/
 // ======================
 // = END CUSTOM LOGIC   =
 // ======================

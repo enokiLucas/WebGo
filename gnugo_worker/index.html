@@ -133,7 +133,7 @@
 		<h1>GNU Go Terminal</h1>
 		<textarea id="output" readonly></textarea>
 		<input type="text" id="commandInput" placeholder="Enter your command here">
-		<button onclick="sendCommandToGo()">Send Command</button>
+		<button onclick="sendMessageToWorker()">Send Command</button>
 
 		<script type='text/javascript'>
 			var statusElement = document.getElementById('status');
@@ -1106,29 +1106,28 @@ function shouldPreventDefault(event) {
 		document.body.appendChild(script);
 	}
 
-			</script>
+// ======================
+// = START CUSTOM LOGIC =
+// ======================
 
-			<script>
-			// ======================
-			// = START CUSTOM LOGIC =
-			// ======================
+//const worker = new Worker('gnugo.worker.js');
 
-				const worker = new Worker('gnugo.worker.js');
+function sendMessageToWorker() {
+	const command = document.getElementById('commandInput').value;
+	const encoder = new TextEncoder();
+	const commandBuffer = encoder.encode(command + '\n'); // Encode command
+	if (Module && Module.worker) {
+		Module.worker.postMessage({
+			type: 'inputCommand',
+			data: commandBuffer,
+			case: 'custom'
+		});
+	}
+}
 
-				function sendCommandToGo() {
-					const command = document.getElementById('commandInput').value;
-					const encoder = new TextEncoder();
-					const commandBuffer = encoder.encode(command + '\n'); // Encode command
-					if (Module && Module.worker) {
-						Module.worker.postMessage({
-							type: 'inputCommand',
-							data: commandBuffer,
-						});
-					}
-				}
-			// ======================
-			// = END CUSTOM LOGIC   =
-			// ======================
+// ======================
+// = END CUSTOM LOGIC   =
+// ======================
 			</script>
 	</body>
 </html>
