@@ -7367,12 +7367,33 @@ function onMessageFromMainEmscriptenThread(message) {
       break;
     }
     case 'custom': {
-      if (Module['onCustomMessage']) {
+      /*if (Module['onCustomMessage']) {
         Module['onCustomMessage'](message);
       } else {
         throw 'Custom message received but worker Module.onCustomMessage not implemented.';
 				console.log('Custom message received but worker Module.onCustomMessage not implemented.');
-      }
+      }*/
+			////////////////START CUSTOM LOGIC
+			if (message.data.type === 'inputCommand') {
+				var stream;
+				try {
+					// Open the file for writing
+					stream = FS.open('/dev/stdin', 'w');
+
+					// Write the data to the file
+					FS.write(stream, message.data.data, 0, message.data.data.length, 0);
+
+					// Always close the file after you're done
+					FS.close(stream);
+				} catch (err) {
+					console.error('Error writing to /dev/stdin:', err);
+					if (stream) {
+						FS.close(stream);
+					}
+				}
+			}
+
+			///////////////END CUSTOM LOGIC
       break;
     }
     case 'setimmediate': {
@@ -7511,7 +7532,7 @@ run();
  * search for the following on the Web Go integration with...
  * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
  */
-/*
+
 function processMessage() {
 	self.onmessage = function(e) {
 		if (e.data.type === 'inputCommand') {
@@ -7534,7 +7555,7 @@ function processMessage() {
 		}
 	};
 }
-*/
+
 // ======================
 // = END CUSTOM LOGIC   =
 // ======================
