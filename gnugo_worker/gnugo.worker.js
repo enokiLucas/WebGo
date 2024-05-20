@@ -7267,7 +7267,7 @@ Module['postMainLoop'] = () => {
 
 var messageBuffer = null;
 var messageResenderTimeout = null;
-var calledMain = false;
+var calledMain = true; //TEST changed it back to 'false' when done!!!
 
 // Set calledMain to true during postRun which happens once main returns
 Module['postRun'] ||= [];
@@ -7289,6 +7289,7 @@ function messageResender() {
 //TODO create Module.onCustomMessage !!!
 function onMessageFromMainEmscriptenThread(message) {
 	console.log('Hello from onMessageFromMainEmscriptenThread'); //TEST
+
 	console.log('calledMain: '+calledMain); //TEST
 	console.log('message data.preMain: '+message.data.preMain); //TEST
 
