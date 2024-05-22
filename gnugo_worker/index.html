@@ -1119,7 +1119,7 @@ function sendMessageToWorker() {
 	if (Module && Module.worker) {
 		Module.worker.postMessage({
 			type: 'inputCommand',
-			data: commandBuffer,
+			data: command, //TEST change back to 'commandBuffer'
 			target: 'custom',
 			preMain: false
 		});

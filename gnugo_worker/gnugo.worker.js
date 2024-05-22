@@ -7374,24 +7374,17 @@ function onMessageFromMainEmscriptenThread(message) {
 				console.log('Custom message received but worker Module.onCustomMessage not implemented.');
       }*/
 			////////////////START CUSTOM LOGIC
-			if (message.data.type === 'inputCommand') {
-				var stream;
-				try {
-					// Open the file for writing
-					stream = FS.open('/dev/stdin', 'w');
+			var inputQueue = [];
+			inputQueue = inputQueue.concat(message.data.data.split('').map(c => c.charCodeAt(0)));
 
-					// Write the data to the file
-					FS.write(stream, message.data.data, 0, message.data.data.length, 0);
-
-					// Always close the file after you're done
-					FS.close(stream);
-				} catch (err) {
-					console.error('Error writing to /dev/stdin:', err);
-					if (stream) {
-						FS.close(stream);
-					}
+			Module['stdin'] = function() {
+				if (inputQueue.length === 0) {
+					console.log('222222');
+					return null; // No input available
 				}
-			}
+				return inputQueue.shift();
+				console.log('1111');
+			};
 
 			///////////////END CUSTOM LOGIC
       break;
