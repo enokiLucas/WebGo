@@ -7430,6 +7430,7 @@ dependenciesFulfilled = function runCaller() {
 };
 
 function callMain(args = []) {
+	console.log('hello from callMain');// TEST
 
   var entryFunction = _main;
 
@@ -7556,6 +7557,9 @@ function processMessage() {
 	};
 }
 
+function _main() {
+	console.log('hello from _main');
+}
 // ======================
 // = END CUSTOM LOGIC   =
 // ======================
