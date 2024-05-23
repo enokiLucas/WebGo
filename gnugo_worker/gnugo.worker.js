@@ -14,6 +14,9 @@
 // can continue to use Module afterwards as well.
 //var Module = typeof Module != 'undefined' ? Module : {};
 var Module = {
+	// Specify GTP mode as a command-line argument
+	arguments: ['--mode', 'gtp'],
+
 	preRun: function() {
 		var i = 0;
 
