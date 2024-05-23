@@ -12,7 +12,44 @@
 // after the generated code, you will need to define   var Module = {};
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
-var Module = typeof Module != 'undefined' ? Module : {};
+//var Module = typeof Module != 'undefined' ? Module : {};
+var Module = {
+	preRun: function() {
+		var i = 0;
+
+		function stdin() {
+			if (i < res.length) {
+				var code = input.charCodeAt(i);
+				++i;
+				return code;
+			} else {
+				return null;
+			}
+		}
+
+		var stdoutBuffer = "";
+		function stdout(code) {
+			if (code === "\n".charCodeAt(0) && stdoutBuffer !== "") {
+				console.log(stdoutBuffer);
+				stdoutBuffer = "";
+			} else {
+				stdoutBuffer += String.fromCharCode(code);
+			}
+		}
+
+		var stderrBuffer = "";
+		function stderr(code) {
+			if (code === "\n".charCodeAt(0) && stderrBuffer !== "") {
+				console.log(stderrBuffer);
+				stderrBuffer = "";
+			} else {
+				stderrBuffer += String.fromCharCode(code);
+			}
+		}
+
+		FS.init(stdin, stdout, stderr);
+	}
+}
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
