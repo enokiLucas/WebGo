@@ -13,49 +13,30 @@
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
 
-//var Module = typeof Module != 'undefined' ? Module : {};
-
+var Module = typeof Module != 'undefined' ? Module : {};
+/*
 var Module = { // CUSTOM Module
 	// Specify GTP mode as a command-line argument
 	arguments: ['--mode', 'gtp'],
 
-	preRun: function() {
-		var i = 0;
+	onRuntimeInitialized: function() {
+		// Emscripten runtime is initialized
 
-		function stdin() {
-			if (i < res.length) {
-				var code = input.charCodeAt(i);
-				++i;
-				return code;
-			} else {
-				return null;
-			}
-		}
+		// Register a TTY device for standard input (device 0) using the default operations
+		TTY.register(0, TTY.default_tty_ops);
 
-		var stdoutBuffer = "";
-		function stdout(code) {
-			if (code === "\n".charCodeAt(0) && stdoutBuffer !== "") {
-				console.log(stdoutBuffer);
-				stdoutBuffer = "";
-			} else {
-				stdoutBuffer += String.fromCharCode(code);
-			}
-		}
+		// Register a TTY device for standard error (device 1) using the default operations
+		TTY.register(1, TTY.default_tty1_ops);
 
-		var stderrBuffer = "";
-		function stderr(code) {
-			if (code === "\n".charCodeAt(0) && stderrBuffer !== "") {
-				console.log(stderrBuffer);
-				stderrBuffer = "";
-			} else {
-				stderrBuffer += String.fromCharCode(code);
-			}
-		}
+		// Now the TTY devices are ready to be used for I/O operations
 
-		FS.init(stdin, stdout, stderr);
+		// Your additional initialization code...
+
+		// Example: Simulate reading and writing messages
+		//simulateTTYOperations();
 	}
-}
-
+};
+*/
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
 
@@ -1866,6 +1847,7 @@ var tempI64;
     return u8array;
   }
   var FS_stdin_getChar = () => {
+		console.log('hello from FS_stdin_getChar');
       if (!FS_stdin_getChar_buffer.length) {
         var result = null;
         if (ENVIRONMENT_IS_NODE) {
@@ -7330,12 +7312,27 @@ function messageResender() {
 
 //ALERT working
 //TODO create Module.onCustomMessage !!!
-function onMessageFromMainEmscriptenThread(message) {
-	console.log('Hello from onMessageFromMainEmscriptenThread'); //TEST
 
+// Register a TTY device for standard input (device 0) using the default operations
+TTY.register(0, TTY.default_tty_ops);
+
+// Register a TTY device for standard error (device 1) using the default operations
+TTY.register(1, TTY.default_tty1_ops);
+
+let stream = {
+	node: {
+		rdev: 0,  // Device ID 0
+		timestamp: Date.now(),
+	},
+	tty: TTY.ttys[0],
+	seekable: false,
+};
+function onMessageFromMainEmscriptenThread(message) {
+/*
+	console.log('Hello from onMessageFromMainEmscriptenThread'); //TEST
 	console.log('calledMain: '+calledMain); //TEST
 	console.log('message data.preMain: '+message.data.preMain); //TEST
-
+*/
   if (!calledMain && !message.data.preMain) {
     if (!messageBuffer) {
       messageBuffer = [];
@@ -7410,27 +7407,10 @@ function onMessageFromMainEmscriptenThread(message) {
       break;
     }
     case 'custom': {
-      /*if (Module['onCustomMessage']) {
-        Module['onCustomMessage'](message);
-      } else {
-        throw 'Custom message received but worker Module.onCustomMessage not implemented.';
-				console.log('Custom message received but worker Module.onCustomMessage not implemented.');
-      }*/
-			////////////////START CUSTOM LOGIC
-			/*
-			var inputQueue = [];
-			inputQueue = inputQueue.concat(message.data.data.split('').map(c => c.charCodeAt(0)));
-
-			Module['stdin'] = function() {
-				if (inputQueue.length === 0) {
-					console.log('222222');
-					return null; // No input available
-				}
-				return inputQueue.shift();
-				console.log('1111');
-			};
-*/
-			default_tty_ops.read(message.data.data);
+			///////////////START CUSTOM LOGIC
+			//console.log(TTY.ttys[0]);
+			TTY.ttys[0].input.push(...new TextEncoder().encode(message.data.data));
+			TTY.default_tty_ops.get_char(TTY.ttys[0]);
 			///////////////END CUSTOM LOGIC
       break;
     }
@@ -7468,7 +7448,7 @@ dependenciesFulfilled = function runCaller() {
 };
 
 function callMain(args = []) {
-	console.log('hello from callMain');// TEST
+	//console.log('hello from callMain');// TEST
 
   var entryFunction = _main;
 
