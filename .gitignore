@@ -1,2 +1,4 @@
 package-lock.json
 gnugo2
+gnugo_worker/TTY.js
+gnugo_worker/FS.js
