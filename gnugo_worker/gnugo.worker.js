@@ -37,6 +37,31 @@ var Module = { // CUSTOM Module
 	}
 };
 */
+
+Module = {
+	onRuntimeInitialized: function() {
+		FS.init(function() {
+			// Custom stdin handler
+			return mainThreadStdin();
+		}, function(c) {
+			// Custom stdout handler
+			mainThreadStdout(c);
+		}, function(c) {
+			// Custom stderr handler
+			mainThreadStderr(c);
+		});
+
+		// Any other initialization code here
+	}
+};
+
+
+
+
+
+
+
+
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
 
@@ -7311,9 +7336,10 @@ function messageResender() {
   }
 }
 
-//ALERT working
-//TODO create Module.onCustomMessage !!!
-
+// ======================
+// = START CUSTOM LOGIC =
+// ======================
+/*
 // Register a TTY device for standard input (device 0) using the default operations
 TTY.register(0, TTY.default_tty_ops);
 
@@ -7328,6 +7354,18 @@ let stream = {
 	tty: TTY.ttys[0],
 	seekable: false,
 };
+*//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// ======================
+// = END CUSTOM LOGIC   =
+// ======================
+
+
+//ALERT working
+//TODO create Module.onCustomMessage !!!
 function onMessageFromMainEmscriptenThread(message) {
 /*
 	console.log('Hello from onMessageFromMainEmscriptenThread'); //TEST
@@ -7409,9 +7447,11 @@ function onMessageFromMainEmscriptenThread(message) {
     }
     case 'custom': {
 			///////////////START CUSTOM LOGIC
-			//console.log(TTY.ttys[0]);
+			/*console.log(TTY.ttys[0]);
 			TTY.ttys[0].input.push(...new TextEncoder().encode(message.data.data));
-			TTY.default_tty_ops.get_char(TTY.ttys[0]);
+			TTY.default_tty_ops.get_char(TTY.ttys[0]);*/
+
+
 			///////////////END CUSTOM LOGIC
       break;
     }
