@@ -1110,8 +1110,8 @@ function shouldPreventDefault(event) {
 // = START CUSTOM LOGIC =
 // ======================
 
-Module.worker = new Worker('gnugo.worker.js'); //ALERT have two different workers. See line 898.
-
+const worker = new Worker('gnugo.worker.js'); //ALERT have two different workers. See line 898.
+/*
 function sendMessageToWorker() {
 	const command = document.getElementById('commandInput').value;
 	const encoder = new TextEncoder();
@@ -1126,6 +1126,13 @@ function sendMessageToWorker() {
 	} else {
 		console.log('Module: ' + Module + '\n' + 'Module.worker: ' + Module.worker);
 	}
+}*/
+function sendMessageToWorker(data) {
+	worker.postMessage({
+		target: 'document',
+		type: 'stdin',
+		data: data
+	});
 }
 
 // ======================

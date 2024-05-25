@@ -14,53 +14,6 @@
 // can continue to use Module afterwards as well.
 
 var Module = typeof Module != 'undefined' ? Module : {};
-/*
-var Module = { // CUSTOM Module
-	// Specify GTP mode as a command-line argument
-	arguments: ['--mode', 'gtp'],
-
-	onRuntimeInitialized: function() {
-		// Emscripten runtime is initialized
-
-		// Register a TTY device for standard input (device 0) using the default operations
-		TTY.register(0, TTY.default_tty_ops);
-
-		// Register a TTY device for standard error (device 1) using the default operations
-		TTY.register(1, TTY.default_tty1_ops);
-
-		// Now the TTY devices are ready to be used for I/O operations
-
-		// Your additional initialization code...
-
-		// Example: Simulate reading and writing messages
-		//simulateTTYOperations();
-	}
-};
-*/
-
-Module = {
-	onRuntimeInitialized: function() {
-		FS.init(function() {
-			// Custom stdin handler
-			return mainThreadStdin();
-		}, function(c) {
-			// Custom stdout handler
-			mainThreadStdout(c);
-		}, function(c) {
-			// Custom stderr handler
-			mainThreadStderr(c);
-		});
-
-		// Any other initialization code here
-	}
-};
-
-
-
-
-
-
-
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
@@ -7435,6 +7388,7 @@ function onMessageFromMainEmscriptenThread(message) {
       break;
     }
     case 'worker-init': {
+			console.log('hello from worker-init: '+message.data.URL);
       Module.canvas = document.createElement('canvas');
       screen.width = Module.canvas.width_ = message.data.width;
       screen.height = Module.canvas.height_ = message.data.height;
@@ -7447,10 +7401,6 @@ function onMessageFromMainEmscriptenThread(message) {
     }
     case 'custom': {
 			///////////////START CUSTOM LOGIC
-			/*console.log(TTY.ttys[0]);
-			TTY.ttys[0].input.push(...new TextEncoder().encode(message.data.data));
-			TTY.default_tty_ops.get_char(TTY.ttys[0]);*/
-
 
 			///////////////END CUSTOM LOGIC
       break;
@@ -7584,14 +7534,6 @@ run();
 // ======================
 // = START CUSTOM LOGIC =
 // ======================
-
-/*ALERT cannot type into the text input
- * similar error happened before
- * search for the prompt
- *
- * search for the following on the Web Go integration with...
- * It sounds like there might be something preventing the input box from capturing or displaying the input correctly.
- */
 
 function processMessage() {
 	self.onmessage = function(e) {
