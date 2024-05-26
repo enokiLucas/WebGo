@@ -125,6 +125,13 @@ canvas.emscripten { border: 0px none; background-color: black; }
     </div>
     <textarea id="output" rows="8"></textarea>
 
+    <!--START CUSTOM ELEMENTS --->
+    <h1>GNU Go Terminal</h1>
+		<textarea id="output" readonly></textarea>
+		<input type="text" id="commandInput" placeholder="Enter your command here">
+		<button onclick="sendCommand()">Send Command</button>
+		<!--END CUSTOM ELEMENTS --->
+
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
       var progressElement = document.getElementById('progress');
@@ -195,6 +202,27 @@ canvas.emscripten { border: 0px none; background-color: black; }
           if (text) console.error('[post-exception status] ' + text);
         };
       };
+			/*=====================
+			 * START CUSTOM LOGIC
+			======================*/
+
+			console.log('hello from the botton');
+			function sendCommand() {
+				console.log('hello from function');
+				const data = document.getElementById('commandInput').value;
+				document.dispatchEvent(new CustomEvent('new-gtp-command', {
+					detail: {
+						target: 'document',
+						type: 'stdin',
+						data: data
+					}
+				}));
+			}
+
+
+			/*=====================
+			 * END CUSTOM LOGIC
+			 ======================*/
     </script>
     <script async type="text/javascript" src="gnugo.js"></script>
   </body>

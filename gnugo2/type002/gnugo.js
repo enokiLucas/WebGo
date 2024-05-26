@@ -1024,9 +1024,23 @@ var tempI64;
 				} else {
 					result = null;
 				}
-			} else if (typeof window != 'undefined' && typeof window.prompt == 'function') {
+			} else if (typeof window != 'undefined' && typeof window.prompt == 'function') { //ALERT
 				// Browser.
 				result = window.prompt('Input: ');  // returns null on cancel
+				/*=====================
+				 * START CUSTOM LOGIC
+				 ======================*/
+				const data = document.addEventListener('new-gtp-command', (e) => {
+					return e.detail.data;
+				})
+				console.log(data);
+
+
+
+				/*=====================
+				 * END CUSTOM LOGIC
+				 ======================*/
+
 				if (result !== null) {
 					result += '\n';
 				}

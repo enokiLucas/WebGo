@@ -1127,7 +1127,8 @@ function sendMessageToWorker() {
 		console.log('Module: ' + Module + '\n' + 'Module.worker: ' + Module.worker);
 	}
 }*/
-function sendMessageToWorker(data) {
+function sendMessageToWorker() {
+	const data = document.getElementById('commandInput').value;
 	worker.postMessage({
 		target: 'document',
 		type: 'stdin',
