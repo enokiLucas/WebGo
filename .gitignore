@@ -1,4 +1,5 @@
 package-lock.json
-gnugo2
+gnugo2/restRoom
+gnugo2/type001
 gnugo_worker/TTY.js
 gnugo_worker/FS.js
