@@ -992,72 +992,30 @@ var tempI64;
     return u8array;
   }
 
-  var FS_stdin_getChar = () => { //road001
+	var FS_stdin_getChar = async () => { //road001 //TODO setTimeout
 		if (!FS_stdin_getChar_buffer.length) {
-			var result = null;
-			if (ENVIRONMENT_IS_NODE) {
-				// we will read data by chunks of BUFSIZE
-				var BUFSIZE = 256;
-				var buf = Buffer.alloc(BUFSIZE);
-				var bytesRead = 0;
+			let result = null;
 
-				// For some reason we must suppress a closure warning here, even though
-				// fd definitely exists on process.stdin, and is even the proper way to
-				// get the fd of stdin,
-				// https://github.com/nodejs/help/issues/2136#issuecomment-523649904
-				// This started to happen after moving this logic out of library_tty.js,
-				// so it is related to the surrounding code in some unclear manner.
-				/** @suppress {missingProperties} */
-				var fd = process.stdin.fd;
+			result = await new Promise((resolve) => {
+				document.addEventListener('new-gtp-command', (e) => {
+					resolve(e.detail.data); //Resolve the promise with data
+					console.log(e.detail.data);
+				}, {once: true});
+			});
 
-				try {
-					bytesRead = fs.readSync(fd, buf);
-				} catch(e) {
-					// Cross-platform differences: on Windows, reading EOF throws an exception, but on other OSs.
-					// reading EOF returns 0. Uniformize behavior by treating the EOF exception to return 0.
-					if (e.toString().includes('EOF')) bytesRead = 0;
-					else throw e;
-				}
-
-				if (bytesRead > 0) {
-					result = buf.slice(0, bytesRead).toString('utf-8');
-				} else {
-					result = null;
-				}
-			} else if (typeof window != 'undefined' && typeof window.prompt == 'function') { //ALERT
-				// Browser.
-				result = window.prompt('Input: ');  // returns null on cancel
-				/*=====================
-				 * START CUSTOM LOGIC
-				 ======================*/
-				const data = document.addEventListener('new-gtp-command', (e) => {
-					return e.detail.data;
-				})
-				console.log(data);
-
-
-
-				/*=====================
-				 * END CUSTOM LOGIC
-				 ======================*/
-
-				if (result !== null) {
-					result += '\n';
-				}
-			} else if (typeof readline == 'function') {
-				// Command line.
-				result = readline();
-				if (result !== null) {
-					result += '\n';
-				}
+			if (result !== null) {
+				result += '\n';
 			}
+
 			if (!result) {
 				return null;
 			}
+
 			FS_stdin_getChar_buffer = intArrayFromString(result, true);
 		}
-	return FS_stdin_getChar_buffer.shift();
+		return FS_stdin_getChar_buffer.shift();
 	};
+
 
 	var TTY = {
 		ttys:[],
