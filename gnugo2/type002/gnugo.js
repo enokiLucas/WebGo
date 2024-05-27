@@ -994,14 +994,21 @@ var tempI64;
 
 	var FS_stdin_getChar = async () => { //road001 //TODO setTimeout
 		if (!FS_stdin_getChar_buffer.length) {
-			let result = null;
+			let result = await new Promise((resolve, reject) => {
+				const timeoutID = setTimeout(() => {
+					reject(new Error('Timeout waiting for input.'));
+				}, 10000); //Timeout after 10 seconds.
 
-			result = await new Promise((resolve) => {
 				document.addEventListener('new-gtp-command', (e) => {
-					resolve(e.detail.data); //Resolve the promise with data
-					console.log(e.detail.data);
+					clearTimeout(timeoutID); //clear timeout upon event reception.
+					resolve(e.detail.data);//resolve the promise
+					console.log(e.detail.data);//TEST
 				}, {once: true});
-			});
+
+			}).catch(error => {
+				console.error(error);
+				return null;
+			})
 
 			if (result !== null) {
 				result += '\n';
