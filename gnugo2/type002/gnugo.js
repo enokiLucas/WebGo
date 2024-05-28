@@ -992,21 +992,28 @@ var tempI64;
     return u8array;
   }
 
-	var FS_stdin_getChar = async () => { //road001 //TODO setTimeout
+	let isLocked = false; // Check if the function below is already running
+	var FS_stdin_getChar = async () => { //road001
+
+		if (isLocked) return; // Exit if function is already running
+		isLocked = true; // Set lock
+
 		if (!FS_stdin_getChar_buffer.length) {
+
 			let result = await new Promise((resolve, reject) => {
 				const timeoutID = setTimeout(() => {
+					console.log("Timeout: No input received."); //TEST
 					reject(new Error('Timeout waiting for input.'));
 				}, 10000); //Timeout after 10 seconds.
 
 				document.addEventListener('new-gtp-command', (e) => {
 					clearTimeout(timeoutID); //clear timeout upon event reception.
 					resolve(e.detail.data);//resolve the promise
-					console.log(e.detail.data);//TEST
+					console.log('Input received: '+e.detail.data);//TEST
 				}, {once: true});
 
 			}).catch(error => {
-				console.error(error);
+				console.error('error: '+error); //TEST
 				return null;
 			})
 
@@ -1015,11 +1022,13 @@ var tempI64;
 			}
 
 			if (!result) {
+				isLocked = false; //release lock
 				return null;
 			}
 
 			FS_stdin_getChar_buffer = intArrayFromString(result, true);
 		}
+		isLocked = false; //Release lock
 		return FS_stdin_getChar_buffer.shift();
 	};
 
