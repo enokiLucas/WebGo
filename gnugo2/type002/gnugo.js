@@ -4743,35 +4743,35 @@ var tempI64;
   }
 
   /** @param {number=} offset */
-  var doReadv = (stream, iov, iovcnt, offset) => { //road005
-      var ret = 0;
-      for (var i = 0; i < iovcnt; i++) {
-        var ptr = HEAPU32[((iov)>>2)];
-        var len = HEAPU32[(((iov)+(4))>>2)];
-        iov += 8;
-        var curr = FS.read(stream, HEAP8, ptr, len, offset);
-        if (curr < 0) return -1;
-        ret += curr;
-        if (curr < len) break; // nothing more to read
-        if (typeof offset !== 'undefined') {
-          offset += curr;
-        }
-      }
-      return ret;
-    };
+	var doReadv = (stream, iov, iovcnt, offset) => { //road005
+		var ret = 0;
+		for (var i = 0; i < iovcnt; i++) {
+			var ptr = HEAPU32[((iov)>>2)];
+			var len = HEAPU32[(((iov)+(4))>>2)];
+			iov += 8;
+			var curr = FS.read(stream, HEAP8, ptr, len, offset);
+			if (curr < 0) return -1;
+			ret += curr;
+			if (curr < len) break; // nothing more to read
+			if (typeof offset !== 'undefined') {
+				offset += curr;
+			}
+		}
+		return ret;
+	};
   
-  function _fd_read(fd, iov, iovcnt, pnum) { //road006
-  try {
-  
-      var stream = SYSCALLS.getStreamFromFD(fd);
-      var num = doReadv(stream, iov, iovcnt);
-      HEAPU32[((pnum)>>2)] = num;
-      return 0;
-    } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
-    return e.errno;
-  }
-  }
+		function _fd_read(fd, iov, iovcnt, pnum) { //road006
+			try {
+
+				var stream = SYSCALLS.getStreamFromFD(fd);
+				var num = doReadv(stream, iov, iovcnt);
+				HEAPU32[((pnum)>>2)] = num;
+				return 0;
+			} catch (e) {
+				if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+				return e.errno;
+			}
+		}
 
   
   function _fd_seek(fd,offset_low, offset_high,whence,newOffset) {
