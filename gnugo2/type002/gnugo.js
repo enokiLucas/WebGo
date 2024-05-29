@@ -1032,7 +1032,6 @@ var tempI64;
 		return FS_stdin_getChar_buffer.shift();
 	};
 
-
 	var TTY = {
 		ttys:[],
 		init() {
@@ -1076,7 +1075,7 @@ var tempI64;
 			fsync(stream) {
 				stream.tty.ops.fsync(stream.tty);
 			},
-			read(stream, buffer, offset, length, pos /* ignored */) { //road003
+			read: async (stream, buffer, offset, length, pos /* ignored */) => { //road003 //TEST
 				if (!stream.tty || !stream.tty.ops.get_char) {
 					throw new FS.ErrnoError(60);
 				}
@@ -1084,7 +1083,7 @@ var tempI64;
 				for (var i = 0; i < length; i++) {
 					var result;
 					try {
-						result = stream.tty.ops.get_char(stream.tty);
+						result = await stream.tty.ops.get_char(stream.tty); //TEST await
 					} catch (e) {
 						throw new FS.ErrnoError(29);
 					}
@@ -1118,8 +1117,8 @@ var tempI64;
 			},
 		},
 		default_tty_ops:{
-			get_char(tty) { //road002
-				return FS_stdin_getChar();
+			get_char: async (tty) => { //road002 //TEST get_char (tty) {
+				return await FS_stdin_getChar(); //TEST await
 			},
 			put_char(tty, val) {
 				if (val === null || val === 10) {
@@ -2553,7 +2552,7 @@ var tempI64;
         stream.ungotten = [];
         return stream.position;
       },
-  read(stream, buffer, offset, length, position) { //road004
+  read: async (stream, buffer, offset, length, position) => { //road004 TEST
         if (length < 0 || position < 0) {
           throw new FS.ErrnoError(28);
         }
@@ -2575,7 +2574,7 @@ var tempI64;
         } else if (!stream.seekable) {
           throw new FS.ErrnoError(70);
         }
-        var bytesRead = stream.stream_ops.read(stream, buffer, offset, length, position);
+        var bytesRead = await stream.stream_ops.read(stream, buffer, offset, length, position); //TEST
         if (!seeking) stream.position += bytesRead;
         return bytesRead;
       },
@@ -4743,13 +4742,13 @@ var tempI64;
   }
 
   /** @param {number=} offset */
-	var doReadv = (stream, iov, iovcnt, offset) => { //road005
+	var doReadv = async (stream, iov, iovcnt, offset) => { //road005 TEST
 		var ret = 0;
 		for (var i = 0; i < iovcnt; i++) {
 			var ptr = HEAPU32[((iov)>>2)];
 			var len = HEAPU32[(((iov)+(4))>>2)];
 			iov += 8;
-			var curr = FS.read(stream, HEAP8, ptr, len, offset);
+			var curr = await FS.read(stream, HEAP8, ptr, len, offset); //TEST
 			if (curr < 0) return -1;
 			ret += curr;
 			if (curr < len) break; // nothing more to read
@@ -4759,12 +4758,11 @@ var tempI64;
 		}
 		return ret;
 	};
-  
-		function _fd_read(fd, iov, iovcnt, pnum) { //road006
-			try {
 
+		async function _fd_read(fd, iov, iovcnt, pnum) { //road006
+			try {
 				var stream = SYSCALLS.getStreamFromFD(fd);
-				var num = doReadv(stream, iov, iovcnt);
+				var num = await doReadv(stream, iov, iovcnt);
 				HEAPU32[((pnum)>>2)] = num;
 				return 0;
 			} catch (e) {

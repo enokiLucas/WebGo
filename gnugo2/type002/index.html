@@ -138,6 +138,9 @@ canvas.emscripten { border: 0px none; background-color: black; }
       var spinnerElement = document.getElementById('spinner');
 
       var Module = {
+				// Specify GTP mode as a command-line argument
+				arguments: ['--mode', 'gtp'],
+
         print: (function() {
           var element = document.getElementById('output');
           if (element) element.value = ''; // clear browser cache
@@ -206,7 +209,6 @@ canvas.emscripten { border: 0px none; background-color: black; }
 			 * START CUSTOM LOGIC
 			======================*/
 
-			console.log('hello from the botton');
 			function sendCommand() {
 				console.log('hello from function');
 				const data = document.getElementById('commandInput').value;
