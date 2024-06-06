@@ -995,11 +995,17 @@ var tempI64;
 	var FS_stdin_getChar = () => {
 		if (!FS_stdin_getChar_buffer.length) {
 			var result = null;
-
+/*
 			document.addEventListener('new-gtp-command', (e) => {
 				result = e.detail.data
 				console.log('result: '+result);
 			})
+*/
+
+      result = window.prompt('Input: ');  // returns null on cancel
+      if (result !== null) {
+        result += '\n';
+      }
 
 			if (result !== null) {
 				result += '\n';

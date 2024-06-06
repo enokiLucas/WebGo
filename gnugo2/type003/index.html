@@ -138,7 +138,8 @@ canvas.emscripten { border: 0px none; background-color: black; }
       var spinnerElement = document.getElementById('spinner');
 
       var Module = {
-				//arguments: ['--mode', 'gtp'],
+				arguments: ['--mode', 'gtp'],
+
 
         print: (function() {
           var element = document.getElementById('output');
