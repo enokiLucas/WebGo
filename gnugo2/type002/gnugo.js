@@ -992,11 +992,7 @@ var tempI64;
     return u8array;
   }
 
-	let isLocked = false; // Check if the function below is already running
 	var FS_stdin_getChar = async () => { //road001
-
-		if (isLocked) return; // Exit if function is already running
-		isLocked = true; // Set lock
 
 		if (!FS_stdin_getChar_buffer.length) {
 
@@ -1019,11 +1015,6 @@ var tempI64;
 
 			if (result !== null) {
 				result += '\n';
-			}
-
-			if (!result) {
-				isLocked = false; //release lock
-				return null;
 			}
 
 			FS_stdin_getChar_buffer = intArrayFromString(result, true);

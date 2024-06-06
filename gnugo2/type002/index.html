@@ -210,7 +210,6 @@ canvas.emscripten { border: 0px none; background-color: black; }
 			======================*/
 
 			function sendCommand() {
-				console.log('hello from function');
 				const data = document.getElementById('commandInput').value;
 				document.dispatchEvent(new CustomEvent('new-gtp-command', {
 					detail: {
@@ -219,6 +218,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
 						data: data
 					}
 				}));
+				document.getElementById('commandInput').value = ''; // Clear the input box after sending the command
 			}
 
 
