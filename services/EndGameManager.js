@@ -1,4 +1,4 @@
-class GameEndManager {
+class EndGameManager {
 	constructor() {
 		// Listen for the 'end-game' event on the document
 		document.addEventListener('end-game', this.handleEndGame.bind(this));
@@ -39,3 +39,7 @@ class GameEndManager {
 
 	// Other methods...
 }
+
+// Export a single instance
+export const endGameManager = new EndGameManager();
+
