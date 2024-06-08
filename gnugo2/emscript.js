@@ -1,10 +1,24 @@
+import { run } from 'type003/gnugo.js';
 
 var statusElement = document.getElementById('status');
 var progressElement = document.getElementById('progress');
 var spinnerElement = document.getElementById('spinner');
 
 var Module = {
-		arguments: ['--mode', 'gtp'],
+	noInitialRun: false, // Prevent the main function from running automatically
+	preRun: [],
+	postRun: [],
+	// Function to explicitly start the module processing
+	startModule: function() {
+		if (!Module.calledRun) {
+			console.log("Module is already running or completed.");
+			return;
+		}
+		console.log("Starting module...");
+		run; // This starts the main function of the module
+	},
+
+	arguments: ['--mode', 'gtp'],
 
 		print: (function() {
 				var element = document.getElementById('output');
@@ -39,12 +53,18 @@ var Module = {
 				Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
 		}
 };
+
+
 Module.setStatus('Downloading...');
 window.onerror = (event) => {
 		// TODO: do not warn on ok events like simulating an infinite loop or exitStatus
 		Module.setStatus('Exception thrown, see JavaScript console');
-		spinnerElement.style.display = 'none';
+		//spinnerElement.style.display = 'none';
 		Module.setStatus = (text) => {
 				if (text) console.error('[post-exception status] ' + text);
 		};
 };
+
+var startModule = document.getElementById('startModuleButton').addEventListener('click', function() {
+	Module.startModule();
+});
