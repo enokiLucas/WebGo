@@ -68,6 +68,14 @@ document.getElementById('startModuleButton').addEventListener('click', function(
 });
 
 function loadGnuGoModule() {
+
+	// Remove existing script if it exists
+	const existingScript = document.querySelector('script[src="type003/gnugo.js"]');
+	if (existingScript) {
+		existingScript.parentNode.removeChild(existingScript);
+	}
+
+	// Create new script
 	var script = document.createElement('script');
 	script.src = "type003/gnugo.js";
 	script.type = 'text/javascript';
