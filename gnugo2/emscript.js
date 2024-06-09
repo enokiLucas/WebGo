@@ -59,7 +59,7 @@ window.onerror = (event) => {
 		Module.setStatus('Exception thrown, see JavaScript console');
 		//spinnerElement.style.display = 'none';
 		Module.setStatus = (text) => {
-				if (text) console.error('[post-exception status] ' + text);
+			if (text) console.error('[post-exception status] ' + text);
 		};
 };
 
@@ -87,3 +87,4 @@ function loadGnuGoModule() {
 
 	document.body.appendChild(script);
 }
+
