@@ -4943,7 +4943,7 @@ function callMain(args = []) {
   }
 }
 
-export function run(args = arguments_) {
+function run(args = arguments_) {
 
   if (runDependencies > 0) {
     return;

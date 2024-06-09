@@ -1,5 +1,3 @@
-import { run } from 'type003/gnugo.js';
-
 var statusElement = document.getElementById('status');
 var progressElement = document.getElementById('progress');
 var spinnerElement = document.getElementById('spinner');
@@ -65,6 +63,27 @@ window.onerror = (event) => {
 		};
 };
 
-var startModule = document.getElementById('startModuleButton').addEventListener('click', function() {
-	Module.startModule();
+document.getElementById('startModuleButton').addEventListener('click', function() {
+	loadGnuGoModule();
 });
+
+function loadGnuGoModule() {
+	var script = document.createElement('script');
+	script.src = "type003/gnugo.js";
+	script.type = 'text/javascript';
+	script.async = true;
+
+	script.onload = function() {
+		console.log("GNU Go module loaded successfully.");
+		// Call any initial setup functions here, if necessary
+		if (Module && typeof Module.onRuntimeInitialized === 'function') {
+			Module.onRuntimeInitialized();
+		}
+	};
+
+	script.onerror = function() {
+		console.error("Failed to load the GNU Go module.");
+	};
+
+	document.body.appendChild(script);
+}
