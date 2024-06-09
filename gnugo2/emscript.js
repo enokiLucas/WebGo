@@ -62,7 +62,7 @@ window.onerror = (event) => {
 			if (text) console.error('[post-exception status] ' + text);
 		};
 };
-
+/*
 document.getElementById('startModuleButton').addEventListener('click', function() {
 	loadGnuGoModule();
 });
@@ -95,4 +95,25 @@ function loadGnuGoModule() {
 
 	document.body.appendChild(script);
 }
+*/
 
+let worker;
+
+document.getElementById('startModuleButton').addEventListener('click', () => {
+	if (worker) {
+		worker.terminate(); // Terminate the existing worker
+	}
+
+	worker = new Worker('worker.js');
+
+	worker.onmessage = function(e) {
+		console.log('Message from Worker:', e.data);
+	};
+
+	worker.onerror = function(e) {
+		console.error('Error from Worker:', e.message);
+	};
+
+	// Start the module within the worker
+	worker.postMessage({ command: 'start' });
+});
