@@ -6,6 +6,7 @@ class GameStateManager { //Remember to fix SGF TODO
 		this._boardSize = 13;
 		this._timerControler = { method: 'AbsoluteTime', totalTime: 1200 }; // Define the method of time keeping
 		this.captureCounter = { black: 0, white: 0 }; // Track how many stones each player captured.
+		this.scoreCounter = { black: 0, white: 0}; // Save the score.
 	}
 
 	get timerControler() {
@@ -57,6 +58,7 @@ class GameStateManager { //Remember to fix SGF TODO
 		this.resetPlayer();
 		this.moveKey = 1;
 		this.captureCounter = { black: 0, white: 0 };
+		this.scoreCounter = { black: 0, white: 0};
 		document.dispatchEvent(new CustomEvent('new-game'));
 	}
 
@@ -88,7 +90,7 @@ class GameStateManager { //Remember to fix SGF TODO
 		document.dispatchEvent(event);
 
 		//console.log(this.movesHistory);// TEST
-		console.log(`makeMove: ${event.detail.player}`); //TEST
+		//console.log(`makeMove: ${event.detail.player}`); //TEST
 	}
 
 	makePass() {
