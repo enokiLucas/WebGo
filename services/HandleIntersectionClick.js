@@ -5,6 +5,8 @@ import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js';
 import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 
+import { exploreTerritory } from '../utils/ScoreUtil.js'; //TEST
+
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
 
 // Set up an event listener for capture metadata
@@ -45,7 +47,9 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
-	//console.log(rulesControl.boardMatrix); // TEST
+	console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 4, 4)); // TEST
+	//console.log(`boardX:${boardX}\nboardY:${boardY}`);
+
 
 	if (validationResult.isValid) {
 		// Apply the move

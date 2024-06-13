@@ -15,7 +15,7 @@ export function exploreTerritory(matrix, startX, startY) {
 			territory.push([cx, cy]);
 			const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
-			for (let [dx, dy] of directions) {
+			/*for (let [dx, dy] of directions) {
 				const nx = cx + dx, ny = cy + dy;
 				if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[nx].length) {
 					if (matrix[nx][ny] === null && !checked.has(`${nx},${ny}`)) {
@@ -28,7 +28,22 @@ export function exploreTerritory(matrix, startX, startY) {
 				} else {
 					isSurrounded = false;
 				}
+			}*/
+			for (let [dx, dy] of directions) {
+				const nx = cx + dx, ny = cy + dy;
+				if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[nx].length) {
+					if (matrix[nx][ny] === null && !checked.has(`${nx},${ny}`)) {
+						stack.push([nx, ny]);
+					} else if (matrix[nx][ny] !== null && surroundingColor === null) {
+						surroundingColor = matrix[nx][ny]; // First non-null surrounding color found.
+					} else if (matrix[nx][ny] !== null && surroundingColor !== matrix[nx][ny]) {
+						isSurrounded = false; // Different surrounding stone color found.
+					}
+				} else {
+					isSurrounded = false; // Edge of the board reached and considered not surrounded.
+				}
 			}
+
 		}
 	}
 

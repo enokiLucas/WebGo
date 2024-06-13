@@ -1,10 +1,12 @@
 import { rulesControl } from '../RulesControl.js';
-import { exploreTerritory } from './ScoreUtil.js';
+import { exploreTerritory } from '../../utils/ScoreUtil.js';
 
 class TerritoryScoring {
 	constructor() {
-		this.scoringBoard = rulesControl.createSimulatedBoardMatrix(); // Assuming this creates a deep copy of the board
+		//this.scoringBoard = rulesControl.createSimulatedBoardMatrix(); // Assuming this creates a deep copy of the board
 		this.resetTerritoriesCount();
+		this.blackTerritory = 0;
+		this.whiteTerritory = 0;
 	}
 
 	resetTerritoriesCount() {
@@ -14,10 +16,11 @@ class TerritoryScoring {
 	}
 
 	countScore() {
-		for (let x = 0; x < this.scoringBoard.length; x++) {
-			for (let y = 0; y < this.scoringBoard[x].length; y++) {
-				if (this.scoringBoard[x][y] === null && !this.visited.has(`${x},${y}`)) {
-					const { territory, isCompletelySurrounded, surroundedBy } = exploreTerritory(x, y, this.scoringBoard);
+		const scoringBoard = rulesControl.createSimulatedBoardMatrix();
+		for (let x = 0; x < scoringBoard.length; x++) {
+			for (let y = 0; y < scoringBoard[x].length; y++) {
+				if (scoringBoard[x][y] === null && !this.visited.has(`${x},${y}`)) {
+					const { territory, isCompletelySurrounded, surroundedBy } = exploreTerritory(scoringBoard, x, y);
 					if (isCompletelySurrounded) {
 						// Mark all explored territory points as visited
 						territory.forEach(point => {
