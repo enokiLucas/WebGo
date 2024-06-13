@@ -47,8 +47,8 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
-	console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 4, 4)); // TEST
-	//console.log(`boardX:${boardX}\nboardY:${boardY}`);
+	console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0)); // TEST
+	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
 
 
 	if (validationResult.isValid) {
