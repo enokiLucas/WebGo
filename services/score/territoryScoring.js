@@ -20,17 +20,19 @@ class TerritoryScoring {
 		for (let x = 0; x < scoringBoard.length; x++) {
 			for (let y = 0; y < scoringBoard[x].length; y++) {
 				if (scoringBoard[x][y] === null && !this.visited.has(`${x},${y}`)) {
-					const { territory, isCompletelySurrounded, surroundedBy } = exploreTerritory(scoringBoard, x, y);
+					const { points, isCompletelySurrounded, surroundedBy } = exploreTerritory(scoringBoard, x, y);
+					//console.log(territory)
+					//console.log(`points:${points}, isCompletelySurrounded:${isCompletelySurrounded}, surroundedBy:${surroundedBy}`);
 					if (isCompletelySurrounded) {
 						// Mark all explored territory points as visited
-						territory.forEach(point => {
+						points.forEach(point => {
 							this.visited.add(`${point.x},${point.y}`);
 						});
 						// Add territory size to the corresponding player's score
 						if (surroundedBy === 'black') {
-							this.blackTerritory += territory.length;
+							this.blackTerritory += points.length;
 						} else if (surroundedBy === 'white') {
-							this.whiteTerritory += territory.length;
+							this.whiteTerritory += points.length;
 						}
 					}
 				}

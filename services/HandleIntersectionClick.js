@@ -6,6 +6,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 
 import { exploreTerritory } from '../utils/ScoreUtil.js'; //TEST
+import { territoryScoring } from './score/territoryScoring.js';
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
 
@@ -47,7 +48,9 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
-	console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0)); // TEST
+	//territoryScoring.countScore();//TEST
+	//territoryScoring.resetTerritoriesCount();
+	//console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0)); // TEST
 	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
 
 
