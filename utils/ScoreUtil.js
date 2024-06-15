@@ -4,6 +4,36 @@ export function isValidPosition(x, y, size) {
 	return x >= 0 && x < size && y >= 0 && y < size;
 }
 
+// Check if a intersection is at the edge or not
+//size = matrix.lenght
+function nextDirection(x, y, size) {
+	const directions = [];
+
+	// Check if there is a valid space above the current point
+	if (x > 0) {
+		directions.push([-1, 0]);
+	}
+
+	// Check if there is a valid space to the right of the current point
+	if (y < size - 1) {
+		directions.push([0, 1]);
+	}
+
+	// Check if there is a valid space below the current point
+	if (x < size - 1) {
+		directions.push([1, 0]);
+	}
+
+	// Check if there is a valid space to the left of the current point
+	if (y > 0) {
+		directions.push([0, -1]);
+	}
+
+	return directions;
+}
+
+
+
 // Explores a territory starting from a specific point on the board (startX, startY)
 // and determines if the territory is completely surrounded by stones of a single color.
 export function exploreTerritory(matrix, startX, startY) {
@@ -25,7 +55,7 @@ export function exploreTerritory(matrix, startX, startY) {
 		if (matrix[cx][cy] === null) {
 			territory.push([cx, cy]);  // Add to territory list
 			// Possible directions to move to from the current point
-			const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+			const directions = nextDirection(startX, startY, size);
 
 			// Explore all adjacent points
 			for (let [dx, dy] of directions) {
