@@ -43,4 +43,5 @@ class InfluenceMap {
 	}
 }
 
-
+// Export a single instance
+export const influenceMap = new InfluenceMap();
