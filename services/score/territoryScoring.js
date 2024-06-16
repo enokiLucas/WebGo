@@ -38,7 +38,14 @@ class TerritoryScoring {
 				}
 			}
 		}
-		console.log(`Black Territory: ${this.blackTerritory}, White Territory: ${this.whiteTerritory}`);
+		//console.log(`Black Territory: ${this.blackTerritory}, White Territory: ${this.whiteTerritory}`); TEST
+		const scoreTerritory = new CustomEvent('scoreTerritory', {
+			detail: {
+				blackTerritory: this.blackTerritory,
+				whiteTerritory: this.whiteTerritory
+			}
+		});
+		document.dispatchEvent(scoreTerritory);
 	}
 
 	// Optional: Method to get current scores
