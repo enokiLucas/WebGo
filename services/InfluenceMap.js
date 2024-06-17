@@ -1,4 +1,4 @@
-import { rulesControl } from '../RulesControl.js';  // Assuming this path is correct
+import { rulesControl } from './RulesControl.js';  // Assuming this path is correct
 
 class InfluenceMap {
 	constructor() {
