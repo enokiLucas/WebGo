@@ -6,7 +6,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 //TEST
 import { exploreTerritory } from '../utils/ScoreUtil.js';
-import { territoryScoring } from './score/territoryScoring.js';
+import { territoryScoring } from './score/TerritoryScoring.js';
 import { influenceMap } from './InfluenceMap.js';
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
@@ -55,8 +55,10 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	//console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0));
 	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
 
-	influenceMap.updateMap(simulatedMatrix);
+	console.log(simulatedMatrix);
 
+	//influenceMap.updateMap(simulatedMatrix);
+	//influenceMap.printMap();
 
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {

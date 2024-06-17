@@ -1,14 +1,32 @@
-import { rulesControl } from './RulesControl.js';  // Assuming this path is correct
+import { rulesControl } from './RulesControl.js';
+import { gameStateManager } from './GameStateManager.js';
 
 class InfluenceMap {
 	constructor() {
-		this.size = rulesControl.boardMatrix.length;  // Assuming boardMatrix is a 2D array
-		this.map = this.initializeMap();
+		this.size = this.setSize();
+		this.map = this.initializeMap(this.size);
 	}
 
-	initializeMap() {
-		// Create a deep copy of the board matrix initialized to zero
-		return rulesControl.createSimulatedBoardMatrix().map(row => row.map(() => 0));
+	connectedCallback() {
+		// Listen to board size change events
+		document.addEventListener('board-size-changed', (event) => {
+			this.setSize();
+			this.initializeMap(this.size);
+		});
+	}
+
+	setSize() {
+		return gameStateManager.boardSize;
+	}
+
+	initializeMap(size) {
+		// Create a 2D array representing the board
+		const boardMatrix = [];
+		const size_n = parseInt(size, 10); // Convert string to number
+		for (let i = 0; i < size; i++) { // Create an array with size number of lines
+			boardMatrix[i] = new Array(size_n).fill(0); // Create a new array for each line, each new array with 'size' number of rows.
+		}
+		return boardMatrix;
 	}
 
 	addInfluence(x, y, color) {
@@ -35,7 +53,7 @@ class InfluenceMap {
 	}
 
 	resetMap() {
-		this.map = this.initializeMap();
+		this.map = this.initializeMap(this.size);
 	}
 
 	printMap() {
