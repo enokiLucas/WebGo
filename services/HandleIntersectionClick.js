@@ -55,10 +55,10 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	//console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0));
 	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
 
-	console.log(simulatedMatrix);
+	//console.log(simulatedMatrix);
 
-	//influenceMap.updateMap(simulatedMatrix);
-	//influenceMap.printMap();
+	influenceMap.updateMap(simulatedMatrix);
+	influenceMap.printMap();
 
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {

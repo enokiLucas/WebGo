@@ -52,6 +52,10 @@ class InfluenceMap {
 	printMap() {
 		console.log(this.map.map(row => row.map(value => value.toFixed(2)).join(' ')).join('\n'));
 	}
+
+	getMap() {
+		return this.map;
+	}
 }
 
 // Export a single instance
