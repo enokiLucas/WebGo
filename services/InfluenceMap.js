@@ -3,20 +3,12 @@ import { gameStateManager } from './GameStateManager.js';
 
 class InfluenceMap {
 	constructor() {
-		this.size = this.setSize();
+		this.size = gameStateManager.boardSize;
 		this.map = this.initializeMap(this.size);
 	}
 
-	connectedCallback() {
-		// Listen to board size change events
-		document.addEventListener('board-size-changed', (event) => {
-			this.setSize();
-			this.initializeMap(this.size);
-		});
-	}
-
 	setSize() {
-		return gameStateManager.boardSize;
+		this.size = gameStateManager.boardSize;
 	}
 
 	initializeMap(size) {
@@ -53,6 +45,7 @@ class InfluenceMap {
 	}
 
 	resetMap() {
+		this.setSize();
 		this.map = this.initializeMap(this.size);
 	}
 
