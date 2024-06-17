@@ -4,9 +4,10 @@ import { placeStoneOnBoard } from './PlaceStoneOnBoard.js';
 import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js';
 import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
-
-import { exploreTerritory } from '../utils/ScoreUtil.js'; //TEST
+//TEST
+import { exploreTerritory } from '../utils/ScoreUtil.js';
 import { territoryScoring } from './score/territoryScoring.js';
+import { influenceMap } from './InfluenceMap.js';
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
 
@@ -48,12 +49,16 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
-	//territoryScoring.countScore();//TEST
+	//==========================================TEST===================================================
+	//territoryScoring.countScore();
 	//territoryScoring.resetTerritoriesCount();
-	//console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0)); // TEST
+	//console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0));
 	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
 
+	influenceMap.updateMap(simulatedMatrix);
 
+
+//=========================================END TEST=================================================
 	if (validationResult.isValid) {
 		// Apply the move
 		updateBoard(board, x, y, boardX, boardY, gameStateManager.currentPlayer, ghostStone);
