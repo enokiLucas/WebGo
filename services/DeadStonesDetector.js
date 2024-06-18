@@ -1,22 +1,21 @@
 import { influenceMap } from './InfluenceMap.js';
 import { rulesControl } from './RulesControl.js';
 
-class DeadStoneDetector {
-	constructor() {
-		this.board = rulesControl.boardMatrix;  // Current board state
-		this.influenceMap = influenceMap.map;  // Current influence map
-	}
+class DeadStonesDetector {
+	constructor() {}
 
 	// Detect dead stones based on influence and board state
 	detectDeadStones() {
 		const deadStones = { black: [], white: [] };
+		const influence = influenceMap.getMap();
+		const board = rulesControl.createSimulatedBoardMatrix();
 
 		// Traverse the board to check each stone
-		for (let x = 0; x < this.board.length; x++) {
-			for (let y = 0; y < this.board[x].length; y++) {
-				const stone = this.board[x][y];
+		for (let x = 0; x < board.length; x++) {
+			for (let y = 0; y < board[x].length; y++) {
+				const stone = board[x][y];
 				if (stone !== null) {
-					const isDead = this.evaluateStone(x, y, stone);
+					const isDead = this.evaluateStone(x, y, stone, influence);
 					if (isDead) {
 						deadStones[stone].push({ x, y });
 					}
@@ -27,8 +26,8 @@ class DeadStoneDetector {
 	}
 
 	// Evaluate if a stone at a given position is dead
-	evaluateStone(x, y, color) {
-		const influence = this.influenceMap[x][y];
+	evaluateStone(x, y, color, map) {
+		const influence = map[x][y];
 		// Define influence thresholds for considering a stone dead
 		const threshold = color === 'black' ? -0.5 : 0.5;
 
@@ -37,4 +36,4 @@ class DeadStoneDetector {
 	}
 }
 
-export const deadStoneDetector = new DeadStoneDetector();
+export const deadStonesDetector = new DeadStonesDetector();

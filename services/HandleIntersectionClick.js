@@ -8,6 +8,7 @@ import { captureRule } from './rules/CaptureRule.js';
 import { exploreTerritory } from '../utils/ScoreUtil.js';
 import { territoryScoring } from './score/TerritoryScoring.js';
 import { influenceMap } from './InfluenceMap.js';
+import { deadStonesDetector } from './DeadStonesDetector.js'
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
 
@@ -58,7 +59,10 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	//console.log(simulatedMatrix);
 
 	influenceMap.updateMap(simulatedMatrix);
-	influenceMap.printMap();
+	//influenceMap.printMap();
+
+	const deadStones = deadStonesDetector.detectDeadStones();
+	console.log(deadStones);
 
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
