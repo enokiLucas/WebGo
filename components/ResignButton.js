@@ -18,7 +18,7 @@ class ResignButton extends HTMLElement {
 
 		button.addEventListener('click', () => {
 			document.dispatchEvent(new CustomEvent('end-game', { detail: {
-				type: 'Resignation',
+				type: 'resignation',
 				player: gameStateManager.currentPlayer
 			} }));
 		});

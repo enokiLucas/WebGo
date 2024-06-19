@@ -42,7 +42,6 @@ class GameStateManager { //Remember to fix SGF TODO
 		document.dispatchEvent(new CustomEvent('captures-changed', {
 			detail: { player, captures: this.captureCounter[player] }
 		}));
-		//console.log(this.captureCounter); //TEST
 	}
 
 	// Getter for capture counts
@@ -92,9 +91,6 @@ class GameStateManager { //Remember to fix SGF TODO
 		document.dispatchEvent(event);
 
 		this.passCounter = 0; // Reset pass counter on a valid move
-
-		//console.log(this.movesHistory);// TEST
-		//console.log(`makeMove: ${event.detail.player}`); //TEST
 	}
 
 	makePass() {
@@ -105,9 +101,10 @@ class GameStateManager { //Remember to fix SGF TODO
 
 		// Increment pass counter and check for consecutive passes
 		this.passCounter++;
+		console.log(this.passCounter);
 		if (this.passCounter >= 2) {
 			document.dispatchEvent(new CustomEvent('end-game', { detail: {
-				type: 'consecutivePasses',
+				type: 'passes',
 				player: this._currentPlayer
 			} }));
 		}

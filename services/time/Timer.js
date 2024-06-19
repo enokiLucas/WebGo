@@ -28,7 +28,7 @@ class Timer {
 			if (this.time[player] < 0) {
 				this.stopCountdown(player);
 				document.dispatchEvent(new CustomEvent('end-game', { detail: {
-					type: 'Time out',
+					type: 'timeout',
 					player: gameStateManager.currentPlayer
 				} }));
 			} else {

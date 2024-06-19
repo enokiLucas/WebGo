@@ -5,7 +5,10 @@ import { rulesControl } from './RulesControl.js';
 
 class EndGameManager {
 	constructor() {
-		// Listen for the 'end-game' event on the document
+		this.initializeEventListeners();
+	}
+
+	initializeEventListeners() {
 		document.addEventListener('end-game', this.handleEndGame.bind(this));
 	}
 
@@ -13,13 +16,13 @@ class EndGameManager {
 		const { type, player } = event.detail;
 		switch (type) {
 			case 'resignation':
-				this.handleResignation(player);
+				this.handleResignation(player); console.log('resignation');
 				break;
 			case 'timeout':
-				this.handleTimeout(player);
+				this.handleTimeout(player); console.log('timeout');
 				break;
-			case 'consecutivePasses':
-				this.handleConsecutivePasses();
+			case 'passes':
+				this.handleConsecutivePasses(); console.log('passes');
 				break;
 				// Add other cases as needed
 		}
