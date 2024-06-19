@@ -1,6 +1,16 @@
 # Sustainable Use License
 
-Version 1.0
+Version 1.0.1
+
+### Modifications:
+
+The following changes have been made to the original version 1.0 of this license:
+
+- The license now applies to the entire repository, not just the main branch.
+
+- There are no exceptions for files with ".ee." in their filename; all files are licensed under this Sustainable Use License.
+
+- Removed all references to the n8n Enterprise License.
 
 ## Acceptance
 
