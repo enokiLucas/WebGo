@@ -7,6 +7,7 @@ class GameStateManager { //Remember to fix SGF TODO
 		this._timerControler = { method: 'AbsoluteTime', totalTime: 1200 }; // Define the method of time keeping
 		this.captureCounter = { black: 0, white: 0 }; // Track how many stones each player captured.
 		this.scoreCounter = { black: 0, white: 0}; // Save the score.
+		this.passCounter = 0; // Track consecutive passes
 	}
 
 	get timerControler() {
@@ -59,6 +60,7 @@ class GameStateManager { //Remember to fix SGF TODO
 		this.moveKey = 1;
 		this.captureCounter = { black: 0, white: 0 };
 		this.scoreCounter = { black: 0, white: 0};
+		this.passCounter = 0;
 		document.dispatchEvent(new CustomEvent('new-game'));
 	}
 
@@ -89,15 +91,26 @@ class GameStateManager { //Remember to fix SGF TODO
 		this.togglePlayer();
 		document.dispatchEvent(event);
 
+		this.passCounter = 0; // Reset pass counter on a valid move
+
 		//console.log(this.movesHistory);// TEST
 		//console.log(`makeMove: ${event.detail.player}`); //TEST
 	}
 
 	makePass() {
-		const event = new CustomEvent('passMade', { detail: {player: this.currentPlayer } });
+		const event = new CustomEvent('passMade', { detail: {player: this._currentPlayer } });
 		this.recordMove(null, null, { pass: true }); // Add a pass move movesHistory
 		this.togglePlayer(); // Switch turns
 		document.dispatchEvent(event);
+
+		// Increment pass counter and check for consecutive passes
+		this.passCounter++;
+		if (this.passCounter >= 2) {
+			document.dispatchEvent(new CustomEvent('end-game', { detail: {
+				type: 'consecutivePasses',
+				player: this._currentPlayer
+			} }));
+		}
 
 		console.log(`makePass: ${event.detail.player}`); //TEST
 	}

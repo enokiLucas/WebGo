@@ -2,7 +2,7 @@ import { gameStateManager } from '../GameStateManager.js';
 
 class Timer {
 	constructor() {
-		this.timeMinutes = { black: 2, white: 2};
+		this.timeMinutes = { black: 1, white: 1};
 		this.time = {};
 		this.timerPath = {};
 		this.intervalID = { black: null, white: null };
@@ -25,9 +25,12 @@ class Timer {
 	startCountdown(player = 'black') {
 		// Update the countdown every second
 		this.intervalID[player] = setInterval(() => {
-			if (this.time[player] <= 0) {
+			if (this.time[player] < 0) {
 				this.stopCountdown(player);
-				document.dispatchEvent(new CustomEvent('end-game', { detail: { type: 'Time out' } }));
+				document.dispatchEvent(new CustomEvent('end-game', { detail: {
+					type: 'Time out',
+					player: gameStateManager.currentPlayer
+				} }));
 			} else {
 				this.convertToClock(player);
 				this.time[player]--; // Decrement the timer

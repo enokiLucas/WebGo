@@ -17,7 +17,10 @@ class ResignButton extends HTMLElement {
 		button.setAttribute('id', 'resign-pass');
 
 		button.addEventListener('click', () => {
-			document.dispatchEvent(new CustomEvent('end-game', { detail: { type: 'Resignation' } }));
+			document.dispatchEvent(new CustomEvent('end-game', { detail: {
+				type: 'Resignation',
+				player: gameStateManager.currentPlayer
+			} }));
 		});
 
 		this.shadowRoot.appendChild(button);
