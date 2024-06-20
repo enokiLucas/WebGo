@@ -50,6 +50,9 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	// Save the validation result.
 	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
 
+	//Update the influence map.
+	influenceMap.updateMap(simulatedMatrix);
+
 	//==========================================TEST===================================================
 	//territoryScoring.countScore();
 	//territoryScoring.resetTerritoriesCount();
@@ -57,13 +60,6 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
 
 	//console.log(simulatedMatrix);
-
-	influenceMap.updateMap(simulatedMatrix);
-	//influenceMap.printMap();
-
-	const deadStones = deadStonesDetector.detectDeadStones();
-	console.log(deadStones);
-
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
 		// Apply the move
