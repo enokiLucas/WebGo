@@ -2,7 +2,7 @@ import { gameStateManager } from '../GameStateManager.js';
 
 class Timer {
 	constructor() {
-		this.timeMinutes = { black: 1, white: 1};
+		this.timeMinutes = { black: 10, white: 10};
 		this.time = {};
 		this.timerPath = {};
 		this.intervalID = { black: null, white: null };
