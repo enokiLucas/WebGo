@@ -18,6 +18,7 @@ class PassButton extends HTMLElement {
 
 		button.addEventListener('click', () => {
 			gameStateManager.makePass(getPlayerSGFColor(gameStateManager.currentPlayer));
+
 		});
 
 		this.shadowRoot.appendChild(button);

@@ -24,6 +24,12 @@ class GoBoard extends HTMLElement {
 			const newSize = event.detail.size;
 			this.initializeBoard(newSize);
 		});
+
+		// Change the color of the ghost stone in case of a pass
+		document.addEventListener('passMade', () => {
+			const ghostStone = this.shadowRoot.querySelector('#ghost-stone');
+			ghostStone.setAttribute('fill', gameStateManager.currentPlayer);
+		})
 	}
 
 	// You can use attributes to dynamically set properties like board size

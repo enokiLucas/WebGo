@@ -108,7 +108,6 @@ class GameStateManager { //Remember to fix SGF TODO
 				player: this._currentPlayer
 			} }));
 		}
-
 		console.log(`makePass: ${event.detail.player}`); //TEST
 	}
 }

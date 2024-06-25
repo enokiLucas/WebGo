@@ -28,10 +28,11 @@ function updateBoard(board, x, y, boardX, boardY, player, ghostStone) {
 	const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
 	rulesControl.updateCell(boardX, boardY, player); // Update the logical board
 	rulesControl.updateBoardState(); //Update the BoardState
-	ghostStone.setAttribute('fill', player); // Change the color of the ghost stone
+	//ghostStone.setAttribute('fill', player); // Change the color of the ghost stone
 
 	// Keep it as the last method
 	gameStateManager.makeMove(boardX, boardY, lastMoveMetadata); //Add move to the game state
+	ghostStone.setAttribute('fill', gameStateManager.currentPlayer); // Change the color of the ghost stone
 	lastMoveMetadata = {}; //Reset lastMoveMetadata if necessary
 }
 
