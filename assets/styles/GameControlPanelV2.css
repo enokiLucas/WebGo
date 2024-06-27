@@ -11,7 +11,7 @@ body {
 */
 
 .vertical-tabs-panel {
-	margin-right: 5vh;
+	margin: 2vw 5vh;
 	background-color: #ffffff;
 	width: 25vw;
 	height: 55vh;
@@ -30,7 +30,7 @@ body {
 	/*background-color: #ffffff;
 	width: 25vw;
 	font-size: 16px;
-	min-width: 30em;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 	height: 55vh;*/
 	/*position: absolute;*/
 	/*transform: translate(-50%, -50%);*/
@@ -38,7 +38,7 @@ body {
 	left: 50%;*/
 	display: grid;
 	grid-template-columns: 9fr 3fr;
-	/*box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);*/
+	min-height: 20em;
 }
 
 .tabs {
