@@ -54,13 +54,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	//Update the influence map.
 	influenceMap.updateMap(simulatedMatrix);
 
-	//==========================================TEST===================================================
-	//territoryScoring.countScore();
-	//territoryScoring.resetTerritoriesCount();
-	//console.log(exploreTerritory(rulesControl.createSimulatedBoardMatrix(), 8, 0));
-	//console.log(`boardX:${boardX}\nboardY:${boardY}`); //TEST print the relative coordinaes of a intersection.
-
-	//console.log(simulatedMatrix);
+//==========================================TEST===================================================
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
 		// Apply the move
