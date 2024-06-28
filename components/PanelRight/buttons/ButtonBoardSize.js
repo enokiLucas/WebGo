@@ -1,7 +1,8 @@
 import { loadStyles } from '../../../utils/StyleLoader.js';
-import { gameStateManager } from '../../../services/GameStateManager.js'
+import { gameStateManager } from '../../../services/GameStateManager.js';
+import { newMatchManager } from '../../../services/NewMatchManager.js';
 
-class BoardButtonSize extends HTMLElement {
+class ButtonBoardSize extends HTMLElement {
 	constructor() {
 		super(); // Always call super() first in a Web Component constructor.
 
@@ -17,11 +18,16 @@ class BoardButtonSize extends HTMLElement {
 
 		const button = document.createElement('button');
 		button.textContent = `${this.boardSize}x${this.boardSize} Board`;
-
+/*
 		// Add event listener
 		button.addEventListener('click', () => {
 			gameStateManager.boardSize = this.boardSize;
 		});
+*/
+
+		button.addEventListener('click', () => {
+			newMatchManager.updateNewMatchSettings('boardSize', this.boardSize);
+		})
 
 		this.shadowRoot.appendChild(button);
 
@@ -30,4 +36,4 @@ class BoardButtonSize extends HTMLElement {
 }
 
 // Define the custom element
-customElements.define('board-button-size', BoardButtonSize);
+customElements.define('button-board-size', ButtonBoardSize);
