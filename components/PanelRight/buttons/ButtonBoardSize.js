@@ -17,7 +17,7 @@ class ButtonBoardSize extends HTMLElement {
 		loadStyles(this.shadowRoot, '../../../assets/styles/Buttons.css');
 
 		const button = document.createElement('button');
-		button.textContent = `${this.boardSize}x${this.boardSize} Board`;
+		button.textContent = this.boardSize;
 /*
 		// Add event listener
 		button.addEventListener('click', () => {
