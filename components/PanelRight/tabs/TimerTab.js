@@ -14,6 +14,7 @@ class TimerTab extends HTMLElement {
 		await loadStyles(this.shadowRoot, '../../../assets/styles/TimerTab.css');
 		document.addEventListener('moveMade', this.updateTimerDisplay);
 		document.addEventListener('passMade', this.updateTimerDisplay);
+		document.addEventListener('captures-changed', this.updateCaptureDisplay);
 		this.testTimer();
 
 	}
@@ -74,7 +75,7 @@ class TimerTab extends HTMLElement {
 	}
 
 	//Update the capture display.
-	updateCaptureDisplay(e) {
+	updateCaptureDisplay = (e) => {
 		const newScore = gameStateManager.getCaptureCounter();
 		//console.log(newScore[e.detail.player]);
 		const captureCounter = this.shadowRoot.querySelector(`.captures-counter.${e.detail.player}-section`);
