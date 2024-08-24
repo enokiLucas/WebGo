@@ -10,20 +10,19 @@ class DeadStonesDetection {
 
   isStoneDead(boardState, x, y, color) {
     const state = new MonteCarloState(boardState, color);
-    const deadAfterSimulations = this.simulateWithOpponentMoves(state, x, y, color);
+    const deadAfterSimulations = this.simulateOpponentResponses(state, x, y, color);
     return deadAfterSimulations;
   }
 
-  simulateWithOpponentMoves(state, x, y, color) {
+  simulateOpponentResponses(state, x, y, color) {
     const opponent = color === 'black' ? 'white' : 'black';
     const simulationResults = [];
 
-    // Simulate all possible moves by the opponent
-    for (let i = 0; i < state.boardMatrix.length; i++) {
-      for (let j = 0; j < state.boardMatrix[i].length; j++) {
-        if (state.boardMatrix[i][j] === null) {  // Empty spot
+    for (let i = Math.max(x - 1, 0); i <= Math.min(x + 1, state.boardMatrix.length - 1); i++) {
+      for (let j = Math.max(y - 1, 0); j <= Math.min(y + 1, state.boardMatrix[i].length - 1); j++) {
+        if (state.boardMatrix[i][j] === null) {
           const simulationState = state.clone();
-          simulationState.applyMove(i, j);  // Apply opponent's move
+          simulationState.applyMove(i, j);
 
           const result = this.monteCarloEngine.run(simulationState);
           simulationResults.push({ move: `${i},${j}`, score: result.score });
@@ -31,19 +30,16 @@ class DeadStonesDetection {
       }
     }
 
-    // Analyze results to determine if the stone is effectively dead
-    return this.analyzeResults(simulationResults, x, y);
+    return this.analyzeDeadStoneResults(simulationResults, x, y);
   }
 
-  analyzeResults(simulationResults, targetX, targetY) {
-    // Check if the simulations consistently result in the target stone being captured
+  analyzeDeadStoneResults(simulationResults, targetX, targetY) {
     let isDead = true;
 
     for (const result of simulationResults) {
       const { move, score } = result;
 
-      // If the result favors the opponent significantly, the stone is likely dead
-      if (move === `${targetX},${targetY}` && score < 0) {
+      if (move === `${targetX},${targetY}` && score > 0) {
         isDead = false;
         break;
       }

@@ -7,11 +7,10 @@ class MonteCarloSimulation {
       const [x, y] = MonteCarloSimulation.getRandomMove(simulationState);
       simulationState.applyMove(x, y);
     }
-    return MonteCarloSimulation.score(simulationState);
+    return { move: `${simulationState.lastMoveX},${simulationState.lastMoveY}`, score: MonteCarloSimulation.score(simulationState) };
   }
 
   static isTerminal(state) {
-    // Define when the simulation ends (e.g., both players pass)
     return state.passCounter >= 2;
   }
 
@@ -28,7 +27,6 @@ class MonteCarloSimulation {
   }
 
   static score(state) {
-    // Use TerritoryScoring or any other existing method to calculate score
     return territoryScoring.countScore(state.boardMatrix);
   }
 }
