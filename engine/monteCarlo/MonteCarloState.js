@@ -2,7 +2,8 @@
 import { rulesControl } from '../../services/RulesControl.js';
 
 class MonteCarloState {
-  constructor(boardMatrix, currentPlayer) {
+  constructor(boardMatrix, currentPlayer, passCounter, boardX, boardY) {
+    console.log('hello'); // TEST
 
     if (!Array.isArray(boardMatrix) || boardMatrix.length === 0) {
       throw new Error("Invalid boardMatrix: must be a non-empty 2D array.");
@@ -10,9 +11,9 @@ class MonteCarloState {
 
     this.boardMatrix = boardMatrix.map(row => [...row]);
     this.currentPlayer = currentPlayer;
-    this.passCounter = 0;
-    this.lastMoveX = null;
-    this.lastMoveY = null;
+    this.passCounter = passCounter;
+    this.lastMoveX = boardX;
+    this.lastMoveY = boardY;
   }
 
   clone() {
