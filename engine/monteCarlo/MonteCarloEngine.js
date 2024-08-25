@@ -9,6 +9,7 @@ class MonteCarloEngine {
   }
 
   run(state) {
+    console.log('hello from run');
     const simulationResults = [];
     for (let i = 0; i < this.numSimulations; i++) {
       const simulationResult = MonteCarloSimulation.simulate(state);
