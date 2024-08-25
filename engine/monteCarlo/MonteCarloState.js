@@ -1,7 +1,13 @@
 // Handles state representation and cloning
+import { rulesControl } from '../../services/RulesControl.js';
 
 class MonteCarloState {
   constructor(boardMatrix, currentPlayer) {
+
+    if (!Array.isArray(boardMatrix) || boardMatrix.length === 0) {
+      throw new Error("Invalid boardMatrix: must be a non-empty 2D array.");
+    }
+
     this.boardMatrix = boardMatrix.map(row => [...row]);
     this.currentPlayer = currentPlayer;
     this.passCounter = 0;

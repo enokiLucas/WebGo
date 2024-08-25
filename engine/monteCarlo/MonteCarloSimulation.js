@@ -1,4 +1,5 @@
 // Logic for running the simulations
+import { territoryScoring } from '../../services/score/TerritoryScoring.js'
 
 class MonteCarloSimulation {
   static simulate(state) {

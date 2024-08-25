@@ -6,7 +6,25 @@ import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 import { influenceMap } from './InfluenceMap.js';
 //TEST
+import { monteCarloEngine } from '../engine/monteCarlo/MonteCarloEngine.js';
+import { MonteCarloState } from '../engine/monteCarlo/MonteCarloState.js';
 
+function aiMakeMove() {
+	const currentState = new MonteCarloState(rulesControl.boardMatrix, gameStateManager.currentPlayer);
+	console.log('14: currentState -> ' + currentState);
+
+	// Run the Monte Carlo simulation to find the best move
+	const bestMove = monteCarloEngine.run(currentState);
+	console.log('18: bestMove -> ' + bestMove)
+
+	if (bestMove) {
+			const [x, y] = bestMove.split(',').map(Number); // Extract coordinates from the move string
+			gameStateManager.makeMove(x, y); // Apply the move to the game
+			console.log(`AI chose move at (${x}, ${y})`);
+	} else {
+			console.log("AI couldn't find a valid move.");
+	}
+}
 //END TEST
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
@@ -53,7 +71,9 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	//Update the influence map.
 	influenceMap.updateMap(simulatedMatrix);
 
-//==========================================TEST===================================================
+//===========================================TEST===================================================
+		console.log(aiMakeMove());
+
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
 		// Apply the move
