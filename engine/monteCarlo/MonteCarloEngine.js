@@ -12,7 +12,7 @@ class MonteCarloEngine {
     console.log('hello from run');
     const simulationResults = [];
     for (let i = 0; i < this.numSimulations; i++) {
-      const simulationResult = MonteCarloSimulation.simulate(state);
+      const simulationResult = MonteCarloSimulation.simulate(state); console.log(simulationResult);
       simulationResults.push(simulationResult);
     }
 
