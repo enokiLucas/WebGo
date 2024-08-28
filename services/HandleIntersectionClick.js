@@ -11,11 +11,11 @@ import { MonteCarloState } from '../engine/monteCarlo/MonteCarloState.js';
 
 function aiMakeMove(boardX, boardY) {
 	const currentState = new MonteCarloState(rulesControl.boardMatrix, gameStateManager.currentPlayer, gameStateManager.getPassCounter(), boardX, boardY);
-	console.log('14: currentState -> '); console.log(currentState);
+	//console.log('14: currentState -> '); console.log(currentState);
 
 	// Run the Monte Carlo simulation to find the best move
 	const bestMove = monteCarloEngine.run(currentState);
-	console.log('18: bestMove -> '); console.log(bestMove);
+	//console.log('18: bestMove -> '); console.log(bestMove);
 
 	if (bestMove) {
 			const [x, y] = bestMove.split(',').map(Number); // Extract coordinates from the move string
@@ -24,6 +24,9 @@ function aiMakeMove(boardX, boardY) {
 	} else {
 			console.log("AI couldn't find a valid move.");
 	}
+
+	console.log('end of aiMakeMave');
+	console.log(gameStateManager.getScoreCounter());
 }
 //END TEST
 

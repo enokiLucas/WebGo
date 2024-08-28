@@ -58,7 +58,8 @@ class EndGameManager {
 		this.removeDeadStones(deadStones);
 
 		// Count territory and capture scores
-		territoryScoring.countScore();
+		const scoringBoard = rulesControl.createSimulatedBoardMatrix();
+		territoryScoring.countScore(scoringBoard, true); // add the simulated board matrix as the argument
 
 		// Get final scores
 		const blackScore = territoryScoring.blackTerritory + gameStateManager.getCaptureCounter().black;

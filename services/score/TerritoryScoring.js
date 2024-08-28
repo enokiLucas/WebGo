@@ -24,8 +24,25 @@ class TerritoryScoring {
 	 * Try the following first:
 	 * countScore(const scoringBoard = rulesControl.createSimulatedBoardMAtrix)
 	*/
-	countScore() {
-		const scoringBoard = rulesControl.createSimulatedBoardMatrix();
+
+	addTerritoryToScore() {
+		// Add territory size to the corresponding player's score
+		if (surroundedBy === 'black') {
+			this.blackTerritory += points.length;
+		} else if (surroundedBy === 'white') {
+			this.whiteTerritory += points.length;
+		}
+	}
+
+	/**
+	 * 
+	 * @param {Array} scoringBoard matrix made based on the board that can be manipulated without interfering with the original
+	 * @param {boolean} bool switch for using the function addTerritoryToScore
+	 * 	true: add the territory to the score
+	 * 	false: does not add territory to the score. 
+	 */
+	countScore(scoringBoard, bool) {
+		//const scoringBoard = rulesControl.createSimulatedBoardMatrix();
 		for (let x = 0; x < scoringBoard.length; x++) {
 			for (let y = 0; y < scoringBoard[x].length; y++) {
 				if (scoringBoard[x][y] === null && !this.visited.has(`${x},${y}`)) {
@@ -35,11 +52,9 @@ class TerritoryScoring {
 						points.forEach(point => {
 							this.visited.add(`${point.x},${point.y}`);
 						});
-						// Add territory size to the corresponding player's score
-						if (surroundedBy === 'black') {
-							this.blackTerritory += points.length;
-						} else if (surroundedBy === 'white') {
-							this.whiteTerritory += points.length;
+						// In case countScore is used without the intention of calculating the final score.
+						if (bool) {
+							this.addTerritoryToScore;
 						}
 					}
 				}

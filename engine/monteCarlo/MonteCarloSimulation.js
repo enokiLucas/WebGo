@@ -28,7 +28,7 @@ class MonteCarloSimulation {
   }
 
   static score(state) {
-    return territoryScoring.countScore(state.boardMatrix); // ALERT
+    return territoryScoring.countScore(state.boardMatrix, false); // ALERT
   }
 }
 
