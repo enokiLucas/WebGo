@@ -15,6 +15,15 @@ class TerritoryScoring {
 		this.visited = new Set();
 	}
 
+	/**
+	 * In monte carlo simulation, countScore has am argument that is the state boardMatrix
+	 * but in the EndGameManager, it is used without an arg as it was first designed.
+	 * 
+	 * Make the function below receive an argument of the matrix
+	 * 
+	 * Try the following first:
+	 * countScore(const scoringBoard = rulesControl.createSimulatedBoardMAtrix)
+	 */
 	countScore() {
 		const scoringBoard = rulesControl.createSimulatedBoardMatrix();
 		for (let x = 0; x < scoringBoard.length; x++) {
