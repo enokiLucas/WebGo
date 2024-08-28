@@ -25,8 +25,6 @@ export class RulesControl {
 	updateCell(x, y, color) {
 		// Place a stone on the board and check for captures
 		this.boardMatrix[x][y] = color;
-
-		//console.log(this.boardMatrix); // test
 	}
 
 	getCellValue(x, y) {
@@ -36,7 +34,6 @@ export class RulesControl {
 	updateBoardState() {
 		const currentBoardState = this.boardMatrix.flat().join('');
 		this.boardStatesHistory.push(currentBoardState);
-		//console.log(this.boardStatesHistory)  //test.
 	}
 
 	getPreviousBoardState() {
@@ -51,7 +48,7 @@ export class RulesControl {
 		// Create a deep copy of the current board matrix
 		const simulatedBoardMatrix = this.boardMatrix.map(row => [...row]);
 		return simulatedBoardMatrix;
-}
+	}
 
 
 	// Centralized method to check if a a move is valid.
