@@ -23,15 +23,13 @@ class TerritoryScoring {
 	 * 
 	 * Try the following first:
 	 * countScore(const scoringBoard = rulesControl.createSimulatedBoardMAtrix)
-	 */
+	*/
 	countScore() {
 		const scoringBoard = rulesControl.createSimulatedBoardMatrix();
 		for (let x = 0; x < scoringBoard.length; x++) {
 			for (let y = 0; y < scoringBoard[x].length; y++) {
 				if (scoringBoard[x][y] === null && !this.visited.has(`${x},${y}`)) {
 					const { points, isCompletelySurrounded, surroundedBy } = exploreTerritory(scoringBoard, x, y);
-					//console.log(territory)
-					//console.log(`points:${points}, isCompletelySurrounded:${isCompletelySurrounded}, surroundedBy:${surroundedBy}`);
 					if (isCompletelySurrounded) {
 						// Mark all explored territory points as visited
 						points.forEach(point => {
@@ -47,7 +45,7 @@ class TerritoryScoring {
 				}
 			}
 		}
-		//console.log(`Black Territory: ${this.blackTerritory}, White Territory: ${this.whiteTerritory}`); TEST
+
 		const scoreTerritory = new CustomEvent('scoreTerritory', {
 			detail: {
 				blackTerritory: this.blackTerritory,
