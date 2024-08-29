@@ -42,7 +42,6 @@ class TerritoryScoring {
 	 * 	false: does not add territory to the score. 
 	 */
 	countScore(scoringBoard, bool) {
-		//const scoringBoard = rulesControl.createSimulatedBoardMatrix();
 		for (let x = 0; x < scoringBoard.length; x++) {
 			for (let y = 0; y < scoringBoard[x].length; y++) {
 				if (scoringBoard[x][y] === null && !this.visited.has(`${x},${y}`)) {
@@ -55,6 +54,8 @@ class TerritoryScoring {
 						// In case countScore is used without the intention of calculating the final score.
 						if (bool) {
 							this.addTerritoryToScore;
+						} else {
+							return points.length;
 						}
 					}
 				}

@@ -3,7 +3,6 @@ import { rulesControl } from '../../services/RulesControl.js';
 
 class MonteCarloState {
   constructor(boardMatrix, currentPlayer, passCounter, boardX, boardY) {
-    console.log('hello'); // TEST
 
     if (!Array.isArray(boardMatrix) || boardMatrix.length === 0) {
       throw new Error("Invalid boardMatrix: must be a non-empty 2D array.");

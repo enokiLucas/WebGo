@@ -24,9 +24,6 @@ function aiMakeMove(boardX, boardY) {
 	} else {
 			console.log("AI couldn't find a valid move.");
 	}
-
-	console.log('end of aiMakeMave');
-	console.log(gameStateManager.getScoreCounter());
 }
 //END TEST
 
@@ -75,7 +72,7 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	influenceMap.updateMap(simulatedMatrix);
 
 //===========================================TEST===================================================
-		console.log(aiMakeMove(boardX, boardY));
+	aiMakeMove(boardX, boardY);
 
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
