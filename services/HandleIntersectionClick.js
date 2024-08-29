@@ -9,16 +9,19 @@ import { influenceMap } from './InfluenceMap.js';
 import { monteCarloEngine } from '../engine/monteCarlo/MonteCarloEngine.js';
 import { MonteCarloState } from '../engine/monteCarlo/MonteCarloState.js';
 
-function aiMakeMove(boardX, boardY) {
+function aiMakeMove(board, boardX, boardY) {
 	const currentState = new MonteCarloState(rulesControl.boardMatrix, gameStateManager.currentPlayer, gameStateManager.getPassCounter(), boardX, boardY);
-	//console.log('14: currentState -> '); console.log(currentState);
 
 	// Run the Monte Carlo simulation to find the best move
 	const bestMove = monteCarloEngine.run(currentState);
-	//console.log('18: bestMove -> '); console.log(bestMove);
+
+	console.log(bestMove);
 
 	if (bestMove) {
 			const [x, y] = bestMove.split(',').map(Number); // Extract coordinates from the move string
+			const cx = EDGE_MARGIN + (LENGTH_SQUARE * x);
+			const cy = EDGE_MARGIN + (LENGTH_SQUARE * y);
+			placeStoneOnBoard(board, cx, cy, gameStateManager.currentPlayer);
 			gameStateManager.makeMove(x, y); // Apply the move to the game
 			console.log(`AI chose move at (${x}, ${y})`);
 	} else {
@@ -72,7 +75,8 @@ export function handleIntersectionClick(board, event, ghostStone) {
 	influenceMap.updateMap(simulatedMatrix);
 
 //===========================================TEST===================================================
-	aiMakeMove(boardX, boardY);
+	aiMakeMove(board, boardX, boardY);
+	console.log(rulesControl.boardMatrix);
 
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
