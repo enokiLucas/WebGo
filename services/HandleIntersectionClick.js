@@ -6,28 +6,7 @@ import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 import { influenceMap } from './InfluenceMap.js';
 //TEST
-import { monteCarloEngine } from '../engine/monteCarlo/MonteCarloEngine.js';
-import { MonteCarloState } from '../engine/monteCarlo/MonteCarloState.js';
-
-function aiMakeMove(board, boardX, boardY) {
-	const currentState = new MonteCarloState(rulesControl.boardMatrix, gameStateManager.currentPlayer, gameStateManager.getPassCounter(), boardX, boardY);
-
-	// Run the Monte Carlo simulation to find the best move
-	const bestMove = monteCarloEngine.run(currentState);
-
-	console.log(bestMove);
-
-	if (bestMove) {
-			const [x, y] = bestMove.split(',').map(Number); // Extract coordinates from the move string
-			const cx = EDGE_MARGIN + (LENGTH_SQUARE * x);
-			const cy = EDGE_MARGIN + (LENGTH_SQUARE * y);
-			placeStoneOnBoard(board, cx, cy, gameStateManager.currentPlayer);
-			gameStateManager.makeMove(x, y); // Apply the move to the game
-			console.log(`AI chose move at (${x}, ${y})`);
-	} else {
-			console.log("AI couldn't find a valid move.");
-	}
-}
+import { aiMakeMove } from './AIplayer.js';
 //END TEST
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
@@ -76,7 +55,6 @@ export function handleIntersectionClick(board, event, ghostStone) {
 
 //===========================================TEST===================================================
 	aiMakeMove(board, boardX, boardY);
-	console.log(rulesControl.boardMatrix);
 
 //=========================================END TEST=================================================
 	if (validationResult.isValid) {
