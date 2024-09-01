@@ -5,8 +5,9 @@ import { convertToSGFPosition, getPlayerSGFColor } from '../utils/SGFUtil.js';
 import { EDGE_MARGIN, LENGTH_SQUARE } from '../utils/constants.js';
 import { captureRule } from './rules/CaptureRule.js';
 import { influenceMap } from './InfluenceMap.js';
+import { monteCarloEngine } from '../engine/monteCarlo/MonteCarloEngine.js';
+import { MonteCarloState } from '../engine/monteCarlo/MonteCarloState.js';
 //TEST
-import { aiMakeMove } from './AIplayer.js';
 //END TEST
 
 let lastMoveMetadata = {}; // Temporary storage for metadata outside of handleIntersectionClick
@@ -22,6 +23,7 @@ document.addEventListener('new-metadata', (event) => {
 	// Or ensure makeMove is called after this event is processed
 });
 
+
 function updateBoard(board, x, y, boardX, boardY, player, ghostStone) {
 	placeStoneOnBoard(board, x, y, player) // Place the stone on the board;
 	const sgfPosition = convertToSGFPosition(x, y); //Convert the event coordinates into SGF positions.
@@ -35,28 +37,17 @@ function updateBoard(board, x, y, boardX, boardY, player, ghostStone) {
 	lastMoveMetadata = {}; //Reset lastMoveMetadata if necessary
 }
 
-export function handleIntersectionClick(board, event, ghostStone) {
-	// Save the coordinates of the event.
-	const x = event.target.cx.baseVal.value;
-	const y = event.target.cy.baseVal.value;
-	// Convert the event coordinates into board relative ones
-	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
-	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
-
+function executeMove(board, ghostStone, x, y, boardX, boardY) {
 	// Create a simulated boardMatrix and place the stone.
 	const simulatedMatrix = rulesControl.createSimulatedBoardMatrix();
 	simulatedMatrix[boardX][boardY] = gameStateManager.currentPlayer;
 
 	// Save the validation result.
-	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer);
+	const validationResult = rulesControl.isMoveValid(boardX, boardY, simulatedMatrix,  gameStateManager.currentPlayer); console.log(validationResult);
 
 	//Update the influence map.
 	influenceMap.updateMap(simulatedMatrix);
 
-//===========================================TEST===================================================
-	aiMakeMove(board, boardX, boardY);
-
-//=========================================END TEST=================================================
 	if (validationResult.isValid) {
 		// Apply the move
 		updateBoard(board, x, y, boardX, boardY, gameStateManager.currentPlayer, ghostStone);
@@ -72,4 +63,45 @@ export function handleIntersectionClick(board, event, ghostStone) {
 		// Handle invalid move, e.g., display error message
 		alert(validationResult.message);
 	}
+}
+
+async function aiMakeMove(board, boardX, boardY, ghostStone) {
+	const currentState = new MonteCarloState(rulesControl.boardMatrix, gameStateManager.currentPlayer, gameStateManager.getPassCounter(), boardX, boardY);
+	
+	// Run the Monte Carlo simulation asynchronously to find the best move
+	const bestMove = await new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(monteCarloEngine.run(currentState));
+		}, 0);
+	});
+
+	if (bestMove) {
+		const [x, y] = bestMove.split(',').map(Number); // Extract coordinates from the move string
+		const cx = EDGE_MARGIN + (LENGTH_SQUARE * x);
+		const cy = EDGE_MARGIN + (LENGTH_SQUARE * y);
+		executeMove(board, ghostStone, cx, cy, boardX, boardY);
+		console.log(`AI chose move at (${x}, ${y})`);
+	} else {
+		console.log("AI couldn't find a valid move.");
+	}
+}
+
+export async function handleIntersectionClick(board, event, ghostStone) {
+	// Save the coordinates of the event.
+	const x = event.target.cx.baseVal.value;
+	const y = event.target.cy.baseVal.value;
+
+	// Convert the event coordinates into board relative ones
+	const boardX = (x - EDGE_MARGIN) / LENGTH_SQUARE;
+	const boardY = (y - EDGE_MARGIN) / LENGTH_SQUARE;
+
+	executeMove(board, ghostStone, x, y, boardX, boardY);
+
+	await aiMakeMove(board, boardX, boardY, ghostStone);
+
+	
+/*
+	if (aiPlayer_bool) {
+		aiMakeMove();
+	}*/
 }
