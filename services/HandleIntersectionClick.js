@@ -65,6 +65,14 @@ function executeMove(board, ghostStone, x, y, boardX, boardY) {
 	}
 }
 
+/**
+ * 
+ * @param {any} board Board
+ * @param {any} boardX X coordinate relative to the size of the board. Coordinate of the previous move made by the player.
+ * @param {any} boardY Y coordinate relative to the size of the board. Coordinate of the previous move made by the player.
+ * @param {any} ghostStone Transparent stone that marks the intersection for the player.
+ * @returns 
+ */
 async function aiMakeMove(board, boardX, boardY, ghostStone) {
 	const currentState = new MonteCarloState(rulesControl.boardMatrix, gameStateManager.currentPlayer, gameStateManager.getPassCounter(), boardX, boardY);
 	
@@ -79,8 +87,9 @@ async function aiMakeMove(board, boardX, boardY, ghostStone) {
 		const [x, y] = bestMove.split(',').map(Number); // Extract coordinates from the move string
 		const cx = EDGE_MARGIN + (LENGTH_SQUARE * x);
 		const cy = EDGE_MARGIN + (LENGTH_SQUARE * y);
-		executeMove(board, ghostStone, cx, cy, boardX, boardY);
+		executeMove(board, ghostStone, cx, cy, x, y);
 		console.log(`AI chose move at (${x}, ${y})`);
+		return [cx, cy];
 	} else {
 		console.log("AI couldn't find a valid move.");
 	}
@@ -98,10 +107,4 @@ export async function handleIntersectionClick(board, event, ghostStone) {
 	executeMove(board, ghostStone, x, y, boardX, boardY);
 
 	await aiMakeMove(board, boardX, boardY, ghostStone);
-
-	
-/*
-	if (aiPlayer_bool) {
-		aiMakeMove();
-	}*/
 }
