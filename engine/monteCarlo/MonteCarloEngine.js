@@ -15,6 +15,8 @@ class MonteCarloEngine {
       simulationResults.push(simulationResult);
     }
 
+    console.log(simulationResults);
+		console.log(MoveSelection.selectBestMove(simulationResults))
     return MoveSelection.selectBestMove(simulationResults);
   }
 }
