@@ -15,6 +15,12 @@ class Timer {
 		}
 	}
 
+	resetTimer() {
+		this.stopCountdown('black');
+		this.stopCountdown('white');
+		this.setTime();
+	}
+
 	setTimerPath(pathToShadowRoot) {
 		this.timerPath = {
 			black: pathToShadowRoot.getElementById('black-timer'),
